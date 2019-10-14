@@ -29,7 +29,11 @@ namespace Fabrikam.Oil.Pumps
                 var telemetry = JsonConvert.DeserializeObject<Telemetry>(
                     Encoding.UTF8.GetString(eventData.Body.Array, eventData.Body.Offset, eventData.Body.Count));
                 telemetry.DeviceId = (string)eventData.SystemProperties["iothub-connection-device-id"];
-                allTelemetry.Add(telemetry);
+                if (telemetry.MotorPowerKw > 0 && telemetry.MotorSpeed > 0 && telemetry.PumpRate > 0 &&
+                    telemetry.TimePumpOn > 0 && telemetry.CasingFriction > 0)
+                {
+                    allTelemetry.Add(telemetry);
+                }
             }
 
             try

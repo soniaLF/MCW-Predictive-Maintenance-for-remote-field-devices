@@ -67,7 +67,10 @@ namespace Fabrikam.FieldDevice.Generator
             {
                 var rnd = new Random();
                 // Percentage of wobble during degradation when randomizing the next value.
-                const double wobblePercentage = 0.02;
+                const double motorPowerWobblePercentage = 0.02;
+                const double pumpRateWobblePercentage = 0.02;
+                const double motorSpeedWobblePercentage = 0.007;
+                const double casingFrictionWobblePercentage = 0.002;
 
                 // Retrieve the last normal entry:
                 var motorPowerkWLastNormal = normal.MotorPowerkW.Last();
@@ -129,27 +132,27 @@ namespace Fabrikam.FieldDevice.Generator
                     // Add subtracted value to gradual failure collections, or the first failed value, whichever is greater:
                     motorPowerkWGradualFailure.Add(rnd.Next(
                         Convert.ToInt32(lastMotorPowerkWValue) -
-                        Convert.ToInt32(lastMotorPowerkWValue * wobblePercentage),
+                        Convert.ToInt32(lastMotorPowerkWValue * motorPowerWobblePercentage),
                         Convert.ToInt32(lastMotorPowerkWValue) +
-                        Convert.ToInt32(lastMotorPowerkWValue * wobblePercentage))
+                        Convert.ToInt32(lastMotorPowerkWValue * motorPowerWobblePercentage))
                     );
                     motorSpeedGradualFailure.Add(rnd.Next(
                         Convert.ToInt32(lastMotorSpeedValue) -
-                        Convert.ToInt32(lastMotorSpeedValue * wobblePercentage),
+                        Convert.ToInt32(lastMotorSpeedValue * motorSpeedWobblePercentage),
                         Convert.ToInt32(lastMotorSpeedValue) +
-                        Convert.ToInt32(lastMotorSpeedValue * wobblePercentage))
+                        Convert.ToInt32(lastMotorSpeedValue * motorSpeedWobblePercentage))
                     );
                     pumpRateGradualFailure.Add(rnd.Next(
                         Convert.ToInt32(lastPumpRateValue) -
-                        Convert.ToInt32(lastPumpRateValue * wobblePercentage),
+                        Convert.ToInt32(lastPumpRateValue * pumpRateWobblePercentage),
                         Convert.ToInt32(lastPumpRateValue) +
-                        Convert.ToInt32(lastPumpRateValue * wobblePercentage))
+                        Convert.ToInt32(lastPumpRateValue * pumpRateWobblePercentage))
                     );
                     casingFrictionGradualFailure.Add(rnd.Next(
                         Convert.ToInt32(lastCasingFrictionValue) -
-                        Convert.ToInt32(lastCasingFrictionValue * wobblePercentage),
+                        Convert.ToInt32(lastCasingFrictionValue * casingFrictionWobblePercentage),
                         Convert.ToInt32(lastCasingFrictionValue) +
-                        Convert.ToInt32(lastCasingFrictionValue * wobblePercentage))
+                        Convert.ToInt32(lastCasingFrictionValue * casingFrictionWobblePercentage))
                     );
                 }
 

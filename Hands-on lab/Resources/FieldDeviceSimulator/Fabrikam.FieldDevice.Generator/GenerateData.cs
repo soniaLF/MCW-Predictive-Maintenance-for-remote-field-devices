@@ -65,10 +65,11 @@ namespace Fabrikam.FieldDevice.Generator
         /// <returns></returns>
         private static double RandomizeInitialValue(double initialValue)
         {
-            var upper = initialValue + (initialValue * 0.02);
-            var lower = initialValue - (initialValue * 0.02);
+            //var upper = initialValue + (initialValue * 0.02);
+            //var lower = initialValue - (initialValue * 0.02);
 
-            return _random.NextDouble() * (upper - lower) + lower;
+            //return _random.NextDouble() * (upper - lower) + lower;
+            return initialValue;
         }
 
         /// <summary>

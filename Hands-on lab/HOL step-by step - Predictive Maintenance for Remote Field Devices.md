@@ -823,11 +823,11 @@ It is recommended that you never check in secrets, such as connection strings, i
 
 3. On line 31, the Device ID is pulled from the system properties of the event. This will let us know from which device the telemetry data came, and allows us to group the telemetry by device so we can perform aggregates on the sensor data.
 
-4. From lines 38 - 50, we group the telemetry by Device ID and calculate the averages for each sensor reading. This helps us reduce the number of calls we send to the scoring service that contains our deployed prediction model.
+4. From lines 42 - 54, we group the telemetry by Device ID and calculate the averages for each sensor reading. This helps us reduce the number of calls we send to the scoring service that contains our deployed prediction model.
 
-5. Lines 63 through 65 sends the received telemetry to the scoring service endpoint. This service will respond with a 1 - meaning the pump requires maintenance, or a 0 meaning no maintenance notifications should be sent.
+5. Lines 67 through 69 sends the received telemetry to the scoring service endpoint. This service will respond with a 1 - meaning the pump requires maintenance, or a 0 meaning no maintenance notifications should be sent.
 
-6. Lines 71 through 83 checks Table storage to ensure a notification for the specific device hasn't been sent in the last 24 hours. If a notification is due to be sent, it will update the table storage record with the current timestamp and send a notification by queueing a message onto the _flownotificationqueue_ queue.
+6. Lines 75 through 87 checks Table storage to ensure a notification for the specific device hasn't been sent in the last 24 hours. If a notification is due to be sent, it will update the table storage record with the current timestamp and send a notification by queueing a message onto the _flownotificationqueue_ queue.
 
 ### Task 8: Run the Function App locally
 
