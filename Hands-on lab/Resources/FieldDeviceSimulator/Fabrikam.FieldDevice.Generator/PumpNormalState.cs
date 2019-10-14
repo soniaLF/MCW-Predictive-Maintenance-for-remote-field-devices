@@ -22,13 +22,13 @@
 
         public struct PumpRate
         {
-            public static double StandardDeviation = 1.5;
+            public static double StandardDeviation = 1.3;
             public static double InitialValue = 60.0;
         }
 
         public struct CasingFriction
         {
-            public static double StandardDeviation = 1.8;
+            public static double StandardDeviation = 1.4;
             public static double InitialValue = 1450.0;
         }
 
