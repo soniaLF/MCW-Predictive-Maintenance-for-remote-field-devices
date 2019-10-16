@@ -66,6 +66,7 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
     - [Task 6: Create the local settings file for the Azure Functions project](#task-6-create-the-local-settings-file-for-the-azure-functions-project)
     - [Task 7: Review the Azure Function code](#task-7-review-the-azure-function-code)
     - [Task 8: Run the Function App locally](#task-8-run-the-function-app-locally)
+    - [Task 9: Deploy the Function App into Azure](#task-9-deploy-the-function-app-into-azure)
   - [After the hands-on lab](#after-the-hands-on-lab)
     - [Task 1: Delete Lab Resources](#task-1-delete-lab-resources)
 
@@ -849,6 +850,36 @@ It is recommended that you never check in secrets, such as connection strings, i
 3. Once a message has been placed on the _flownotificationqueue_, it will trigger the notification flow that we created and send an email to the field workers. These emails are sent in 5 minute intervals.
 
    ![Notification email received](media/flow-email-receipt.png)
+
+4. You can now exit the locally running functions by selecting the Terminal window by pressing <kbd>Ctrl</kbd>+<kbd>c</kbd>
+
+### Task 9: Deploy the Function App into Azure
+
+1. Now that we have been able to successfully run our Functions locally, we are ready to deploy them to the cloud. The first step to deployment is to ensure that you are logged in to your Azure Account. To log into your Azure account, press the following shortcut to display the command palette: <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>p</kbd>.
+
+2. In the textbox of the command palette, type in *Azure:Sign In*, and press enter (or select the command from the list). This will open a Microsoft Authentication webpage in your default browser. Logging into this window will authenticate Visual Studio Code with your ID.
+
+   ![Visual Studio Code command palette displaying Azure:Sign In as a command option - the Azure:Sign In command is highlighted](media/commandpalettesignin.png "The Visual Studio Command Palette highlighting the Azure:Sign In command)
+
+3. Once authenticated, we are ready to deploy - once again press <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>p</kbd> to open the command palette. Type *Azure Functions: Deploy* and select the *Azure Functions: Deploy to Function App* command from the list.
+
+   ![Visual Studio Code command palette displaying Azure Functions:Deploy to Function App command](media/commandpalettedeploytofunctionapp.png "Visual Studio Code command palette displaying Azure Functions:Deploy to Function App command")
+
+4. The first step of this command is to identify where we are deploying the function to. In our case, we have already created a Function App to house our function called **pumpfunctions**. Select this value from the list of available choices.
+
+   ![Visual Studio Code command palette displaying potential destinations for deployment of our function, the pumpfunctions function app is highlighted](media/funcdeploydestinationapp.png "Visual Studio Code command palette displaying potential destinations for deployment of our function, the pumpfunctions function app is highlighted")
+
+5. You may be prompted if you want to deploy to **pumpfunctions**, press the **Deploy** button in this dialog.
+
+   ![A dialog asking if we are sure we want to deploy to pump functions is displayed. The Deploy button is highlighted](media/funcdeploymentdeploydialog.png "A dialog asking if we are sure we want to deploy to pump functions is displayed. The Deploy button is highlighted")
+
+6. After some time, a notification window will display indicating the deployment has completed.
+
+   ![A notification is shown indicating the deployment to pumpfunctions has completed](media/funcdeploycompleted.png "A notification is shown indicating the deployment to pumpfunctions has completed")
+
+7. Returning to the Azure Portal, in the **Fabrikam_Oil** resource group, open the **pumpfunctions** function app and observe that our function that we created in Visual Studio Code has been deployed.
+
+   ![The Azure Portal Function Application overview window is displayed with the pumpfunctions application expanded, the functions node is also expanded and the function named PumpFailurePrediction is highlighted](media/azurefunctiondeployed.png "The Azure Portal Function Application overview window is displayed with the pumpfunctions application expanded, the functions node is also expanded and the function named PumpFailurePrediction is highlighted")
 
 ## After the hands-on lab
 
