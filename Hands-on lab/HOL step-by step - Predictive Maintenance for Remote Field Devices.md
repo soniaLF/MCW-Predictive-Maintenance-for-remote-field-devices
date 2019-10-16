@@ -775,7 +775,7 @@ We will be using [Microsoft Flow](https://flow.microsoft.com/) as a means to ema
 
 ### Task 5: Obtain connection settings for use with the Azure Function implementation
 
-1. Once the Function App has been provisioned, open the **Fabrikam_Oil** resource group and select the link for the Storage Account that was created in the last task.
+1. Once the Function App has been provisioned, open the **Fabrikam_Oil** resource group and select the link for the Storage Account that was created in Task 2.
 
    ![Select Function Storage Account](media/select-function-storage-account.png)
 
@@ -801,7 +801,11 @@ It is recommended that you never check in secrets, such as connection strings, i
 
 1. Using Visual Studio Code, open the `\Hands-on lab\Resources\FailurePredictionFunction` folder.
 
-2. In this folder, create a new file named _local.settings.json_ and populate it with the values obtained in the previous task as follows, then save the file:
+2. Upon opening the folder in Visual Studio Code, you may be prompted to restore unresolved dependencies. If this is the case, press the **Restore** button.
+
+   ![Restore Unresolved Dependencies Dialog](media/unresolveddependencies.png "Restore Unresolved Dependencies Dialog")
+
+3. In this folder, create a new file named _local.settings.json_ and populate it with the values obtained in the previous task as follows, then save the file (note: prediction model endpoint was obtained in Exercise 6, Task 1 - step 8):
 
    ```json
    {
@@ -832,7 +836,7 @@ It is recommended that you never check in secrets, such as connection strings, i
 
 5. Lines 67 through 69 sends the received telemetry to the scoring service endpoint. This service will respond with a 1 - meaning the pump requires maintenance, or a 0 meaning no maintenance notifications should be sent.
 
-6. Lines 75 through 87 checks Table storage to ensure a notification for the specific device hasn't been sent in the last 24 hours. If a notification is due to be sent, it will update the table storage record with the current timestamp and send a notification by queueing a message onto the _flownotificationqueue_ queue.
+6. Lines 75 through 101 checks Table storage to ensure a notification for the specific device hasn't been sent in the last 24 hours. If a notification is due to be sent, it will update the table storage record with the current timestamp and send a notification by queueing a message onto the _flownotificationqueue_ queue.
 
 ### Task 8: Run the Function App locally
 
