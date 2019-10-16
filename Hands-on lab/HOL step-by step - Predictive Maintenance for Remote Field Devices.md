@@ -100,7 +100,12 @@ The diagram above shows the components of IoT Central's architecture that pertai
 ## Requirements
 
 1. Microsoft Azure subscription (non-Microsoft subscription, must be a pay-as-you subscription).
-2. An Azure Databricks cluster running Databricks Runtime 5.1 or above.
+2. [.Net Core 2.2](https://dotnet.microsoft.com/download/dotnet-core/2.2)
+3. [Visual Studio Code](https://code.visualstudio.com/) version 1.39 or greater
+4. [C# Visual Studio Code Extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode.csharp)
+5. [Azure Functions Core Tools version 2.x (using NPM or Chocolatey - see readme on github repository)](https://github.com/Azure/azure-functions-core-tools)
+6. [Azure Functions Visual Studio Code Extension](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurefunctions)
+7. An Azure Databricks cluster running Databricks Runtime 5.1 or above.
 
 ## Before the hands-on lab
 
