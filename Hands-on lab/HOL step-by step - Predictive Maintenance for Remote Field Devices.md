@@ -66,7 +66,8 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
     - [Task 6: Create the local settings file for the Azure Functions project](#task-6-create-the-local-settings-file-for-the-azure-functions-project)
     - [Task 7: Review the Azure Function code](#task-7-review-the-azure-function-code)
     - [Task 8: Run the Function App locally](#task-8-run-the-function-app-locally)
-    - [Task 9: Deploy the Function App into Azure](#task-9-deploy-the-function-app-into-azure)
+    - [Task 9: Prepare the Azure Function App with settings](#task-9-prepare-the-azure-function-app-with-settings)
+    - [Task 10: Deploy the Function App into Azure](#task-10-deploy-the-function-app-into-azure)
   - [After the hands-on lab](#after-the-hands-on-lab)
     - [Task 1: Delete Lab Resources](#task-1-delete-lab-resources)
 
@@ -853,7 +854,30 @@ It is recommended that you never check in secrets, such as connection strings, i
 
 4. You can now exit the locally running functions by selecting the Terminal window by pressing <kbd>Ctrl</kbd>+<kbd>c</kbd>
 
-### Task 9: Deploy the Function App into Azure
+### Task 9: Prepare the Azure Function App with settings
+
+1. In Task 6, we created a local settings file to hold environment variables that are used in our function code. We need to mirror these values in the Azure Function App as well. In the Azure portal, access the **Fabrikam_Oil** resource group, and open the **pumpfunctions** Function Application.
+
+2. In the Overview pane of the Function app, select the **Configuration** option from below the Configured features heading.
+
+   ![The Azure Function Application Overview window is displayed with the Configuration item highlighted](media/functionconfigurationsettingsmenu.png "The Azure Function Application Overview window is displayed with the Configuration item highlighted")
+
+3. In the **Application Settings** section, we will add the following application settings to mimic those that are in our *local.settings.json* file. Add a new setting by selecting the **New application setting** button.
+
+    | Setting     | Value                                                                               |
+    | ----------- | ----------------------------------------------------------------------------------- |
+    | fabrikam-oil_RootManageSharedAccessKey_EVENTHUB  | _event hub shared access key value from the local.settings.json file_                  |
+    | PredictionModelEndpoint  | _prediction model endpoint value from local.settings.json file_   |
+
+    ![The Application Settings tab is selected and the new application setting button is highlighted](media/functionconfigurationnewsetting.png "The Application Settings tab is selected and the new application setting button is highlighted")
+
+    ![The form to add an application setting is displayed, consisting of a name and value textbox](media/functtionappaddremoveappsetting.png "The form to add an application setting is displayed, consisting of a name and value textbox")
+
+4. Once complete, press the **Save** button from the top menu to commit the changes to the application configuration.
+
+   ![The Application Settings tab is selected and the Save button is highlighted](media/functionconfigurationsave.png "The Application Settings tab is selected and the Save button is highlighted")
+
+### Task 10: Deploy the Function App into Azure
 
 1. Now that we have been able to successfully run our Functions locally, we are ready to deploy them to the cloud. The first step to deployment is to ensure that you are logged in to your Azure Account. To log into your Azure account, press the following shortcut to display the command palette: <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>p</kbd>.
 
