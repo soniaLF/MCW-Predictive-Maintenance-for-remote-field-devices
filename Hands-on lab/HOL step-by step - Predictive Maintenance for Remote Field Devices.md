@@ -66,6 +66,8 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
     - [Task 6: Create the local settings file for the Azure Functions project](#task-6-create-the-local-settings-file-for-the-azure-functions-project)
     - [Task 7: Review the Azure Function code](#task-7-review-the-azure-function-code)
     - [Task 8: Run the Function App locally](#task-8-run-the-function-app-locally)
+    - [Task 9: Prepare the Azure Function App with settings](#task-9-prepare-the-azure-function-app-with-settings)
+    - [Task 10: Deploy the Function App into Azure](#task-10-deploy-the-function-app-into-azure)
   - [After the hands-on lab](#after-the-hands-on-lab)
     - [Task 1: Delete Lab Resources](#task-1-delete-lab-resources)
 
@@ -100,7 +102,12 @@ The diagram above shows the components of IoT Central's architecture that pertai
 ## Requirements
 
 1. Microsoft Azure subscription (non-Microsoft subscription, must be a pay-as-you subscription).
-2. An Azure Databricks cluster running Databricks Runtime 5.1 or above.
+2. [.Net Core 2.2](https://dotnet.microsoft.com/download/dotnet-core/2.2)
+3. [Visual Studio Code](https://code.visualstudio.com/) version 1.39 or greater
+4. [C# Visual Studio Code Extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode.csharp)
+5. [Azure Functions Core Tools version 2.x (using NPM or Chocolatey - see readme on github repository)](https://github.com/Azure/azure-functions-core-tools)
+6. [Azure Functions Visual Studio Code Extension](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurefunctions)
+7. An Azure Databricks cluster running Databricks Runtime 5.1 or above.
 
 ## Before the hands-on lab
 
@@ -770,7 +777,7 @@ We will be using [Microsoft Flow](https://flow.microsoft.com/) as a means to ema
 
 ### Task 5: Obtain connection settings for use with the Azure Function implementation
 
-1. Once the Function App has been provisioned, open the **Fabrikam_Oil** resource group and select the link for the Storage Account that was created in the last task.
+1. Once the Function App has been provisioned, open the **Fabrikam_Oil** resource group and select the link for the Storage Account that was created in Task 2.
 
    ![Select Function Storage Account](media/select-function-storage-account.png)
 
@@ -796,7 +803,11 @@ It is recommended that you never check in secrets, such as connection strings, i
 
 1. Using Visual Studio Code, open the `\Hands-on lab\Resources\FailurePredictionFunction` folder.
 
-2. In this folder, create a new file named _local.settings.json_ and populate it with the values obtained in the previous task as follows, then save the file:
+2. Upon opening the folder in Visual Studio Code, you may be prompted to restore unresolved dependencies. If this is the case, press the **Restore** button.
+
+   ![Restore Unresolved Dependencies Dialog](media/unresolveddependencies.png "Restore Unresolved Dependencies Dialog")
+
+3. In this folder, create a new file named _local.settings.json_ and populate it with the values obtained in the previous task as follows, then save the file (note: prediction model endpoint was obtained in Exercise 6, Task 1 - step 8):
 
    ```json
    {
@@ -827,7 +838,7 @@ It is recommended that you never check in secrets, such as connection strings, i
 
 5. Lines 67 through 69 sends the received telemetry to the scoring service endpoint. This service will respond with a 1 - meaning the pump requires maintenance, or a 0 meaning no maintenance notifications should be sent.
 
-6. Lines 75 through 87 checks Table storage to ensure a notification for the specific device hasn't been sent in the last 24 hours. If a notification is due to be sent, it will update the table storage record with the current timestamp and send a notification by queueing a message onto the _flownotificationqueue_ queue.
+6. Lines 75 through 101 checks Table storage to ensure a notification for the specific device hasn't been sent in the last 24 hours. If a notification is due to be sent, it will update the table storage record with the current timestamp and send a notification by queueing a message onto the _flownotificationqueue_ queue.
 
 ### Task 8: Run the Function App locally
 
@@ -840,6 +851,59 @@ It is recommended that you never check in secrets, such as connection strings, i
 3. Once a message has been placed on the _flownotificationqueue_, it will trigger the notification flow that we created and send an email to the field workers. These emails are sent in 5 minute intervals.
 
    ![Notification email received](media/flow-email-receipt.png)
+
+4. You can now exit the locally running functions by selecting the Terminal window by pressing <kbd>Ctrl</kbd>+<kbd>c</kbd>
+
+### Task 9: Prepare the Azure Function App with settings
+
+1. In Task 6, we created a local settings file to hold environment variables that are used in our function code. We need to mirror these values in the Azure Function App as well. In the Azure portal, access the **Fabrikam_Oil** resource group, and open the **pumpfunctions** Function Application.
+
+2. In the Overview pane of the Function app, select the **Configuration** option from below the Configured features heading.
+
+   ![The Azure Function Application Overview window is displayed with the Configuration item highlighted](media/functionconfigurationsettingsmenu.png "The Azure Function Application Overview window is displayed with the Configuration item highlighted")
+
+3. In the **Application Settings** section, we will add the following application settings to mimic those that are in our *local.settings.json* file. Add a new setting by selecting the **New application setting** button.
+
+    | Setting     | Value                                                                               |
+    | ----------- | ----------------------------------------------------------------------------------- |
+    | fabrikam-oil_RootManageSharedAccessKey_EVENTHUB  | _event hub shared access key value from the local.settings.json file_                  |
+    | PredictionModelEndpoint  | _prediction model endpoint value from local.settings.json file_   |
+
+    ![The Application Settings tab is selected and the new application setting button is highlighted](media/functionconfigurationnewsetting.png "The Application Settings tab is selected and the new application setting button is highlighted")
+
+    ![The form to add an application setting is displayed, consisting of a name and value textbox](media/functtionappaddremoveappsetting.png "The form to add an application setting is displayed, consisting of a name and value textbox")
+
+4. Once complete, press the **Save** button from the top menu to commit the changes to the application configuration.
+
+   ![The Application Settings tab is selected and the Save button is highlighted](media/functionconfigurationsave.png "The Application Settings tab is selected and the Save button is highlighted")
+
+### Task 10: Deploy the Function App into Azure
+
+1. Now that we have been able to successfully run our Functions locally, we are ready to deploy them to the cloud. The first step to deployment is to ensure that you are logged in to your Azure Account. To log into your Azure account, press the following shortcut to display the command palette: <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>p</kbd>.
+
+2. In the textbox of the command palette, type in *Azure:Sign In*, and press enter (or select the command from the list). This will open a Microsoft Authentication webpage in your default browser. Logging into this window will authenticate Visual Studio Code with your ID.
+
+   ![Visual Studio Code command palette displaying Azure:Sign In as a command option - the Azure:Sign In command is highlighted](media/commandpalettesignin.png "The Visual Studio Command Palette highlighting the Azure:Sign In command)
+
+3. Once authenticated, we are ready to deploy - once again press <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>p</kbd> to open the command palette. Type *Azure Functions: Deploy* and select the *Azure Functions: Deploy to Function App* command from the list.
+
+   ![Visual Studio Code command palette displaying Azure Functions:Deploy to Function App command](media/commandpalettedeploytofunctionapp.png "Visual Studio Code command palette displaying Azure Functions:Deploy to Function App command")
+
+4. The first step of this command is to identify where we are deploying the function to. In our case, we have already created a Function App to house our function called **pumpfunctions**. Select this value from the list of available choices.
+
+   ![Visual Studio Code command palette displaying potential destinations for deployment of our function, the pumpfunctions function app is highlighted](media/funcdeploydestinationapp.png "Visual Studio Code command palette displaying potential destinations for deployment of our function, the pumpfunctions function app is highlighted")
+
+5. You may be prompted if you want to deploy to **pumpfunctions**, press the **Deploy** button in this dialog.
+
+   ![A dialog asking if we are sure we want to deploy to pump functions is displayed. The Deploy button is highlighted](media/funcdeploymentdeploydialog.png "A dialog asking if we are sure we want to deploy to pump functions is displayed. The Deploy button is highlighted")
+
+6. After some time, a notification window will display indicating the deployment has completed.
+
+   ![A notification is shown indicating the deployment to pumpfunctions has completed](media/funcdeploycompleted.png "A notification is shown indicating the deployment to pumpfunctions has completed")
+
+7. Returning to the Azure Portal, in the **Fabrikam_Oil** resource group, open the **pumpfunctions** function app and observe that our function that we created in Visual Studio Code has been deployed.
+
+   ![The Azure Portal Function Application overview window is displayed with the pumpfunctions application expanded, the functions node is also expanded and the function named PumpFailurePrediction is highlighted](media/azurefunctiondeployed.png "The Azure Portal Function Application overview window is displayed with the pumpfunctions application expanded, the functions node is also expanded and the function named PumpFailurePrediction is highlighted")
 
 ## After the hands-on lab
 

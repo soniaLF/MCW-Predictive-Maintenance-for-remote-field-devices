@@ -43,6 +43,12 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
 ## Requirements
 
 1. Microsoft Azure subscription (non-Microsoft subscription, must be a pay-as-you subscription).
+2. [.Net Core 2.2](https://dotnet.microsoft.com/download/dotnet-core/2.2)
+3. [Visual Studio Code](https://code.visualstudio.com/) version 1.39 or greater
+4. [C# Visual Studio Code Extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode.csharp)
+5. [Azure Functions Core Tools version 2.x (using NPM or Chocolatey - see readme on github repository)](https://github.com/Azure/azure-functions-core-tools)
+6. [Azure Functions Visual Studio Code Extension](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurefunctions)
+7. An Azure Databricks cluster running Databricks Runtime 5.1 or above.
 
 ## Before the hands-on lab
 
@@ -170,7 +176,7 @@ In this task, you will import the Databricks notebooks into your workspace.
 
 Download the lab artifacts from GitHub.
 
-1. In a web browser, navigate to the [Predictive Maintenance for remote field devices GitHub repo](https://github.com/solliancenet/MCW-Predictive-Maintenance-for-Remote-Field-Devices).
+1. In a web browser, navigate to the [Predictive Maintenance for remote field devices GitHub repo](https://github.com/microsoft/MCW-Predictive-Maintenance-for-remote-field-devices).
 
 2. On the repo page, select **Clone or download**, then select **Download ZIP**.
 
