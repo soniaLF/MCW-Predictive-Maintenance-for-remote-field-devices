@@ -1,4 +1,4 @@
-![](https://github.com/Microsoft/MCW-Template-Cloud-Workshop/raw/master/Media/ms-cloud-workshop.png 'Microsoft Cloud Workshops')
+![Microsoft Cloud Workshops](https://github.com/Microsoft/MCW-Template-Cloud-Workshop/raw/master/Media/ms-cloud-workshop.png 'Microsoft Cloud Workshops')
 
 <div class="MCWHeader1">
 Predictive Maintenance for remote field devices
@@ -9,7 +9,7 @@ Hands-on lab step-by-step
 </div>
 
 <div class="MCWHeader3">
-September 2019
+November 2019
 </div>
 
 Information in this document, including URL and other Internet Web site references, is subject to change without notice. Unless otherwise noted, the example companies, organizations, products, domain names, e-mail addresses, logos, people, places, and events depicted herein are fictitious, and no association with any real company, organization, product, domain name, e-mail address, logo, person, place or event is intended or should be inferred. Complying with all applicable copyright laws is the responsibility of the user. Without limiting the rights under copyright, no part of this document may be reproduced, stored in or introduced into a retrieval system, or transmitted in any form or by any means (electronic, mechanical, photocopying, recording, or otherwise), or for any purpose, without the express written permission of Microsoft Corporation.
@@ -34,11 +34,10 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
   - [Before the hands-on lab](#before-the-hands-on-lab)
   - [Exercise 1: Configuring IoT Central with devices and metadata](#exercise-1-configuring-iot-central-with-devices-and-metadata)
     - [Task 1: Model the telemetry data](#task-1-model-the-telemetry-data)
-      - [Telemetry Schema](#telemetry-schema)
     - [Task 2: Create an IoT Central Application](#task-2-create-an-iot-central-application)
     - [Task 3: Create the Device Template](#task-3-create-the-device-template)
     - [Task 4: Create and provision real devices](#task-4-create-and-provision-real-devices)
-  - [Task 5: Delete the simulated device](#task-5-delete-the-simulated-device)
+    - [Task 5: Delete the simulated device](#task-5-delete-the-simulated-device)
   - [Exercise 2: Run the Rod Pump Simulator](#exercise-2-run-the-rod-pump-simulator)
     - [Task 1: Generate device connection strings](#task-1-generate-device-connection-strings)
     - [Task 2: Open the Visual Studio solution, and update connection string values](#task-2-open-the-visual-studio-solution-and-update-connection-string-values)
@@ -79,7 +78,7 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
 
 In this hands-on-lab, you will build an end-to-end industrial IoT solution. We will begin by leveraging the Azure IoT Central SaaS offerings to quickly stand up a fully functional remote monitoring solution. Azure IoT Central provides solutions built upon recommendations found in the [Azure IoT Reference Architecture](https://docs.microsoft.com/en-us/azure/architecture/reference-architectures/iot/). We will customize this system specifically for rod pumps. Rod pumps are industrial equipment that is heavily used in the oil and gas industry. We will then establish a model for the telemetry data that is received from the pump systems in the field and use this model to deploy simulated devices for system testing purposes.
 
-Furthermore we will establish threshold rules in the remote monitoring system that will monitor the incoming telemetry data to ensure all equipment is running optimally, and can alert us whenever the equipment is running outside of normal boundaries - indicating the need for alternative running parameters, maintenance, or a complete shut down of the pump. By leveraging the IoT Central solution, users can also issue commands to the pumps from a remote location in an instant to automate many operational and maintenance tasks which used to require staff on-site. This lessens operating costs associated with technician dispatch and equipment damage due to a failure.
+Furthermore, we will establish threshold rules in the remote monitoring system that will monitor the incoming telemetry data to ensure all equipment is running optimally, and can alert us whenever the equipment is running outside of normal boundaries - indicating the need for alternative running parameters, maintenance, or a complete shutdown of the pump. By leveraging the IoT Central solution, users can also issue commands to the pumps from a remote location in an instant to automate many operational and maintenance tasks which used to require staff on-site. This lessens operating costs associated with technician dispatch and equipment damage due to a failure.
 
 Above and beyond real-time monitoring and mitigating immediate equipment damage through commanding - you will also learn how to apply the historical telemetry data accumulated to identify positive and negative trends that can be used to adjust daily operations for higher throughput and reliability.
 
@@ -105,7 +104,7 @@ The diagram above shows the components of IoT Central's architecture that pertai
 2. [.Net Core 2.2](https://dotnet.microsoft.com/download/dotnet-core/2.2)
 3. [Visual Studio Code](https://code.visualstudio.com/) version 1.39 or greater
 4. [C# Visual Studio Code Extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode.csharp)
-5. [Azure Functions Core Tools version 2.x (using NPM or Chocolatey - see readme on github repository)](https://github.com/Azure/azure-functions-core-tools)
+5. [Azure Functions Core Tools version 2.x (using NPM or Chocolatey - see readme on GitHub repository)](https://github.com/Azure/azure-functions-core-tools)
 6. [Azure Functions Visual Studio Code Extension](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurefunctions)
 7. An Azure Databricks cluster running Databricks Runtime 5.1 or above.
 
@@ -117,7 +116,7 @@ Refer to the [Before the hands-on lab setup guide](./Before%20the%20HOL%20-%20Pr
 
 Duration: X minutes
 
-[Azure IoT Central](https://azure.microsoft.com/en-us/services/iot-central/) is a Software as a Service (SaaS) offering from Microsoft. The aim of this service is to provide a frictionless entry into the Cloud Computing and IoT space. The core focus of many industrial companies is not on cloud computing, therefore they do not necessarily have the personnel skilled to provide guidance and to stand up a reliable and scalable infrastructure for an IoT solution. It is imperative for these types of companies to enter the IoT space not only for the cost savings associated with remote monitoring, but also to improve safety for their workers and the environment.
+[Azure IoT Central](https://azure.microsoft.com/en-us/services/iot-central/) is a Software as a Service (SaaS) offering from Microsoft. The aim of this service is to provide a frictionless entry into the Cloud Computing and IoT space. The core focus of many industrial companies is not on cloud computing; therefore, they do not necessarily have the personnel skilled to provide guidance and to stand up a reliable and scalable infrastructure for an IoT solution. It is imperative for these types of companies to enter the IoT space not only for the cost savings associated with remote monitoring, but also to improve safety for their workers and the environment.
 
 Fabrikam is one such company that could use a helping hand entering the IoT space. They have recently invested in sensor technology on their rod pumps in the field, and they are ready to implement their cloud-based IoT Solution. Their IT department is small and unfamiliar with cloud-based IoT infrastructure; their IT budget also does not afford them the luxury of hiring a team of contractors to build out a solution for them.
 
@@ -166,7 +165,7 @@ The telemetry being reported by the Fabrikam rod pumps are as follows, we will b
 
     c. *Application Name* - give your application a name of your choice, in this example, we used *fabrikam-oil*
 
-    d. *Url* - this will be the URL for your application, it needs to be globally unique.
+    d. *URL* - this will be the URL for your application, it needs to be globally unique.
 
     e. Fill out your contact information (First Name, Last Name, Email Address, Phone Number, Country)
 
@@ -174,7 +173,7 @@ The telemetry being reported by the Fabrikam rod pumps are as follows, we will b
 
 ### Task 3: Create the Device Template
 
-1. Once the application has been provisioned, we need to define the type of equipment we are using, and the data associated with the equipment. In order to do this we must define a _Device Template_. Press either the _Create Device Templates_ button, or the _Device Templates_ menu item from the left-hand menu.
+1. Once the application has been provisioned, we need to define the type of equipment we are using, and the data associated with the equipment. In order to do this, we must define a _Device Template_. Press either the _Create Device Templates_ button, or the _Device Templates_ menu item from the left-hand menu.
 
     ![Device Templates](media/create-device-templates.png)
 
@@ -230,7 +229,7 @@ The telemetry being reported by the Fabrikam rod pumps are as follows, we will b
     | IP Address    | IPAddress    | text      | The IP address of the rod pump    |
     | Pump Location | Location     | location  | The geo. location of the rod pump |
 
-11. Operators and field workers will want to be able to turn on and off the pumps remotely. In order to do this we will define commands. Select the _Commands_ tab, and press the _New_ button to add a new command.
+11. Operators and field workers will want to be able to turn on and off the pumps remotely. In order to do this, we will define commands. Select the _Commands_ tab, and press the _New_ button to add a new command.
 
     ![Add Command](media/device-template-add-command.png)
 
@@ -348,7 +347,7 @@ Included with this lab is source code that will simulate the connection and tele
 
 3. Open _Program.cs_, go to line 141 and you will find the _SetupDeviceRunTasks_ method. This method is responsible for creating the source code representations of the devices that we have defined earlier in the lab. Each of these devices is identified by its connection string. Note that DEVICE001 is defined as the pump that will gradually fail, DEVICE002 as a healthy pump, and DEVICE003 as a pump that will fail immediately after a specific amount of time. Line 164 also adds an event handler that gets fired every time the Power State for a pump changes. The power state of a pump gets changed via a cloud to device command - we will be visiting this concept later on in this lab.
 
-4. Open _Device.cs_, this class represents a device in the field. It encapsulates the properties (serial number and IP address) that are expected in the properties for the device in the cloud. It also maintains its own power state. Line 86 shows the _SendDevicePropertiesAndInitialState_ method which updates the reported properties from the device to the cloud. This is also refered to as _Device Twins_. Line 131 shows the _SendEvent_ method that sends the generated telemetry data to the cloud.
+4. Open _Device.cs_, this class represents a device in the field. It encapsulates the properties (serial number and IP address) that are expected in the properties for the device in the cloud. It also maintains its own power state. Line 86 shows the _SendDevicePropertiesAndInitialState_ method which updates the reported properties from the device to the cloud. This is also referred to as _Device Twins_. Line 131 shows the _SendEvent_ method that sends the generated telemetry data to the cloud.
 
 ### Task 3: Run the application
 
