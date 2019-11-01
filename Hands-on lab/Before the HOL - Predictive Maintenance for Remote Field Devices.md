@@ -1,4 +1,4 @@
-![](https://github.com/Microsoft/MCW-Template-Cloud-Workshop/raw/master/Media/ms-cloud-workshop.png 'Microsoft Cloud Workshops')
+![Microsoft Cloud Workshops](https://github.com/Microsoft/MCW-Template-Cloud-Workshop/raw/master/Media/ms-cloud-workshop.png 'Microsoft Cloud Workshops')
 
 <div class="MCWHeader1">
 Predictive Maintenance for remote field devices
@@ -9,7 +9,7 @@ Before the hands-on lab setup guide
 </div>
 
 <div class="MCWHeader3">
-September 2019
+November 2019
 </div>
 
 Information in this document, including URL and other Internet Web site references, is subject to change without notice. Unless otherwise noted, the example companies, organizations, products, domain names, e-mail addresses, logos, people, places, and events depicted herein are fictitious, and no association with any real company, organization, product, domain name, e-mail address, logo, person, place or event is intended or should be inferred. Complying with all applicable copyright laws is the responsibility of the user. Without limiting the rights under copyright, no part of this document may be reproduced, stored in or introduced into a retrieval system, or transmitted in any form or by any means (electronic, mechanical, photocopying, recording, or otherwise), or for any purpose, without the express written permission of Microsoft Corporation.
@@ -46,7 +46,7 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
 2. [.Net Core 2.2](https://dotnet.microsoft.com/download/dotnet-core/2.2)
 3. [Visual Studio Code](https://code.visualstudio.com/) version 1.39 or greater
 4. [C# Visual Studio Code Extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode.csharp)
-5. [Azure Functions Core Tools version 2.x (using NPM or Chocolatey - see readme on github repository)](https://github.com/Azure/azure-functions-core-tools)
+5. [Azure Functions Core Tools version 2.x (using NPM or Chocolatey - see readme on GitHub repository)](https://github.com/Azure/azure-functions-core-tools)
 6. [Azure Functions Visual Studio Code Extension](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurefunctions)
 7. An Azure Databricks cluster running Databricks Runtime 5.1 or above.
 
@@ -62,17 +62,17 @@ In the Before the hands-on lab exercise, you will set up your environment for us
 
 In this task, you will create an Azure resource group for the resources used throughout this lab.
 
-1. Log into the [Azure Portal](https://portal.azure.com)
+1. Log into the [Azure Portal](https://portal.azure.com).
 
 2. In the left-hand menu, select **Resource Groups**.
 
 3. At the top of the screen press the **Add** button.
 
-   ![Add Resource Group Menu](media/add-resource-group-menu.png)
+   ![Add Resource Group Menu](media/add-resource-group-menu.png 'Resource Group Menu')
 
 4. Create a new resource group with the name **Fabrikam_Oil**, ensure the proper subscription and region nearest you are selected. Then select **Review + Create**.
 
-   ![Create Resource Group](media/create-resource-group.png)
+   ![Create Resource Group](media/create-resource-group.png 'Resource Group')
 
 5. On the Summary blade, select **Create** to provision your resource group.
 
