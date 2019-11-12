@@ -773,7 +773,7 @@ We will be using [Microsoft Flow](https://flow.microsoft.com/) as a means to ema
 
 12. Microsoft will automatically name the Flow. You are able to edit this Flow in the future by selecting **My flows** from the left-hand menu.
 
-    ![The Azure Flow blade is displayed. The left pane, the My flows link is circled. The Send an email step is circled.](media/new-flow-created.png "New Flow created")
+    ![The Azure Flow blade is displayed. In the left pane, the My flows link is circled. The Send an email step is circled.](media/new-flow-created.png "New Flow created")
 
 ### Task 5: Obtain connection settings for use with the Azure Function implementation
 
@@ -869,13 +869,13 @@ It is recommended that you never check in secrets, such as connection strings, i
     | fabrikam-oil_RootManageSharedAccessKey_EVENTHUB  | _event hub shared access key value from the local.settings.json file_                  |
     | PredictionModelEndpoint  | _prediction model endpoint value from local.settings.json file_   |
 
-    ![The Application Settings tab is selected and the new application setting button is highlighted](media/functionconfigurationnewsetting.png "The Application Settings tab is selected and the new application setting button is highlighted")
+    ![The Application Settings tab is selected and the new application setting button is highlighted.](media/functionconfigurationnewsetting.png "New Application Setting")
 
-    ![The form to add an application setting is displayed, consisting of a name and value textbox](media/functtionappaddremoveappsetting.png "The form to add an application setting is displayed, consisting of a name and value textbox")
+    ![The form to add an application setting is displayed, consisting of a name and value textbox.](media/functtionappaddremoveappsetting.png "Add an Application Setting")
 
 4. Once complete, press the **Save** button from the top menu to commit the changes to the application configuration.
 
-   ![The Application Settings tab is selected and the Save button is highlighted](media/functionconfigurationsave.png "The Application Settings tab is selected and the Save button is highlighted")
+   ![The Application Settings tab is selected and the Save button is highlighted.](media/functionconfigurationsave.png "Save Application Setting")
 
 ### Task 10: Deploy the Function App into Azure
 
@@ -883,15 +883,15 @@ It is recommended that you never check in secrets, such as connection strings, i
 
 2. In the textbox of the command palette, type in *Azure:Sign In*, and press enter (or select the command from the list). This will open a Microsoft Authentication webpage in your default browser. Logging into this window will authenticate Visual Studio Code with your ID.
 
-   ![Visual Studio Code command palette displaying Azure:Sign In as a command option - the Azure:Sign In command is highlighted](media/commandpalettesignin.png "The Visual Studio Command Palette highlighting the Azure:Sign In command")
+   ![The Visual Studio Code command palette is displaying Azure:Sign In as a command option. The Azure:Sign In command is highlighted.](media/commandpalettesignin.png "Azure Sign In Command")
 
 3. Once authenticated, we are ready to deploy - once again press <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>p</kbd> to open the command palette. Type *Azure Functions: Deploy* and select the *Azure Functions: Deploy to Function App* command from the list.
 
-   ![Visual Studio Code command palette displaying Azure Functions:Deploy to Function App command](media/commandpalettedeploytofunctionapp.png "Visual Studio Code command palette displaying Azure Functions:Deploy to Function App command")
+   ![The Visual Studio Code command palette is displaying Azure Functions. The Deploy to Function App command is circled.](media/commandpalettedeploytofunctionapp.png "Deploy to Function App Command")
 
 4. The first step of this command is to identify where we are deploying the function to. In our case, we have already created a Function App to house our function called **pumpfunctions**. Select this value from the list of available choices.
 
-   ![Visual Studio Code command palette displaying potential destinations for deployment of our function, the pumpfunctions function app is highlighted](media/funcdeploydestinationapp.png "pumpfunctions function app is highlighted")
+   ![The Visual Studio Code command palette is displaying potential destinations for deployment of our function, the pumpfunctions function app is highlighted](media/funcdeploydestinationapp.png "pumpfunctions function app is highlighted")
 
 5. You may be prompted if you want to deploy to **pumpfunctions**, press the **Deploy** button in this dialog.
 
