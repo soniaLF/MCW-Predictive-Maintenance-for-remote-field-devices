@@ -701,7 +701,7 @@ One of the things we would like to avoid is sending repeated notifications to th
 
 There are many ways to trigger flows in Microsoft Flow. One of them is having Flow monitor an Azure Queue. We will use a Queue in our Azure Storage Account to host this queue.
 
-1. From the Storage Account left-hand menu, select **Queues** located beneath the _Queue service_ section, then press the **+ Queue** button, and create a new queue named **flownotificationqueue**
+1. From the Storage Account left-hand menu, select **Queues** located beneath the _Queue service_ section, then press the **+ Queue** button, and create a new queue named **flownotificationqueue**.
 
    ![The queues administration blade is displayed. The Add Queue button is circled.](media/create-storage-queue-menu.png "Create Queue in the Storage Account")
 
@@ -771,7 +771,7 @@ We will be using [Microsoft Flow](https://flow.microsoft.com/) as a means to ema
 
     ![The Flow dialog displays the Delete message step. Message ID and Pop Receipt fields are populated. The Save button is circled. The available dynamic content pane has the available fields listed.](media/create-flow-delete-message-form.png "Delete queue message form")
 
-12. Microsoft will automatically name the Flow, you are able to edit this Flow in the future by selecting **My flows** from the left-hand menu
+12. Microsoft will automatically name the Flow. You are able to edit this Flow in the future by selecting **My flows** from the left-hand menu.
 
     ![The Azure Flow blade is displayed. The left pane, the My flows link is circled. The Send an email step is circled.](media/new-flow-created.png "New Flow created")
 
