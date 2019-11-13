@@ -10,6 +10,8 @@ They would like to understand their options for expediting the implementation of
 
 They would like to start by building a proof of concept that performs the predictive analytics in the cloud. While their machine learning will initially happen in the cloud, they would like to design their solution with an eye towards the future so it could be enhanced to run the models at the edge.
 
+- November 2019
+
 ## Target audience
 
 - IoT Engineer
@@ -62,5 +64,18 @@ In this hands-on lab, you will look at implementing a predictive maintenance sol
 ## Related references
 
 - [MCW](https://github.com/Microsoft/MCW)
-- For the lab: Predictive maintenance solution for manufacturing, see https://azure.github.io/LearnAI_Azure_ML/
-- Interested in deeper security for IoT solutions, see the forthcoming [Securing the IoT End-to-End MCW]()
+- Interested in deeper security for IoT solutions, see the forthcoming [Securing the IoT End-to-End MCW](https://github.com/microsoft/MCW-Securing-the-IoT-end-to-end)
+
+## Help & Support
+
+We welcome feedback and comments from Microsoft SMEs & learning partners who deliver MCWs.  
+
+***Having trouble?***
+
+- First, verify you have followed all written lab instructions (including the Before the Hands-on lab document).
+- Next, submit an issue with a detailed description of the problem.
+- Do not submit pull requests. Our content authors will make all changes and submit pull requests for approval.
+
+If you are planning to present a workshop, *review and test the materials early*! We recommend at least two weeks prior.
+
+### Please allow 5 - 10 business days for review and resolution of issues.
