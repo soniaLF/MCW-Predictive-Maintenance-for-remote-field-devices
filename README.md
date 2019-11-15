@@ -2,10 +2,6 @@
 
 Fabrikam, Inc. creates innovated IoT solutions for the oil and gas manufacturing industry. It is beginning work on a new, predictive maintenance solution that targets rod pumps (the iconic pivoting pumps that dot oil fields around the world). With their solution in place, companies will be able to monitor and configure pump settings and operations remotely, and only send personnel onsite when necessary for repair or maintenance when the solution indicates that something has gone wrong. However, Fabrikam wants to go beyond reactive alerting- they want to want to enable the solution with the ability to _predict_ problems so they can be averted before a fault occurs and damage is done.
 
-Using Machine Learning gives Fabrikam's solution the ability to analyze readings from various elements of the rod pump mechanism and sense patterns that indicate a possible impending mechanical failure or a deviation from the pump’s optimal operating conditions. In that case, the controller can modify the operating parameters of the pump to avoid or mitigate the impact of the unexpected changes. Or, if necessary, it can shut down the pump before any damage occurs and notify the company that repairs are necessary—protecting the machinery, and preventing potential environmental damage.
-
-Their goal in the use of such predictive models is to increase operator efficiency and safety. Addressing a typical maintenance issue takes several people and at least three days of system downtime at a cost of up to \$20,000 USD a day, not including parts and labor. "By proactively identifying pump problems through predictive analytics, companies reduce unplanned downtime, which decreases costs, increases production, and increases the agility of maintenance services." says Fabrikam's Chief Engineer. He adds that the majority of industry accidents don’t happen at the well site, they happen when personnel are driving between sites. By eliminating the need for many site visits, they can reduce those accidents.
-
 They would like to understand their options for expediting the implementation of the PoC. Specifically they are looking to learn what offerings Azure provides that could enable a quick end-to-end start on the infrastructure for monitoring and managing devices and the system metadata. On top this, they are curious about what other platform services Azure provides that they should consider in this scenario.
 
 They would like to start by building a proof of concept that performs the predictive analytics in the cloud. While their machine learning will initially happen in the cloud, they would like to design their solution with an eye towards the future so it could be enhanced to run the models at the edge.
@@ -19,47 +15,35 @@ They would like to start by building a proof of concept that performs the predic
 - Data Scientist
 - Data Engineer
 
-## Abstract
+## Abstracts
 
 ### Workshop
 
-In this workshop, you will look at the process for designing and implementing a predictive maintenance solution for oil and gas manufacturing.
+In this workshop, you will learn how to evaluate Microsoft's catalog of PaaS and SaaS-based IoT products to determine the optimal combination of tools to fulfill Fabrikam's needs. You will design and implement a solution that simplifies IoT device management and reporting, providing Fabrikam with a faster path to realizing their IoT strategy without requiring a lot of custom development. Next, you will learn how to deploy a trained predictive maintenance Machine Learning model and design a stream processing pipeline that makes predictions with the model in near real-time. At the end of this pipeline is an alert that is sent to the oil pump maintenance team when a pump failure is imminent.
+
+At the end of this workshop, you will be better able to design an IoT-based predictive maintenance solution in Azure.
 
 ### Whiteboard design session
 
-In this workshop, you will look at designing a predictive maintenance solution for oil and gas manufacturing.
+In this whiteboard design session, you will work with a group to evaluate Azure's PaaS and SaaS-based IoT products and design a solution that uses the optimal combination of tools to fulfill Fabrikam's needs. You will provide guidance for designing a solution that simplifies IoT device management and reporting, enabling Fabrikam to more rapidly implement their IoT strategy without requiring a lot of custom development. Next, you will design a solution that deploys a trained predictive maintenance Machine Learning model and uses a stream processing pipeline that makes predictions with the model in near real-time. At the end of this pipeline is an alert that is sent to the oil pump maintenance team when a pump failure is imminent.
 
-#### Outline: Key Concerns for Customer situation
-
-- Is there an out of the box solution we can use to jumpstart the creation of our solution (e.g., we need web based access to metadata management, configurable dashboards, collection and export of real-time telemetry, and security).
-- Can this solution enable our data scientists to leverage their expertise to build custom models against timeseries telemetry, and to plug their models in to the near-real time streams collected by the solution?
-- How would data engineers get at rod pump streaming telemetry?
-- How can data engineers collect historical streaming telemetry for use in modeling by the data scientists?
-- What service would the data scientists use for for training their model that could support the potentially large scale?
-- How could data scientists plug their model into a real-time predictive analytics pipeline to detect potential failures?
-- How would alerts be generated and delivered when the model predicts a failure?
-- How can the operators view the current status of the rod pumps in a single dashboard?
+At the end of this whiteboard design session, you will be better able to design an IoT-based predictive maintenance solution in Azure.
 
 ### Hands-on lab
 
-In this hands-on lab, you will look at implementing a predictive maintenance solution for oil and gas manufacturing.
+In this hands-on lab, you will implement a proof-of-concept (PoC) that uses Azure's premiere IoT SaaS-based service that simplifies IoT management and reduces development tasks in the cloud. Next, you will create a solution that deploys a trained predictive maintenance Machine Learning model and uses a stream processing pipeline that makes predictions with the model in near real-time. At the end of this pipeline is an alert that is sent to the oil pump maintenance team when a pump failure is imminent.
 
-#### Outline: Hands-on lab exercises
-
-- Exercise 0: Before the hands-on lab
-- Exercise 1: Configuring IoT Central with devices and metadata
-- Exercise 2: Running the rod pump simulator
-- Exercise 3: Enabling monitoring and analytics
-- Exercise 4: Enabling Continuous Export from IoT Central
-- Exercise 5: Creating and deploying a first predictive maintenance model using Azure Databricks and Azure Machine Learning
-- Exercise 6: Sending predictive maintenance alerts with Microsoft Flow
+At the end of this hands-on-lab, you will be better able to implement an IoT-based predictive maintenance solution in Azure.
 
 ## Azure services and related products
 
+- IoT Central
 - Azure Databricks
-- Azure IoT Central
-- Azure IoT Hub
 - Azure Machine Learning
+- Azure Event Hubs
+- Azure Functions
+- Azure Storage
+- Microsoft FLow
 
 ## Related references
 
@@ -68,14 +52,14 @@ In this hands-on lab, you will look at implementing a predictive maintenance sol
 
 ## Help & Support
 
-We welcome feedback and comments from Microsoft SMEs & learning partners who deliver MCWs.  
+We welcome feedback and comments from Microsoft SMEs & learning partners who deliver MCWs.
 
-***Having trouble?***
+**_Having trouble?_**
 
 - First, verify you have followed all written lab instructions (including the Before the Hands-on lab document).
 - Next, submit an issue with a detailed description of the problem.
 - Do not submit pull requests. Our content authors will make all changes and submit pull requests for approval.
 
-If you are planning to present a workshop, *review and test the materials early*! We recommend at least two weeks prior.
+If you are planning to present a workshop, _review and test the materials early_! We recommend at least two weeks prior.
 
 ### Please allow 5 - 10 business days for review and resolution of issues.
