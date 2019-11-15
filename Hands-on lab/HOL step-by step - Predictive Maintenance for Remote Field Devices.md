@@ -38,7 +38,7 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
     - [Task 2: Create an IoT Central Application](#task-2-create-an-iot-central-application)
     - [Task 3: Create the Device Template](#task-3-create-the-device-template)
     - [Task 4: Create and provision real devices](#task-4-create-and-provision-real-devices)
-  - [Task 5: Delete the simulated device](#task-5-delete-the-simulated-device)
+    - [Task 5: Delete the simulated device](#task-5-delete-the-simulated-device)
   - [Exercise 2: Run the Rod Pump Simulator](#exercise-2-run-the-rod-pump-simulator)
     - [Task 1: Generate device connection strings](#task-1-generate-device-connection-strings)
     - [Task 2: Open the Visual Studio solution, and update connection string values](#task-2-open-the-visual-studio-solution-and-update-connection-string-values)
