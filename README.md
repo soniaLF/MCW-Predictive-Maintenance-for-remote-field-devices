@@ -2,11 +2,9 @@
 
 Fabrikam, Inc. creates innovated IoT solutions for the oil and gas manufacturing industry. It is beginning work on a new, predictive maintenance solution that targets rod pumps (the iconic pivoting pumps that dot oil fields around the world). With their solution in place, companies will be able to monitor and configure pump settings and operations remotely, and only send personnel onsite when necessary for repair or maintenance when the solution indicates that something has gone wrong. However, Fabrikam wants to go beyond reactive alerting- they want to want to enable the solution with the ability to _predict_ problems so they can be averted before a fault occurs and damage is done.
 
-They would like to understand their options for expediting the implementation of the PoC. Specifically they are looking to learn what offerings Azure provides that could enable a quick end-to-end start on the infrastructure for monitoring and managing devices and the system metadata. On top this, they are curious about what other platform services Azure provides that they should consider in this scenario.
+They would like to understand their options for expediting the implementation of the PoC. Specifically, they are looking to learn what offerings Azure provides that could enable a quick end-to-end start on the infrastructure for monitoring and managing devices and the system metadata. On top this, they are curious about what other platform services Azure provides that they should consider in this scenario.
 
-They would like to start by building a proof of concept that performs the predictive analytics in the cloud. While their machine learning will initially happen in the cloud, they would like to design their solution with an eye towards the future so it could be enhanced to run the models at the edge.
-
-- November 2019
+November 2019
 
 ## Target audience
 
@@ -43,12 +41,12 @@ At the end of this hands-on-lab, you will be better able to implement an IoT-bas
 - Azure Event Hubs
 - Azure Functions
 - Azure Storage
-- Microsoft FLow
+- Microsoft Flow
 
 ## Related references
 
 - [MCW](https://github.com/Microsoft/MCW)
-- Interested in deeper security for IoT solutions, see the forthcoming [Securing the IoT End-to-End MCW](https://github.com/microsoft/MCW-Securing-the-IoT-end-to-end)
+- Interested in deeper security for IoT solutions, see [Securing the IoT End-to-End MCW](https://github.com/microsoft/MCW-Securing-the-IoT-end-to-end)
 
 ## Help & Support
 
