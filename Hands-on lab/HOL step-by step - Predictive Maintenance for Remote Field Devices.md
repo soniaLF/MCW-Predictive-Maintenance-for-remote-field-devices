@@ -34,7 +34,6 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
   - [Before the hands-on lab](#before-the-hands-on-lab)
   - [Exercise 1: Configuring IoT Central with devices and metadata](#exercise-1-configuring-iot-central-with-devices-and-metadata)
     - [Task 1: Model the telemetry data](#task-1-model-the-telemetry-data)
-      - [Telemetry Schema](#telemetry-schema)
     - [Task 2: Create an IoT Central Application](#task-2-create-an-iot-central-application)
     - [Task 3: Create the Device Template](#task-3-create-the-device-template)
     - [Task 4: Create and provision real devices](#task-4-create-and-provision-real-devices)
@@ -121,7 +120,7 @@ Duration: 45 minutes
 
 Fabrikam is one such company that could use a helping hand entering the IoT space. They have recently invested in sensor technology on their rod pumps in the field, and they are ready to implement their cloud-based IoT Solution. Their IT department is small and unfamiliar with cloud-based IoT infrastructure; their IT budget also does not afford them the luxury of hiring a team of contractors to build out a solution for them.
 
-The Fabrikam CIO has recently heard of Azure IoT Central - this online offering will streamline the process of them getting their sensor data to the cloud, where they can monitor their equipment for failures and improve their maintenance practices and not have to worry about the underlying infrastructure. A [predictable cost model](https://azure.microsoft.com/en-us/pricing/details/iot-central/) also ensures that there are no financial surprises.
+The Fabrikam CIO has recently heard of Azure IoT Central. This online offering will streamline the process of them getting their sensor data to the cloud, where they can monitor their equipment for failures and improve their maintenance practices and not have to worry about the underlying infrastructure. A [predictable cost model](https://azure.microsoft.com/en-us/pricing/details/iot-central/) also ensures that there are no financial surprises.
 
 ### Task 1: Model the telemetry data
 
@@ -146,31 +145,31 @@ The telemetry being reported by the Fabrikam rod pumps are as follows, we will b
 
 1. Access the (Azure IoT Central)[https://azure.microsoft.com/en-us/services/iot-central/] website.
 
-2. Press the _Get started_ button
+2. Press the _Get started_ button.
 
     ![The browser screen shows the Azure products filtered to Azure IoT Central. An arrow points to the Get started button.](media/azure-iot-central-website.png "IoT Central Getting started")
 
-3. If you are not currently logged in, you will be prompted to log in with your Microsoft Azure Account
+3. If you are not currently logged in, you will be prompted to log in with your Microsoft Azure Account.
 
-4. Press the _New Application_ button
+4. Press the _New Application_ button.
 
     ![The screens displays the list of my applications and options for creating a new application.](media/azure-iot-central-new-application.png "New Application")
 
-5. Fill the provisioning form
+5. Fill in the provisioning form.
 
     ![The screens displays the new application configuration options. The Trial payment plan is selected.](media/custom-app-creation-form.png "Provision application form")
 
     a. *Payment Plan* - feel free to choose either the 7 day trial or the Pay as you Go option.
 
-    b. *Application Template* - select *Custom Application*
+    b. *Application Template* - select *Custom Application*.
 
-    c. *Application Name* - give your application a name of your choice, in this example, we used *fabrikam-oil*
+    c. *Application Name* - give your application a name of your choice, in this example, we used *fabrikam-oil*.
 
     d. *URL* - this will be the URL for your application, it needs to be globally unique.
 
-    e. Fill out your contact information (First Name, Last Name, Email Address, Phone Number, Country)
+    e. Fill out your contact information (First Name, Last Name, Email Address, Phone Number, Country/Region).
 
-    f. Press the *Create* button to provision your application
+    f. Press the *Create* button to provision your application.
 
 ### Task 3: Create the Device Template
 
@@ -178,7 +177,7 @@ The telemetry being reported by the Fabrikam rod pumps are as follows, we will b
 
     ![The screen displays the options available for a dashboard. Red arrows point to Create Device Templates.](media/create-device-templates.png "Device Templates")
 
-2. Select _Custom_ to define our own type of hardware
+2. Select _Custom_ to define our own type of hardware.
 
     ![The screen shows the Device Template menu item is selected. The device template tile option for the Custom template is circled.](media/new-template-custom.png "Custom Template")
 
@@ -190,7 +189,7 @@ The telemetry being reported by the Fabrikam rod pumps are as follows, we will b
 
     ![The screen displays the configuration menu for the Rod Pump 1. The Measurements menu item is selected and the Add New menu is selected.](media/new-measurement.png "New Measurement")
 
-5. From the context menu, select _Telemetry_
+5. From the context menu, select _Telemetry_.
 
     ![The screen displays the configuration menu for the Rod Pump 1. The Measurements menu item is selected and the Add New menu displays the options available. The Telemetry item is selected.](media/new-telemetry-measurement.png "New Telemetry Measurement")
 
@@ -208,11 +207,11 @@ The telemetry being reported by the Fabrikam rod pumps are as follows, we will b
 
     ![A line chart displays the Rod Pump 1 telemetry measurements.](media/telemetry-defined.png "Telemetry Defined")
 
-7. Remaining on the measurement tab - we also need to define the current state of the pump, whether it is running or not. Press _New_ and select _State_.
+7. Remaining on the measurement tab, we also need to define the current state of the pump, whether it is running or not. Press _New_ and select _State_.
 
     ![The screen displays the configuration menu for the Rod Pump 1. The Measurements menu item is selected and the Add New menu displays the options available. The State item is selected.](media/device-template-add-state.png "Add State")
 
-8. Add the state with the display name of _Power State_, field name of _PowerState_ with the values _Unavailable_, _On_, and _Off_ - then press the _Save_ button.
+8. Add the state with the display name of _Power State_, field name of _PowerState_ with the values _Unavailable_, _On_, and _Off_, then press the _Save_ button.
 
     ![The screen displays the state configuration options.](media/power-state-definition.png "Power State")
 
@@ -326,7 +325,7 @@ Included with this lab is source code that will simulate the connection and tele
 
     ![The command prompt displays the npm dps-keygen installation package result message.](media/global-install-keyutil.png "Global Install of Key Generator Utility")
 
-    Next, generate the connection string using the key generator utility
+    Next, generate the connection string using the key generator utility:
 
     ```
     dps-keygen -di:<Device ID> -dk:<Primary Key> -si:<Scope ID>
@@ -356,7 +355,7 @@ Included with this lab is source code that will simulate the connection and tele
 
 2. Once the menu is displayed, select option 1 to generate and send telemetry to IoT Central.
 
-    ![The command prompt displays the choice to generate and send telemetry to IoT Central](media/generate-and-send-telemetry.png "Generate and Send Telemetry to IoT Central")
+    ![The command prompt displays the choice to generate and send telemetry to IoT Central.](media/generate-and-send-telemetry.png "Generate and Send Telemetry to IoT Central")
 
 3. Allow the simulator to start sending telemetry data to IoT Central, you will see output similar to the following:
 
@@ -430,7 +429,7 @@ Device sets allow you to create logical groupings of IoT Devices in the field by
 
     ![A screen displays the current device sets.  There is a add new button circled.](media/device-set-list.png "Device set listing")
 
-2. In the field, all Texas pumps are located in the 192.168.1.\* subnet, so we will create a filter to include only those pumps in this device set. Create the Device set with a condition as follows:
+2. In the field, all Texas pumps are located in the *192.168.1.* subnet, so we will create a filter to include only those pumps in this device set. Create the Device set with a condition as follows:
 
     ![The screen shows the device set creation options.  There is a list of devices and their settings displayed on the right.](media/new-device-set.png "New device set")
 
