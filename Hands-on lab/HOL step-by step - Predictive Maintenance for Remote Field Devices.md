@@ -867,7 +867,7 @@ It is recommended that you never check in secrets, such as connection strings, i
 
 2. In the Overview pane of the Function app, select the **Configuration** option from below the Configured features heading.
 
-   ![The Azure Function Application Overview window is displayed with the Configuration item highlighted](media/functionconfigurationsettingsmenu.png "The Azure Function Application Overview window is displayed with the Configuration item highlighted")
+   ![The Azure Function Application Overview window is displayed with the Configuration item highlighted.](media/functionconfigurationsettingsmenu.png "Azure Function Application Overview window")
 
 3. In the **Application Settings** section, we will add the following application settings to mimic those that are in our *local.settings.json* file. Add a new setting by selecting the **New application setting** button.
 
@@ -906,7 +906,7 @@ It is recommended that you never check in secrets, such as connection strings, i
 
 6. After some time, a notification window will display indicating the deployment has completed.
 
-   ![A notification is shown indicating the deployment to pumpfunctions has completed](media/funcdeploycompleted.png "Deployment to pumpfunctions completed")
+   ![A notification is shown indicating the deployment to pumpfunctions has completed.](media/funcdeploycompleted.png "Deployment to pumpfunctions completed")
 
 7. Returning to the Azure Portal, in the **Fabrikam_Oil** resource group, open the **pumpfunctions** function app and observe that our function that we created in Visual Studio Code has been deployed.
 
@@ -926,6 +926,8 @@ Duration: 10 minutes
 
    ![The Azure Resource Group panel is displayed. The Delete resource group link is circled.](media/delete-resource-group.png "Delete the Resource Group")
 
-3. Delete Microsoft Flows that we created. Access Microsoft Flow and login. From the left-hand menu, select **My flows**. Press on the ellipsis button next to each flow that we created in this lab and select **Delete**.
+3. Delete Microsoft Flows that we created. Access Microsoft Flow and login. From the left-hand menu, select **My flows**. Press the ellipsis button next to each flow that we created in this lab and select **Delete**.
 
    ![The Azure Flows panel is displayed. The ellipsis and delete links are circled.](media/delete-flow.png "Delete Microsoft Flow processes")
+
+You should follow all steps provided *after* attending the Hands-on lab.
