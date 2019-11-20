@@ -256,7 +256,9 @@ This final chart shows the telemetry for these five components when there is an 
 
 ### Infographic for common scenarios
 
-Potential picture goes here...
+Use the following diagram for inspiration in your design.
+
+![The infographic shows common scenarios for a SaaS and PaaS-based IoT architecture.](media/infographic.png "Infographic for common scenarios")
 
 ## Step 2: Design a proof of concept solution
 

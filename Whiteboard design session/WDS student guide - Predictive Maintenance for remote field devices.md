@@ -30,6 +30,7 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
   - [Abstract and learning objectives](#abstract-and-learning-objectives)
   - [Step 1: Review the customer case study](#step-1-review-the-customer-case-study)
     - [Customer situation](#customer-situation)
+      - [Telemetry data](#telemetry-data)
     - [Customer needs](#customer-needs)
     - [Customer objections](#customer-objections)
     - [Infographic for common scenarios](#infographic-for-common-scenarios)
@@ -66,7 +67,7 @@ Directions: With all participants in the session, the facilitator/SME presents a
 
 ### Customer situation
 
-Fabrikam, Inc. creates innovative IoT solutions for the oil and gas manufacturing industry. It is beginning work on a new, predictive maintenance solution that targets rod pumps (the iconic pivoting pumps that dot oil fields around the world). With their solution in place, companies will be able to monitor and configure pump settings and operations remotely, and only send personnel onsite when necessary for repair or maintenance when the solution indicates that something has gone wrong. However, Fabrikam wants to go beyond reactive alerting; they want to want to enable the solution with the ability to *predict* problems so they can be averted before a fault occurs and damage is done.
+Fabrikam, Inc. creates innovative IoT solutions for the oil and gas manufacturing industry. It is beginning work on a new, predictive maintenance solution that targets rod pumps (the iconic pivoting pumps that dot oil fields around the world). With their solution in place, companies will be able to monitor and configure pump settings and operations remotely, and only send personnel onsite when necessary for repair or maintenance when the solution indicates that something has gone wrong. However, Fabrikam wants to go beyond reactive alerting; they want to want to enable the solution with the ability to _predict_ problems so they can be averted before a fault occurs and damage is done.
 
 One of Fabrikam's challenges is managing IoT devices at scale. They want to be able to securely store credentials on their devices before sending them to their customers. When the devices connect to the cloud, they want to have an approval process that activates those devices so they can start sending telemetry securely. All data in transit must be encrypted.
 
@@ -76,9 +77,9 @@ Whichever cloud-based solution Fabrikam pursues, they want to know how they can 
 
 Fabrikam has collected and compiled thorough maintenance and operational data of rod pump components, creating separate data sets for pumps operating under normal conditions, during gradual mechanical failure, and during periods of immediate failure. Each of the elements of the rod pump's mechanism generates a consistent pattern in their telemetry when operating under normal conditions. If one of these components starts to degrade or suffers an operational failure, the signal reflects this change in status. Fabrikam would like to use this historical data to train a Machine Learning (ML) model to predict when a pump needs to be maintained. They want to use this trained model to make predictions in real time, based on telemetry from their pumps' sensors. If the model predicts a pump needs to be maintained, they would like to automatically send an alert to engineers and field pump supervisors so they can potentially mitigate the issue and prevent damage to the failing and related components. In many cases, the fuel rod's onboard controller can modify the operating parameters of the pump to avoid or mitigate the impact of unexpected changes. Alternatively, if necessary, it can shut down the pump before any damage occurs and notify the company that repairs are necessary, protecting the machinery, and preventing potential environmental damage. Fabrikam would like to have a mechanism within their solution to send commands to rod pump controllers to modify these operating parameters remotely.
 
-Their goal in the use of such predictive models is to increase operator efficiency and safety. Addressing a typical maintenance issue takes several people and at least three days of system downtime at a cost of up to $20,000 USD a day, not including parts and labor. "By proactively identifying pump problems through predictive analytics, companies reduce unplanned downtime, which decreases costs, increases production, and increases the agility of maintenance services." says Fabrikam's Chief Engineer, Peter Guerin. He adds that the majority of industry accidents don’t happen at the well site, they happen when personnel are driving between sites. By eliminating the need for many site visits, they can reduce those accidents.
+Their goal in the use of such predictive models is to increase operator efficiency and safety. Addressing a typical maintenance issue takes several people and at least three days of system downtime at a cost of up to \$20,000 USD a day, not including parts and labor. "By proactively identifying pump problems through predictive analytics, companies reduce unplanned downtime, which decreases costs, increases production, and increases the agility of maintenance services." says Fabrikam's Chief Engineer, Peter Guerin. He adds that the majority of industry accidents don’t happen at the well site, they happen when personnel are driving between sites. By eliminating the need for many site visits, they can reduce those accidents.
 
-They would like to understand their options for expediting the implementation of the PoC.  Specifically, they are looking to learn what offerings Azure provides that could enable a quick end-to-end start on the infrastructure for monitoring and managing devices and the system metadata. On top of this, they are curious about what other platform services Azure provides that they should consider in this scenario.
+They would like to understand their options for expediting the implementation of the PoC. Specifically, they are looking to learn what offerings Azure provides that could enable a quick end-to-end start on the infrastructure for monitoring and managing devices and the system metadata. On top of this, they are curious about what other platform services Azure provides that they should consider in this scenario.
 
 They would like to start by building a proof of concept that performs the predictive analytics in the cloud. While their machine learning will initially happen in the cloud, they would like to design their solution with an eye towards the future so it could be enhanced to run the models at the edge.
 
@@ -86,25 +87,25 @@ They would like to start by building a proof of concept that performs the predic
 
 Fabrikam identified 33 rod pump components whose telemetry they want to capture and monitor. Of these, they want to automatically monitor five that can be used to predict potential mechanical failure or detect an active failure.
 
-| Field          | Type    | Description                                                                                                                                                                                                                                                   |
-| -------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| MotorPowerkW   | Numeric | Measured in Kilowatts (kW); The power output of the motor should be steady, but will drop if there is a problem                                                                                                                                               |
-| MotorSpeed     | Numeric | Measured in RPM (including slip); Can change based on density of oil. Lower density causes this to go up (like if you have pockets of gas and it jumps up). If there's a failure it will go down below the normal operating average.                          |
-| CasingFriction | Numeric | Measured in PSI (psi); The pressure will drop if a fissure is developing in the casing, indicating a failure.                                                                                                                                                 |
+| Field          | Type    | Description                                                                                                                                                                                                                                                  |
+| -------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| MotorPowerkW   | Numeric | Measured in Kilowatts (kW); The power output of the motor should be steady, but will drop if there is a problem                                                                                                                                              |
+| MotorSpeed     | Numeric | Measured in RPM (including slip); Can change based on density of oil. Lower density causes this to go up (like if you have pockets of gas and it jumps up). If there's a failure it will go down below the normal operating average.                         |
+| CasingFriction | Numeric | Measured in PSI (psi); The pressure will drop if a fissure is developing in the casing, indicating a failure.                                                                                                                                                |
 | PumpRate       | Numeric | Speed calculated over the time duration between the last two times the crank arm has passed the proximity sensor measured in Strokes Per Minute (SPM) - minimum 0.0, maximum 100.0. A significant slowdown could be an indicator of failure within the pump. |
-| TimePumpOn     | Numeric | Number of minutes the pump has been on. This should be a steady sawtooth pattern with a regular cadence of the pump cycling power. A consistently shorter than average cadence can indicate problems with the pump.                                           |
+| TimePumpOn     | Numeric | Number of minutes the pump has been on. This should be a steady sawtooth pattern with a regular cadence of the pump cycling power. A consistently shorter than average cadence can indicate problems with the pump.                                          |
 
 Normal signal readings from these five sensors appear in the chart below, with 10,000 intervals. The frequency of the output is condensed to fit:
 
-![The five components' telemetry shown in their normal operating state.](media/normal-telemetry.png "Normal telemetry")
+![The five components' telemetry shown in their normal operating state.](media/normal-telemetry.png 'Normal telemetry')
 
 The next chart shows the telemetry for these five components during a gradual failure. In many cases, there is time to react and prevent total failure through remote commands to the pump controller:
 
-![The five components' telemetry shown during gradual failure.](media/gradual-failure-telemetry.png "Gradual failure")
+![The five components' telemetry shown during gradual failure.](media/gradual-failure-telemetry.png 'Gradual failure')
 
 This final chart shows the telemetry for these five components when there is an immediate failure:
 
-![The five components' telemetry during immediate failure.](media/immediate-failure-telemetry.png "Immediate failure")
+![The five components' telemetry during immediate failure.](media/immediate-failure-telemetry.png 'Immediate failure')
 
 ### Customer needs
 
@@ -132,7 +133,9 @@ This final chart shows the telemetry for these five components when there is an 
 
 ### Infographic for common scenarios
 
-Potential picture goes here...
+Use the following diagram for inspiration in your design.
+
+![The infographic shows common scenarios for a SaaS and PaaS-based IoT architecture.](media/infographic.png 'Infographic for common scenarios')
 
 ## Step 2: Design a proof of concept solution
 
