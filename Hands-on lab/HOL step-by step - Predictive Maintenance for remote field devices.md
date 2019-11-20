@@ -257,6 +257,8 @@ The telemetry being reported by the Fabrikam rod pumps are as follows, we will b
 
     ![The device template options are displayed. The save button is circled.](media/dashboard-map-settings.png "Dashboard Map Form")
 
+    After saving, the map will appear on the dashboard as shown:
+
     ![The dashboard configuration options are displayed.](media/dashboard-charts-definition.png "Dashboard Charts Definition")
 
 16. Finally, we can add an image to represent the equipment. Press on the circle icon left of the template name, and select an image file. The image used in this lab can be found on [PixaBay](https://pixabay.com/photos/pumpjack-texas-oil-rig-pump-591934/).
