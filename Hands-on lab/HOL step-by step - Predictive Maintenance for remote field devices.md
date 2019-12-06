@@ -27,49 +27,49 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
 <!-- TOC -->
 
 - [Predictive Maintenance for remote field devices hands-on lab step-by-step](#predictive-maintenance-for-remote-field-devices-hands-on-lab-step-by-step)
-    - [Abstract and learning objectives](#abstract-and-learning-objectives)
-    - [Overview](#overview)
-    - [Solution architecture](#solution-architecture)
-    - [Requirements](#requirements)
-    - [Before the hands-on lab](#before-the-hands-on-lab)
-    - [Exercise 1: Configuring IoT Central with devices and metadata](#exercise-1-configuring-iot-central-with-devices-and-metadata)
-        - [Task 1: Model the telemetry data](#task-1-model-the-telemetry-data)
-            - [Telemetry Schema](#telemetry-schema)
-        - [Task 2: Create an IoT Central Application](#task-2-create-an-iot-central-application)
-        - [Task 3: Create the Device Template](#task-3-create-the-device-template)
-        - [Task 4: Create and provision real devices](#task-4-create-and-provision-real-devices)
-        - [Task 5: Delete the simulated device](#task-5-delete-the-simulated-device)
-    - [Exercise 2: Run the Rod Pump Simulator](#exercise-2-run-the-rod-pump-simulator)
-        - [Task 1: Generate device connection strings](#task-1-generate-device-connection-strings)
-        - [Task 2: Open the Visual Studio solution, and update connection string values](#task-2-open-the-visual-studio-solution-and-update-connection-string-values)
-        - [Task 3: Run the application](#task-3-run-the-application)
-        - [Task 4: Interpret telemetry data](#task-4-interpret-telemetry-data)
-        - [Task 5: Restart a failing pump remotely](#task-5-restart-a-failing-pump-remotely)
-    - [Exercise 3: Creating a device set](#exercise-3-creating-a-device-set)
-        - [Task 1: Create a device set using a filter](#task-1-create-a-device-set-using-a-filter)
-    - [Exercise 4: Creating a useful dashboard](#exercise-4-creating-a-useful-dashboard)
-        - [Task 1: Clearing out the default dashboard](#task-1-clearing-out-the-default-dashboard)
-        - [Task 2: Add your company logo](#task-2-add-your-company-logo)
-        - [Task 3: Add a list of Texas Rod Pumps](#task-3-add-a-list-of-texas-rod-pumps)
-        - [Task 4: Add a map displaying the power state of DEVICE001](#task-4-add-a-map-displaying-the-power-state-of-device001)
-    - [Exercise 5: Create an Event Hub and continuously export data from IoT Central](#exercise-5-create-an-event-hub-and-continuously-export-data-from-iot-central)
-        - [Task 1: Create an Event Hub](#task-1-create-an-event-hub)
-        - [Task 2: Configure continuous data export from IoT Central](#task-2-configure-continuous-data-export-from-iot-central)
-    - [Exercise 6: Use Azure Databricks and Azure Machine Learning service to train and deploy predictive model](#exercise-6-use-azure-databricks-and-azure-machine-learning-service-to-train-and-deploy-predictive-model)
-        - [Task 1: Run the Anomaly Detection notebook](#task-1-run-the-anomaly-detection-notebook)
-    - [Exercise 7: Create an Azure Function to predict pump failure](#exercise-7-create-an-azure-function-to-predict-pump-failure)
-        - [Task 1: Create an Azure Function Application](#task-1-create-an-azure-function-application)
-        - [Task 2: Create a notification table in Azure Storage](#task-2-create-a-notification-table-in-azure-storage)
-        - [Task 3: Create a notification queue in Azure Storage](#task-3-create-a-notification-queue-in-azure-storage)
-        - [Task 4: Create notification service in Microsoft Flow](#task-4-create-notification-service-in-microsoft-flow)
-        - [Task 5: Obtain connection settings for use with the Azure Function implementation](#task-5-obtain-connection-settings-for-use-with-the-azure-function-implementation)
-        - [Task 6: Create the local settings file for the Azure Functions project](#task-6-create-the-local-settings-file-for-the-azure-functions-project)
-        - [Task 7: Review the Azure Function code](#task-7-review-the-azure-function-code)
-        - [Task 8: Run the Function App locally](#task-8-run-the-function-app-locally)
-        - [Task 9: Prepare the Azure Function App with settings](#task-9-prepare-the-azure-function-app-with-settings)
-        - [Task 10: Deploy the Function App into Azure](#task-10-deploy-the-function-app-into-azure)
-    - [After the hands-on lab](#after-the-hands-on-lab)
-        - [Task 1: Delete Lab Resources](#task-1-delete-lab-resources)
+  - [Abstract and learning objectives](#abstract-and-learning-objectives)
+  - [Overview](#overview)
+  - [Solution architecture](#solution-architecture)
+  - [Requirements](#requirements)
+  - [Before the hands-on lab](#before-the-hands-on-lab)
+  - [Exercise 1: Configuring IoT Central with devices and metadata](#exercise-1-configuring-iot-central-with-devices-and-metadata)
+    - [Task 1: Model the telemetry data](#task-1-model-the-telemetry-data)
+      - [Telemetry Schema](#telemetry-schema)
+    - [Task 2: Create an IoT Central Application](#task-2-create-an-iot-central-application)
+    - [Task 3: Create the Device Template](#task-3-create-the-device-template)
+    - [Task 4: Create and provision real devices](#task-4-create-and-provision-real-devices)
+    - [Task 5: Delete the simulated device](#task-5-delete-the-simulated-device)
+  - [Exercise 2: Run the Rod Pump Simulator](#exercise-2-run-the-rod-pump-simulator)
+    - [Task 1: Generate device connection strings](#task-1-generate-device-connection-strings)
+    - [Task 2: Open the Visual Studio solution, and update connection string values](#task-2-open-the-visual-studio-solution-and-update-connection-string-values)
+    - [Task 3: Run the application](#task-3-run-the-application)
+    - [Task 4: Interpret telemetry data](#task-4-interpret-telemetry-data)
+    - [Task 5: Restart a failing pump remotely](#task-5-restart-a-failing-pump-remotely)
+  - [Exercise 3: Creating a device set](#exercise-3-creating-a-device-set)
+    - [Task 1: Create a device set using a filter](#task-1-create-a-device-set-using-a-filter)
+  - [Exercise 4: Creating a useful dashboard](#exercise-4-creating-a-useful-dashboard)
+    - [Task 1: Clearing out the default dashboard](#task-1-clearing-out-the-default-dashboard)
+    - [Task 2: Add your company logo](#task-2-add-your-company-logo)
+    - [Task 3: Add a list of Texas Rod Pumps](#task-3-add-a-list-of-texas-rod-pumps)
+    - [Task 4: Add a map displaying the power state of DEVICE001](#task-4-add-a-map-displaying-the-power-state-of-device001)
+  - [Exercise 5: Create an Event Hub and continuously export data from IoT Central](#exercise-5-create-an-event-hub-and-continuously-export-data-from-iot-central)
+    - [Task 1: Create an Event Hub](#task-1-create-an-event-hub)
+    - [Task 2: Configure continuous data export from IoT Central](#task-2-configure-continuous-data-export-from-iot-central)
+  - [Exercise 6: Use Azure Databricks and Azure Machine Learning service to train and deploy predictive model](#exercise-6-use-azure-databricks-and-azure-machine-learning-service-to-train-and-deploy-predictive-model)
+    - [Task 1: Run the Anomaly Detection notebook](#task-1-run-the-anomaly-detection-notebook)
+  - [Exercise 7: Create an Azure Function to predict pump failure](#exercise-7-create-an-azure-function-to-predict-pump-failure)
+    - [Task 1: Create an Azure Function Application](#task-1-create-an-azure-function-application)
+    - [Task 2: Create a notification table in Azure Storage](#task-2-create-a-notification-table-in-azure-storage)
+    - [Task 3: Create a notification queue in Azure Storage](#task-3-create-a-notification-queue-in-azure-storage)
+    - [Task 4: Create notification service in Microsoft Flow](#task-4-create-notification-service-in-microsoft-flow)
+    - [Task 5: Obtain connection settings for use with the Azure Function implementation](#task-5-obtain-connection-settings-for-use-with-the-azure-function-implementation)
+    - [Task 6: Create the local settings file for the Azure Functions project](#task-6-create-the-local-settings-file-for-the-azure-functions-project)
+    - [Task 7: Review the Azure Function code](#task-7-review-the-azure-function-code)
+    - [Task 8: Run the Function App locally](#task-8-run-the-function-app-locally)
+    - [Task 9: Prepare the Azure Function App with settings](#task-9-prepare-the-azure-function-app-with-settings)
+    - [Task 10: Deploy the Function App into Azure](#task-10-deploy-the-function-app-into-azure)
+  - [After the hands-on lab](#after-the-hands-on-lab)
+    - [Task 1: Delete Lab Resources](#task-1-delete-lab-resources)
 
 <!-- /TOC -->
 
@@ -91,7 +91,7 @@ The Predictive Maintenance for Remote Field Devices hands-on lab is an exercise 
 
 ![The architecture diagram shows the components of the preferred solution.](../Media/preferred-solution.png "High-level architecture")
 
-[Azure IoT Central](https://docs.microsoft.com/azure/iot-central/overview-iot-central) is at the core of the preferred solution. It is used for data ingest, device management, data storage, and reporting. IoT field devices securely connect to IoT Central through its cloud gateway. The continuous export component sends device telemetry data to [Azure Blob storage](https://docs.microsoft.com/azure/storage/blobs/storage-blobs-overview) for cold storage, and the same data to [Azure Event Hubs](https://docs.microsoft.com/azure/event-hubs/event-hubs-about) for real-time processing. Azure Databricks uses the data stored in cold storage to periodically re-train a Machine Learning (ML) model to detect oil pump failures. It is also used to deploy the trained model to a web service hosted by [Azure Kubernetes Service](https://docs.microsoft.com/azure/aks/) (AKS) or [Azure Container Instances](https://docs.microsoft.com/azure/container-instances/) (ACI), using [Azure Machine Learning service](https://docs.microsoft.com/azure/machine-learning/service/overview-what-is-azure-ml). An [Azure function](https://docs.microsoft.com/azure/azure-functions/functions-overview) is triggered by events flowing through Event Hubs. It sends the event data for each pump to the web service hosting the deployed model, then sends an alert through [Microsoft Flow](https://flow.microsoft.com/) if an alert has not been sent within a configurable period of time. The alert is sent in the form of an email, identifying the failing oil pump with a suggestion to service the device.
+[Azure IoT Central](https://docs.microsoft.com/azure/iot-central/overview-iot-central) is at the core of the preferred solution. It is used for data ingest, device management, data storage, and reporting. IoT field devices securely connect to IoT Central through its cloud gateway. The continuous export component sends device telemetry data to [Azure Blob storage](https://docs.microsoft.com/azure/storage/blobs/storage-blobs-overview) for cold storage, and the same data to [Azure Event Hubs](https://docs.microsoft.com/azure/event-hubs/event-hubs-about) for real-time processing. Azure Databricks uses the data stored in cold storage to periodically re-train a Machine Learning (ML) model to detect oil pump failures. It is also used to deploy the trained model to a web service hosted by [Azure Kubernetes Service](https://docs.microsoft.com/azure/aks/) (AKS) or [Azure Container Instances](https://docs.microsoft.com/azure/container-instances/) (ACI), using [Azure Machine Learning](https://docs.microsoft.com/azure/machine-learning/service/overview-what-is-azure-ml). An [Azure function](https://docs.microsoft.com/azure/azure-functions/functions-overview) is triggered by events flowing through Event Hubs. It sends the event data for each pump to the web service hosting the deployed model, then sends an alert through [Microsoft Flow](https://flow.microsoft.com/) if an alert has not been sent within a configurable period of time. The alert is sent in the form of an email, identifying the failing oil pump with a suggestion to service the device.
 
 _Azure IoT Central architecture_
 
@@ -146,31 +146,35 @@ The telemetry being reported by the Fabrikam rod pumps are as follows, we will b
 
 1. Access the (Azure IoT Central)[https://azure.microsoft.com/en-us/services/iot-central/] website.
 
-2. Press the _Get started_ button.
+2. Select the _Build a solution_ button.
 
-    ![The browser screen shows the Azure products filtered to Azure IoT Central. An arrow points to the Get started button.](media/azure-iot-central-website.png "IoT Central Getting started")
+    ![The browser screen shows the Azure products filtered to Azure IoT Central. An arrow points to the Build a solution button.](media/azure-iot-central-website.png "IoT Central Getting started")
 
 3. If you are not currently logged in, you will be prompted to log in with your Microsoft Azure Account.
 
-4. Press the _New Application_ button.
+4. Select **My Apps** from the left-hand menu, then select the **New application** button.
 
     ![The screens displays the list of my applications and options for creating a new application.](media/azure-iot-central-new-application.png "New Application")
 
-5. Fill in the provisioning form.
+5. Select **Custom app**.
+
+    ![The custom app option is selected.](media/azure-iot-central-custom-app.png "Custom app")
+
+6. Fill in the provisioning form.
 
     ![The screens displays the new application configuration options. The Trial payment plan is selected.](media/custom-app-creation-form.png "Provision application form")
 
-    a. *Payment Plan* - feel free to choose either the 7 day trial or the Pay as you Go option.
+    a. *Application Name* - give your application a name of your choice, in this example, we used *fabrikam-oil*.
 
-    b. *Application Template* - select *Custom Application*.
+    b. *URL* - this will be the URL for your application, it needs to be globally unique.
 
-    c. *Application Name* - give your application a name of your choice, in this example, we used *fabrikam-oil*.
+    c. *Application Template* - select *Preview application*.
 
-    d. *URL* - this will be the URL for your application, it needs to be globally unique.
+    d. *7 day free trial* - select this option to enable the free trial.
 
     e. Fill out your contact information (First Name, Last Name, Email Address, Phone Number, Country/Region).
 
-    f. Press the *Create* button to provision your application.
+    f. Select the *Create* button to provision your application.
 
 ### Task 3: Create the Device Template
 
