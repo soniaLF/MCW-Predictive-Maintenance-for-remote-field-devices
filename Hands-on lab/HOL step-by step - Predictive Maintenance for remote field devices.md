@@ -168,7 +168,7 @@ The telemetry being reported by the Fabrikam rod pumps are as follows, we will b
 
     b. *URL* - this will be the URL for your application, it needs to be globally unique.
 
-    c. *Application Template* - select *Preview application*.
+    c. *Application Template* - select *Legacy application (2018)*.
 
     d. *7 day free trial* - select this option to enable the free trial.
 
@@ -240,11 +240,11 @@ The telemetry being reported by the Fabrikam rod pumps are as follows, we will b
 
 12. Create a command as follows, and press _save_:
 
-    a. _Display Name_ - _Toggle Motor Power_
-    b. _Field Name_ - _MotorPower_
-    c. _Default Timeout_ - _30_
-    d. _Data Type_ - _toggle_
-    e. _Description_ - _Toggle the motor power of the pump on and off_
+    1. _Display Name_ - _Toggle Motor Power_
+    2. _Field Name_ - _MotorPower_
+    3. _Default Timeout_ - _30_
+    4. _Data Type_ - _toggle_
+    5. _Description_ - _Toggle the motor power of the pump on and off_
 
     ![The screen shows the configure command options. The save button is circled.](media/template-configure-command.png "Configure Command")
 
@@ -270,7 +270,7 @@ The telemetry being reported by the Fabrikam rod pumps are as follows, we will b
 
     ![A Rod Pump 1 device is displayed. The device picture has focus.](media/device-template-thumbnail.png "Device Template Thumbnail")
 
-17. Review the application template by viewing its simulated device. IoT Central automatically creates a simulated device based on the template you've created. From the left-hand menu, select _Device Explorer_. In this list you will see a simulated device for the template that we have just created. Select the link for this simulated device, the charts will show a sampling of simulated data.
+17. Review the application template by viewing its simulated device. IoT Central automatically creates a simulated device based on the template you've created. From the left-hand menu, select _Devices_. In this list you will see a simulated device for the template that we have just created. Select the link for this simulated device, the charts will show a sampling of simulated data.
 
     ![A rod pump list is displayed. Rod Pump 1 is circled.](media/iot-central-simulated-rod-pump.png "Device List - Simulated")
 
