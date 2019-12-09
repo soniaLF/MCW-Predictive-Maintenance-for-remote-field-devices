@@ -70,7 +70,7 @@ In this task, you will create an Azure resource group for the resources used thr
 
 3. In the left-hand menu, select **Resource Groups**.
 
-4. At the top of the screen press the **Add** button.
+4. At the top of the screen select the **Add** button.
 
    ![Add Resource Group Menu](media/add-resource-group-menu.png 'Resource Group Menu')
 
