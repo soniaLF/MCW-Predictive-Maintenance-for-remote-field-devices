@@ -717,15 +717,15 @@ We will be using an Azure Function to read incoming telemetry from IoT Hub and s
 
     ![The create Function App blade is displayed. All of the Function App configurations are displayed.  The create button is circled.](media/create-azure-function-app-form2.png "Create Azure Function App")
 
-6. On the Review blade, select **Create**.
+6. On the Review blade, select **Create**, then **wait until the Function App is created** before continuing.
 
 ### Task 2: Create a notification table in Azure Storage
 
 One of the things we would like to avoid is sending repeated notifications to the workforce in the field. Notifications should only be sent once every 24 hour period per device. To keep track of when a notification was last sent for a device, we will use a table in a Storage Account.
 
-1. In the [Azure Portal](https://portal.azure.com), select **Resource groups** from the left-hand menu, then select the **Fabrikam_Oil** link from the listing.
+1. In the [Azure portal](https://portal.azure.com), select **Resource groups** from the left-hand menu, then select the **Fabrikam_Oil** link from the listing.
 
-2. Select the link for the storage account that was created in Task 1.
+2. Select the link for the storage account that was created with the Function App in Task 1. The name will start with "storageaccount".
 
    ![The resources are listed in the blade. The storage account is circled.](media/select-function-storage-account.png "Select the Storage Account")
 
@@ -743,9 +743,9 @@ There are many ways to trigger flows in Microsoft Flow. One of them is having Fl
 
    ![The queues administration blade is displayed. The Add Queue button is circled.](media/create-storage-queue-menu.png "Create Queue in the Storage Account")
 
-2. Navigate to the storage account. Obtain the Shared Storage Key for the storage account by selecting left-hand menu item **Access keys**. Copy the _Key_ value of _key1_ and retain this value. We will be using it later in the next task. Also, retain the name of your Storage Account. (in the image below, the name of the Storage Account is _pumpfunctions8600_)
+2. Navigate to the storage account. Obtain the Shared Storage Key for the storage account by selecting the left-hand menu item **Access keys**. Copy the _Key_ value of _key1_ and retain this value. We will be using it later in the next task. Also, retain the name of your Storage Account. (in the image below, the name of the Storage Account is _storageaccountfabribce9_)
 
-   ![The pump function access key information is displayed.  Key 1 is circled. Connection string has the focus.](media/copy-function-storage-access-key.png "Copy access key for the Storage Account")
+   ![The pump function access key information is displayed. Key 1 is circled.](media/copy-function-storage-access-key.png "Copy access key for the Storage Account")
 
 ### Task 4: Create notification service in Microsoft Flow
 
@@ -815,13 +815,13 @@ We will be using [Microsoft Flow](https://flow.microsoft.com/) as a means to ema
 
 ### Task 5: Obtain connection settings for use with the Azure Function implementation
 
-1. Once the Function App has been provisioned, open the **Fabrikam_Oil** resource group and select the link for the Storage Account that was created in Task 2.
+1. Once the Function App has been provisioned, open the **Fabrikam_Oil** resource group and select the link for the storage account that was created with the Function App in Task 1. The name will start with "storageaccount".
 
-   ![The Azure resource list is displayed. The newly created function app is circled.](media/select-function-storage-account.png "Select Function Storage Account")
+   ![The resources are listed in the blade. The storage account is circled.](media/select-function-storage-account.png "Select the Storage Account")
 
 2. From the left-hand menu, select **Access Keys** and copy the key 1 Connection String, keep this value handy as we'll be needing it in the next task.
 
-   ![The pump function access keys are displayed. Key 1 is circled. The copy button for Connection string value is circled.](media/copy-function-storage-access-key.png "Copy Function Storage Connection String")
+   ![The pump function access keys are displayed. Key 1 is circled. The copy button for Connection string value is circled.](media/copy-function-storage-access-key-connection-string.png "Copy Function Storage Connection String")
 
 3. Return to the **Fabrikam_Oil** resource group, and select the link for the Event Hubs Namespace.
 
@@ -839,7 +839,7 @@ We will be using [Microsoft Flow](https://flow.microsoft.com/) as a means to ema
 
 It is recommended that you never check in secrets, such as connection strings, into source control. One way to do this is to use settings files. The values stored in these files mimic environment values used in production. The local settings file is never checked into source control.
 
-1. Using Visual Studio Code, open the `\Hands-on lab\Resources\FailurePredictionFunction` folder.
+1. Using Visual Studio Code, open the `C:\MCW-Predictive-Maintenance-for-remote-field-devices-master\Hands-on lab\Resources\FailurePredictionFunction` folder.
 
 2. Upon opening the folder in Visual Studio Code, you may be prompted to restore unresolved dependencies. If this is the case, press the **Restore** button.
 
@@ -861,7 +861,7 @@ It is recommended that you never check in secrets, such as connection strings, i
 
 ### Task 7: Review the Azure Function code
 
-1. Observe the static _Run_ function. It identifies that the function will run every time the _iot-central-feed_ event hub receives a message. It also uses a specific Consumer Group. These groups are used when there is a possibility that more than one process may be utilizing the data received in the hub. This ensures that dependent processes receive all messages once - thus avoiding any contingency problems. The method receives an array (batch) of events from the hub on each execution, as well as an instance of a logger in case you wish to see values in the console (locally or in the cloud).
+1. Observe the static _Run_ function located in **PumpFailurePrediction.cs**. It identifies that the function will run every time the _iot-central-feed_ event hub receives a message. It also uses a specific Consumer Group. These groups are used when there is a possibility that more than one process may be utilizing the data received in the hub. This ensures that dependent processes receive all messages once - thus avoiding any contingency problems. The method receives an array (batch) of events from the hub on each execution, as well as an instance of a logger in case you wish to see values in the console (locally or in the cloud).
 
    ```c#
    public static async Task Run([EventHubTrigger("iot-central-feed", Connection = "fabrikam-oil_RootManageSharedAccessKey_EVENTHUB",
