@@ -563,7 +563,7 @@ The Event Hub we will be creating will act as a collector for data coming into I
 
 3. Open your **Fabrikam_Oil** resource group.
 
-4. On the top of the screen, press the **Add** button, when the marketplace screen displays search for and select **Event Hubs**, this will allow you to create a new Event Hub Namespace resource.
+4. On the top of the screen, select the **Add** button. When the marketplace screen displays, search for and select **Event Hubs**. This will allow you to create a new Event Hub Namespace resource.
 
    ![Searching for the Event Hubs in the Azure Marketplace.](media/search-event-hubs.png "Search Event Hubs")
 
@@ -571,7 +571,7 @@ The Event Hub we will be creating will act as a collector for data coming into I
 
    | Field          | Value                                 |
    | -------------- | ------------------------------------- |
-   | Name           | _anything must be globally unique_    |
+   | Name           | _anything (must be globally unique)_    |
    | Pricing Tier   | Standard                              |
    | Subscription   | _select the appropriate subscription_ |
    | Resource Group | Fabrikam_Oil                          |
@@ -579,11 +579,11 @@ The Event Hub we will be creating will act as a collector for data coming into I
 
    ![The creating event hub namespace options are displayed.](media/create-eventhub-namespace-form.png "Configure Event Hub Namespace")
 
-6. Once the Event Hubs namespace has been created, open it and press the **+ Event Hub** button at the top of the screen.
+6. Once the Event Hubs namespace has been created, open it and select the **+ Event Hub** button at the top of the screen.
 
    ![The Event Hub namespace screen is displayed. The create event hub button is circled.](media/add-eventhub-menu.png "Add new Event Hub")
 
-7. In the Create Event Hub form, configure the hub as follows and press the **Create** button:
+7. In the Create Event Hub form, configure the hub as follows and select the **Create** button:
 
    | Field        | Value            |
    | ------------ | ---------------- |
@@ -598,7 +598,7 @@ The Event Hub we will be creating will act as a collector for data coming into I
 
    ![The event hubs are listed. IOT central feed is shown and circled.](media/event-hub-listing.png "Event Hub Listing")
 
-9. From the top menu, press the **+ Consumer Group** button to create a new consumer group for the hub. Name the consumer group _ingressprocessing_ and press the **Create** button.
+9. From the top menu, select the **+ Consumer Group** button to create a new consumer group for the hub. Name the consumer group _ingressprocessing_ and select the **Create** button.
 
    ![The event hub screen shows the ability to create a consumer group. The name is entered and the create button is circled.](media/create-consumer-group-form.png "Create Consumer Group")
 
@@ -608,11 +608,11 @@ The Event Hub we will be creating will act as a collector for data coming into I
 
    ![The dashboard is displayed and the left-hand menu has the Data Export link circled.](media/data-export-menu.png "Data Export Menu")
 
-2. From the _Data Export_ screen, press the **+ New** button from the upper right menu, and select **Azure Event Hubs**.
+2. From the _Data Export_ screen, select the **+ New** button from the upper right menu, and select **Azure Event Hubs**.
 
    ![The new Data Export options are displayed. The Azure Event Hubs option is circled.](media/ce-eventhubs-menu.png "New Event Hubs export")
 
-3. IoT Central will automatically retrieve Event Hubs namespaces and Event Hubs from the connected Azure Account. Configure the data export as follows and press the **Save** button:
+3. IoT Central will automatically retrieve Event Hubs namespaces and Event Hubs from the connected Azure Account. Configure the data export as follows and select the **Save** button:
 
    | Field                | Value                                            |
    | -------------------- | ------------------------------------------------ |
@@ -625,6 +625,20 @@ The Event Hub we will be creating will act as a collector for data coming into I
    | Device Templates     | Off                                              |
 
    ![The data export configuration fields are displayed.  The save button is circled.](media/create-data-export-form.png "Configure Data Export")
+
+   > **Note**: If you cannot browse your subscription for the Event Hubs namespace due to using a trial app instead of pay-as-you-go, perform the following steps:
+
+   ![The error stating the user is unable to browse Event Hubs is highlighted.](media/iot-central-cannot-browse-event-hubs.png "Cannot browse event hubs")
+
+   1. Navigate to your Event Hubs namespace in the Azure portal.
+
+   2. Select **Shared access policies** on the left-hand menu, then select the **RootManageSharedAccessKey** and copy the **Connection string-primary key**.
+
+        ![The Event Hubs connection string is highlighted.](media/event-hubs-connection-string.png "Event Hubs connection string")
+
+   3. Return to IoT Central and paste the connection string into the **Connection string** field, then select the `iot-central-feed` event hub you created.
+
+        ![The data export configuration form is updated with the manual connection string for Event Hubs.](media/create-data-export-form-connection-string.png "Connection string added")
 
 4. The Event Hub Feed export will be created, and then started (it may take a few minutes for the export to start)
 
