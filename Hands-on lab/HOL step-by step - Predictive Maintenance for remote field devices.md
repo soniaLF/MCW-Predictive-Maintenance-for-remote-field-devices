@@ -324,7 +324,7 @@ Included with this lab is source code that will simulate the connection and tele
 
     ![The device connection key information is displayed.](media/device-connection-info.png "Device Connection Info")
 
-2. Utilizing one of the keys from the values you recorded in #5 we will be generating a connection string to be used within the source code running on the device. We will generate the connection string using command line tooling. Ensure you have Node v.8+ installed, open a command prompt, and execute the following to globally install the key generator utility:
+2. Utilizing one of the keys from the values you recorded in #5, we will be generating a connection string to be used within the source code running on the device. We will generate the connection string using command line tooling. Ensure you have Node v.8+ installed, open a command prompt, and execute the following to globally install the key generator utility:
 
     ```
     npm i -g dps-keygen
@@ -346,9 +346,11 @@ Included with this lab is source code that will simulate the connection and tele
 
 ### Task 2: Open the Visual Studio solution, and update connection string values
 
-1. Using Visual Studio Code, open the `C:\MCW-Predictive-Maintenance-for-remote-field-devices-master\Hands-on lab\Resources\FieldDeviceSimulator\Fabrikam.FieldDevice.Generator` folder.
+1. Using Visual Studio Code, open the `C:\MCW-Predictive-Maintenance-for-remote-field-devices-master\Hands-on lab\Resources\FieldDeviceSimulator` folder.
 
-2. Open _appsettings.json_ and copy & paste the connection strings that you generated in Task 1 into this file.
+    > If you are prompted by Visual Studio code to install additional components to enable debugging, please select the option to install the components.
+
+2. Expand the `Fabrikam.FieldDevice.Generator` folder, then open _appsettings.json_ and copy & paste the connection strings that you generated in Task 1 into this file.
 
     ![The screenshot shows the connection strings for all three devices.](media/appsettings-updated.png "Updated appsettings.json")
 
@@ -358,19 +360,23 @@ Included with this lab is source code that will simulate the connection and tele
 
 ### Task 3: Run the application
 
-1. Using Visual Studio Code, Debug the current project by pressing _F5_.
+1. Within Visual Studio Code, expand the **.vscode** sub-folder, then open **launch.json**. Update the `console` setting to **externalTerminal**. This will cause the debugger to launch the console window into an external terminal instead of within Visual Studio Code. This is a required step since the internal terminal does not support entering values (ReadLine).
 
-2. Once the menu is displayed, select option 1 to generate and send telemetry to IoT Central.
+    ![The console setting is highlighted in launch.json.](media/vs-code-launch-settings.png "launch.json")
+
+2. Using Visual Studio Code, Debug the current project by pressing _F5_.
+
+3. Once the menu is displayed, select option 1 to generate and send telemetry to IoT Central.
 
     ![The command prompt displays the choice to generate and send telemetry to IoT Central.](media/generate-and-send-telemetry.png "Generate and Send Telemetry to IoT Central")
 
-3. Allow the simulator to start sending telemetry data to IoT Central, you will see output similar to the following:
+4. Allow the simulator to start sending telemetry data to IoT Central, you will see output similar to the following:
 
     ![A command prompt shows a few provisioned devices and their corresponding measurements.](media/telemetry-data-generated.png "Sample Telemetry")
 
-4. Allow the simulator to run while continuing with this lab.
+5. Allow the simulator to run while continuing with this lab.
 
-5. After some time has passed, in IoT Central press the _Devices_ item in the left-hand menu. Note that the provisioning status of DEVICE001, DEVICE002, and DEVICE003 now indicate _Provisioned_.
+6. After some time has passed, in IoT Central press the _Devices_ item in the left-hand menu. Note that the provisioning status of DEVICE001, DEVICE002, and DEVICE003 now indicate _Provisioned_.
 
     ![A list of provisioned devices is displayed.](media/provisioned-devices.png "Provisioned Devices")
 
@@ -384,15 +390,11 @@ DEVICE001 is the rod pump that will gradually fail. Upon running the simulator f
 
     ![Motor power telemetry graphing options are displayed. The graph shows a line with a drop off.](media/device001-focus-telemetry-chart.png "Focus Telemetry Chart to Motor Power")
 
-3. Observe how the Motor Power usage of DEVICE001 gradually degrades.
+3. Observe how the Motor Power usage of DEVICE001 gradually degrades.  **Note**: You may not yet see the degradation at this stage. The motor power will gradually decrease after running for several minutes.
 
     ![The average Motor Power measurements are displayed in a graph. The graph shows Motor Power usage degradation.](media/device001-gradual-failure-power.png "Motor Power usage degradation")
 
-4. Press the _Rules_ tab, and select the alert for _Low Motor Power (kW)_, be sure to set the _Time Range_ to the _Last Hour_ for a higher level look at the telemetry values received. Notice how when the pump is operating normally, it is over the 30 kW line shown by the horizontal dotted line on the chart. Once the pump starts failing, you see the gradual decrease of pump power usage as it ventures below the 30 kW threshold.
-
-    ![The screen shows the device telemetry rule creation options. Low motor power is highlighted.](media/device001-rules-chart.png "DEVICE001 Motor Power Rules Chart")
-
-5. Repeat 1-4 and observe that DEVICE002, the non-failing pump, remains above the 30 kW threshold. DEVICE003 is also a failing pump, but displays an immediate failure versus a gradual one.
+4. Repeat 1-3 and observe that DEVICE002, the non-failing pump, remains above the 30 kW threshold. DEVICE003 is also a failing pump, but displays an immediate failure versus a gradual one.
 
     ![Low motor measurements are being displayed in a graph. Power measurements show steady.](media/device002-normal-operation.png "DEVICE002 Motor Power Rules Chart")
 
