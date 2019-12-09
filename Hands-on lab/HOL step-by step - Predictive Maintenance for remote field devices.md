@@ -434,7 +434,7 @@ Device sets allow you to create logical groupings of IoT Devices in the field by
 
 ### Task 1: Create a device set using a filter
 
-1. In the left-hand menu, select the _Device sets_ menu item. You will see a single default device set in the list.Press the _+ New_ button in the upper right-hand side of the listing.
+1. In the left-hand menu, select the _Device sets_ menu item. You will see a single default device set in the list. Select the _+ New_ button in the upper right-hand side of the listing.
 
     ![A screen displays the current device sets.  There is a add new button circled.](media/device-set-list.png "Device set listing")
 
@@ -455,7 +455,7 @@ Device sets allow you to create logical groupings of IoT Devices in the field by
 
     ![The screen shows the device set configuration values.  There is a list of devices and their settings displayed on the right.](media/texas-rod-pump-devices.png "Texas Rod Pumps")
 
-4. Similar to devices, you are also able to create a dashboard specific to this Device Set. Press the _Dashboard_ tab from the top menu, then press the _Edit_ button on the right-hand side of the screen.
+4. Similar to devices, you are also able to create a dashboard specific to this Device Set. Select the _Dashboard_ tab from the top menu, then select the _Edit_ button on the right-hand side of the screen.
 
     ![The edit device menu is presented. The dashboard item is circled.](media/device-set-dashboard-edit.png "Device Set Dashboard Edit")
 
@@ -463,19 +463,17 @@ Device sets allow you to create logical groupings of IoT Devices in the field by
 
     ![The editing dashboard options are displayed.  The map menu item is circled.](media/device-set-add-map.png "Device Set Dashboard Add Map")
 
-6. Configure the map as follows, and press _Save_:
+6. Configure the map as follows, and select _Save_:
 
     | Field             | Value                       |
     | ----------------- | --------------------------- |
-    | Device Template   | Rod Pump (1.0.0)            |
-    | Device Instance   | Rod Pump - DEVICE001        |
-    | Title             | Rod Pump - DEVICE001 Status |
-    | Location          | Rod Pump Location           |
+    | Title             | Texas Rod Pumps |
+    | Location          | Pump Location           |
     | State Measurement | Power State                 |
 
     ![The device configurations are displayed. The save button is circled.](media/device-set-configure-map.png "Device set configure map")
 
-7. End Dashboard editing by pressing the _Done_ button on upper-right corner of the dashboard editor.
+7. End Dashboard editing by selecting the _Done_ button on upper-right corner of the dashboard editor.
 
     ![A map of the Texas rod pumps is displayed. The done button is circled in the upper right-hand corner.](media/device-set-dashboard-done.png "Device set dashboard complete editing")
 
@@ -489,11 +487,11 @@ One of the main features of IoT Central is the ability to visualize the health o
 
 ### Task 1: Clearing out the default dashboard
 
-1. In the left-hand menu, press the _Dashboard_ item. Then, in the upper right corner of the dashboard - press the _Edit_ button.
+1. In the left-hand menu, select the _Dashboard_ item. Then, in the upper right corner of the dashboard - select the _Edit_ button.
 
     ![The dashboard editing options are presented to the user.](media/dashboard-edit-button.png "Edit Dashboard")
 
-2. Press the _X_ on each tile that you do not wish to see on the dashboard to remove them. The _X_ will display when you hover over the tile.
+2. Select the _X_ on each tile that you do not wish to see on the dashboard to remove them. The _X_ will display when you hover over the tile.
 
     ![The create device template card is displayed. The close button in the upper right-hand corner is selected.](media/delete-dashboard-card.png "Delete Dashboard Tile")
 
@@ -503,7 +501,7 @@ One of the main features of IoT Central is the ability to visualize the health o
 
     ![The Library menu items are displayed. The Image menu item is circled.](media/dashboard-library-image.png "Dashboard library Image")
 
-2. Configure the logo with the following file _/Media/fabrikam-logo.png_.
+2. Configure the logo with the following file _C:\MCW-Predictive-Maintenance-for-remote-field-devices-master\Hands-on lab\media\fabrikam-logo.png_.
 
     ![The company logo configuration options are displayed.](media/configure-dashboard-logo.png "Configure Logo Image")
 
@@ -519,9 +517,9 @@ In the previous exercise, we created a device set that contains the devices loca
 
 2. Configure the device list by selecting the _Texas Rod Pumps_ Device Set, and assigning it the title of _Texas Rod Pumps_.
 
-3. Add columns by pressing the _Add/Remove_, we will add _Device ID_ and _IP Address_.
+3. Add columns by selecting the _Add/Remove_, we will add _Device ID_ and _IP Address_.
 
-4. Press the _Save_ button to add the tile to the dashboard.
+4. Select the _Save_ button to add the tile to the dashboard.
 
     ![The panel for device list configuration is displayed.](media/device-list-configure1.png "Configure list")
 
