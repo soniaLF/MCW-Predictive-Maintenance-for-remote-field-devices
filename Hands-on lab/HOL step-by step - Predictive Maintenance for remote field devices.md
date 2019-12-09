@@ -690,24 +690,34 @@ We will be using an Azure Function to read incoming telemetry from IoT Hub and s
 
 1. Return to the [Azure Portal](https://portal.azure.com).
 
-2. From the left-hand menu, select the **Create a resource** item.
+2. Open your resource group for this lab.
 
-3. From the top menu, press the **+ Add** button, and search for Function App.
+3. From the top menu, select the **+ Add** button, and search for Function App.
 
-4. Configure the Function App as follows and press the **Create** button:
+4. Configure the Function App as follows, then select **Next: Hosting >**:
 
-   | Field         | Value                                           |
-   | ------------- | ----------------------------------------------- |
-   | App Name      | _your choice, must be globally unique_          |
-   | Subscription  | _select the appropriate subscription_           |
-   | ResourceGroup | use existing, and select Fabrikam_Oil           |
-   | OS            | Windows                                         |
-   | Hosting Plan  | Consumption                                     |
-   | Location      | _select the location nearest to you_            |
-   | Runtime Stack | .Net Core                                       |
-   | Storage       | select Create new, and retain the default value |
+    | Field         | Value                                           |
+    | ------------- | ----------------------------------------------- |
+    | App Name      | _your choice, must be globally unique_          |
+    | Subscription  | _select the appropriate subscription_           |
+    | Resource Group | use existing, and _select Fabrikam_Oil_           |
+    | Publish       | _select Code_ |
+    | Runtime Stack | _select .Net Core_                                       |
+    | Location      | _select the location nearest to you_            |
 
-   ![The create Function App blade is displayed. All of the Function App configurations are displayed.  The create button is circled.](media/create-azure-function-app-form.png "Create Azure Function App")
+    ![The create Function App blade is displayed. All of the Function App configurations are displayed.  The create button is circled.](media/create-azure-function-app-form.png "Create Azure Function App")
+
+5. Configure the Hosting options as follows, then select **Review + create**:
+
+    | Field         | Value                                           |
+    | ------------- | ----------------------------------------------- |
+    | Storage Account | _retain the default value of create new_ |
+    | Operating System | Windows |
+    | Plan Type | Consumption                                     |
+
+    ![The create Function App blade is displayed. All of the Function App configurations are displayed.  The create button is circled.](media/create-azure-function-app-form2.png "Create Azure Function App")
+
+6. On the Review blade, select **Create**.
 
 ### Task 2: Create a notification table in Azure Storage
 
