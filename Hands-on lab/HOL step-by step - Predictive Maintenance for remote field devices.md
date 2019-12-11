@@ -9,7 +9,7 @@ Hands-on lab step-by-step
 </div>
 
 <div class="MCWHeader3">
-November 2019
+December 2019
 </div>
 
 Information in this document, including URL and other Internet Web site references, is subject to change without notice. Unless otherwise noted, the example companies, organizations, products, domain names, e-mail addresses, logos, people, places, and events depicted herein are fictitious, and no association with any real company, organization, product, domain name, e-mail address, logo, person, place or event is intended or should be inferred. Complying with all applicable copyright laws is the responsibility of the user. Without limiting the rights under copyright, no part of this document may be reproduced, stored in or introduced into a retrieval system, or transmitted in any form or by any means (electronic, mechanical, photocopying, recording, or otherwise), or for any purpose, without the express written permission of Microsoft Corporation.
@@ -34,6 +34,7 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
   - [Before the hands-on lab](#before-the-hands-on-lab)
   - [Exercise 1: Configuring IoT Central with devices and metadata](#exercise-1-configuring-iot-central-with-devices-and-metadata)
     - [Task 1: Model the telemetry data](#task-1-model-the-telemetry-data)
+      - [Telemetry Schema](#telemetry-schema)
     - [Task 2: Create an IoT Central Application](#task-2-create-an-iot-central-application)
     - [Task 3: Create the Device Template](#task-3-create-the-device-template)
     - [Task 4: Create and provision real devices](#task-4-create-and-provision-real-devices)
@@ -90,7 +91,7 @@ The Predictive Maintenance for Remote Field Devices hands-on lab is an exercise 
 
 ![The architecture diagram shows the components of the preferred solution.](../Media/preferred-solution.png "High-level architecture")
 
-[Azure IoT Central](https://docs.microsoft.com/azure/iot-central/overview-iot-central) is at the core of the preferred solution. It is used for data ingest, device management, data storage, and reporting. IoT field devices securely connect to IoT Central through its cloud gateway. The continuous export component sends device telemetry data to [Azure Blob storage](https://docs.microsoft.com/azure/storage/blobs/storage-blobs-overview) for cold storage, and the same data to [Azure Event Hubs](https://docs.microsoft.com/azure/event-hubs/event-hubs-about) for real-time processing. Azure Databricks uses the data stored in cold storage to periodically re-train a Machine Learning (ML) model to detect oil pump failures. It is also used to deploy the trained model to a web service hosted by [Azure Kubernetes Service](https://docs.microsoft.com/azure/aks/) (AKS) or [Azure Container Instances](https://docs.microsoft.com/azure/container-instances/) (ACI), using [Azure Machine Learning service](https://docs.microsoft.com/azure/machine-learning/service/overview-what-is-azure-ml). An [Azure function](https://docs.microsoft.com/azure/azure-functions/functions-overview) is triggered by events flowing through Event Hubs. It sends the event data for each pump to the web service hosting the deployed model, then sends an alert through [Microsoft Flow](https://flow.microsoft.com/) if an alert has not been sent within a configurable period of time. The alert is sent in the form of an email, identifying the failing oil pump with a suggestion to service the device.
+[Azure IoT Central](https://docs.microsoft.com/azure/iot-central/overview-iot-central) is at the core of the preferred solution. It is used for data ingest, device management, data storage, and reporting. IoT field devices securely connect to IoT Central through its cloud gateway. The continuous export component sends device telemetry data to [Azure Blob storage](https://docs.microsoft.com/azure/storage/blobs/storage-blobs-overview) for cold storage, and the same data to [Azure Event Hubs](https://docs.microsoft.com/azure/event-hubs/event-hubs-about) for real-time processing. Azure Databricks uses the data stored in cold storage to periodically re-train a Machine Learning (ML) model to detect oil pump failures. It is also used to deploy the trained model to a web service hosted by [Azure Kubernetes Service](https://docs.microsoft.com/azure/aks/) (AKS) or [Azure Container Instances](https://docs.microsoft.com/azure/container-instances/) (ACI), using [Azure Machine Learning](https://docs.microsoft.com/azure/machine-learning/service/overview-what-is-azure-ml). An [Azure function](https://docs.microsoft.com/azure/azure-functions/functions-overview) is triggered by events flowing through Event Hubs. It sends the event data for each pump to the web service hosting the deployed model, then sends an alert through [Microsoft Flow](https://flow.microsoft.com/) if an alert has not been sent within a configurable period of time. The alert is sent in the form of an email, identifying the failing oil pump with a suggestion to service the device.
 
 _Azure IoT Central architecture_
 
@@ -128,7 +129,7 @@ The first task is to identify the data that the equipment will be sending to the
 
 The telemetry being reported by the Fabrikam rod pumps are as follows, we will be using this information later in the lab:
 
-#### Telemetry Schema
+#### Telemetry schema
 
 | Field          | Type     | Description                                                                                                                                                                        |
 | -------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -141,39 +142,43 @@ The telemetry being reported by the Fabrikam rod pumps are as follows, we will b
 | MotorSpeed     | Numeric  | including slip (RPM)                                                                                                                                                               |
 | CasingFriction | Numeric  | Measured in PSI (psi)                                                                                                                                                              |
 
-### Task 2: Create an IoT Central Application
+### Task 2: Create an IoT Central application
 
 1. Access the (Azure IoT Central)[https://azure.microsoft.com/en-us/services/iot-central/] website.
 
-2. Press the _Get started_ button.
+2. Select the _Build a solution_ button.
 
-    ![The browser screen shows the Azure products filtered to Azure IoT Central. An arrow points to the Get started button.](media/azure-iot-central-website.png "IoT Central Getting started")
+    ![The browser screen shows the Azure products filtered to Azure IoT Central. An arrow points to the Build a solution button.](media/azure-iot-central-website.png "IoT Central Getting started")
 
 3. If you are not currently logged in, you will be prompted to log in with your Microsoft Azure Account.
 
-4. Press the _New Application_ button.
+4. Select **My Apps** from the left-hand menu, then select the **New application** button.
 
     ![The screens displays the list of my applications and options for creating a new application.](media/azure-iot-central-new-application.png "New Application")
 
-5. Fill in the provisioning form.
+5. Select **Custom app**.
+
+    ![The custom app option is selected.](media/azure-iot-central-custom-app.png "Custom app")
+
+6. Fill in the provisioning form.
 
     ![The screens displays the new application configuration options. The Trial payment plan is selected.](media/custom-app-creation-form.png "Provision application form")
 
-    a. *Payment Plan* - feel free to choose either the 7 day trial or the Pay as you Go option.
+    a. *Application Name* - give your application a name of your choice, in this example, we used *fabrikam-oil*.
 
-    b. *Application Template* - select *Custom Application*.
+    b. *URL* - this will be the URL for your application, it needs to be globally unique.
 
-    c. *Application Name* - give your application a name of your choice, in this example, we used *fabrikam-oil*.
+    c. *Application Template* - select *Legacy application (2018)*.
 
-    d. *URL* - this will be the URL for your application, it needs to be globally unique.
+    d. *7 day free trial* - select this option to enable the free trial.
 
     e. Fill out your contact information (First Name, Last Name, Email Address, Phone Number, Country/Region).
 
-    f. Press the *Create* button to provision your application.
+    f. Select the *Create* button to provision your application.
 
 ### Task 3: Create the Device Template
 
-1. Once the application has been provisioned, we need to define the type of equipment we are using, and the data associated with the equipment. In order to do this, we must define a _Device Template_. Press either the _Create Device Templates_ button, or the _Device Templates_ menu item from the left-hand menu.
+1. Once the application has been provisioned, we need to define the type of equipment we are using, and the data associated with the equipment. In order to do this, we must define a _Device Template_. Select either the _Create Device Templates_ button, or the _Device Templates_ menu item from the left-hand menu.
 
     ![The screen displays the options available for a dashboard. Red arrows point to Create Device Templates.](media/create-device-templates.png "Device Templates")
 
@@ -181,11 +186,11 @@ The telemetry being reported by the Fabrikam rod pumps are as follows, we will b
 
     ![The screen shows the Device Template menu item is selected. The device template tile option for the Custom template is circled.](media/new-template-custom.png "Custom Template")
 
-3. For the device template name, enter _Rod Pump_, then press the _Create_ button.
+3. For the device template name, enter _Rod Pump_, then select the _Create_ button.
 
     ![The screen shows the form to create new custom device templates.](media/rod-pump-template-create.png "Create Rod Pump Template")
 
-4. The next thing we need to do is define the measurements that will be received from the device. To do this, press the _New_ button at the top of the left-hand menu.
+4. The next thing we need to do is define the measurements that will be received from the device. To do this, select the _New_ button at the top of the left-hand menu.
 
     ![The screen displays the configuration menu for the Rod Pump 1. The Measurements menu item is selected and the Add New menu is selected.](media/new-measurement.png "New Measurement")
 
@@ -207,11 +212,11 @@ The telemetry being reported by the Fabrikam rod pumps are as follows, we will b
 
     ![A line chart displays the Rod Pump 1 telemetry measurements.](media/telemetry-defined.png "Telemetry Defined")
 
-7. Remaining on the measurement tab, we also need to define the current state of the pump, whether it is running or not. Press _New_ and select _State_.
+7. Remaining on the measurement tab, we also need to define the current state of the pump, whether it is running or not. Select _New_ and select _State_.
 
     ![The screen displays the configuration menu for the Rod Pump 1. The Measurements menu item is selected and the Add New menu displays the options available. The State item is selected.](media/device-template-add-state.png "Add State")
 
-8. Add the state with the display name of _Power State_, field name of _PowerState_ with the values _Unavailable_, _On_, and _Off_, then press the _Save_ button.
+8. Add the state with the display name of _Power State_, field name of _PowerState_ with the values _Unavailable_, _On_, and _Off_, then select the _Save_ button.
 
     ![The screen displays the state configuration options.](media/power-state-definition.png "Power State")
 
@@ -229,21 +234,21 @@ The telemetry being reported by the Fabrikam rod pumps are as follows, we will b
     | IP Address    | IPAddress    | text      | The IP address of the rod pump    |
     | Pump Location | Location     | location  | The geo. location of the rod pump |
 
-11. Operators and field workers will want to be able to turn on and off the pumps remotely. In order to do this, we will define commands. Select the _Commands_ tab, and press the _New_ button to add a new command.
+11. Operators and field workers will want to be able to turn on and off the pumps remotely. In order to do this, we will define commands. Select the _Commands_ tab and select the _New_ button to add a new command.
 
     ![The screen displays the configuration menu for the Rod Pump 1. The Commands menu item is selected and the New Command link is circled.](media/device-template-add-command.png "Add Command")
 
-12. Create a command as follows, and press _save_:
+12. Create a command as follows, and select _save_:
 
-    a. _Display Name_ - _Toggle Motor Power_
-    b. _Field Name_ - _MotorPower_
-    c. _Default Timeout_ - _30_
-    d. _Data Type_ - _toggle_
-    e. _Description_ - _Toggle the motor power of the pump on and off_
+    1. _Display Name_ - _Toggle Motor Power_
+    2. _Field Name_ - _MotorPower_
+    3. _Default Timeout_ - _30_
+    4. _Data Type_ - _toggle_
+    5. _Description_ - _Toggle the motor power of the pump on and off_
 
     ![The screen shows the configure command options. The save button is circled.](media/template-configure-command.png "Configure Command")
 
-13. Now, we can define the dashboard by pressing the _Dashboard_ option in the top menu, and selecting _Line Chart_ from the left-hand menu. Define a line chart for each of the telemetry fields (PumpRate, TimePumpOn, MotorPower, MotorSpeed, CasingFriction) - keeping all the default values:
+13. Now, we can define the dashboard by pressing the _Dashboard_ option in the top menu and selecting _Line Chart_ from the left-hand menu. Define a line chart for each of the telemetry fields (PumpRate, TimePumpOn, MotorPower, MotorSpeed, CasingFriction) - keeping all the default values:
 
     ![The screen shows the Dashboard menu item is selected and circled. The Library menu has the Line Chart menu item selected.](media/line-chart.png "Line Chart")
 
@@ -261,11 +266,11 @@ The telemetry being reported by the Fabrikam rod pumps are as follows, we will b
 
     ![The dashboard configuration options are displayed.](media/dashboard-charts-definition.png "Dashboard Charts Definition")
 
-16. Finally, we can add an image to represent the equipment. Press on the circle icon left of the template name, and select an image file. The image used in this lab can be found on [PixaBay](https://pixabay.com/photos/pumpjack-texas-oil-rig-pump-591934/).
+16. Finally, we can add an image to represent the equipment. Select on the circle icon left of the template name and select an image file. The image used in this lab can be found on [PixaBay](https://pixabay.com/photos/pumpjack-texas-oil-rig-pump-591934/).
 
     ![A Rod Pump 1 device is displayed. The device picture has focus.](media/device-template-thumbnail.png "Device Template Thumbnail")
 
-17. Review the application template by viewing its simulated device. IoT Central automatically creates a simulated device based on the template you've created. From the left-hand menu, select _Device Explorer_. In this list you will see a simulated device for the template that we have just created. Select the link for this simulated device, the charts will show a sampling of simulated data.
+17. Review the application template by viewing its simulated device. IoT Central automatically creates a simulated device based on the template you've created. From the left-hand menu, select _Devices_. In this list you will see a simulated device for the template that we have just created. Select the link for this simulated device, the charts will show a sampling of simulated data.
 
     ![A rod pump list is displayed. Rod Pump 1 is circled.](media/iot-central-simulated-rod-pump.png "Device List - Simulated")
 
@@ -277,11 +282,11 @@ Under the hood, Azure IoT Central uses the [Azure IoT Hub Device Provisioning Se
 
 [Multiple options](https://docs.microsoft.com/en-us/azure/iot-central/concepts-connectivity) exist to register devices in IoT Central, ranging from individual device registration to [bulk device registration](https://docs.microsoft.com/en-us/azure/iot-central/concepts-connectivity#connect-devices-at-scale-using-sas) via a comma delimited file. In this lab we will register a single device using SAS.
 
-1. In the left-hand menu of your IoT Central application, select _Device Explorer_.
+1. In the left-hand menu of your IoT Central application, select _Devices_.
 
 2. Select the _Rod Pump (1.0.0)_ template. This will now show the list of existing devices which at this time includes only the simulated device.
 
-3. Press the _+_ button to add a new device, select _Real_.
+3. Select the _+_ button to add a new device, select _Real_.
 
     ![The device explorer screen shows the devices that are unassociated. The filter for real and simulated devices is circled.](media/add-real-device-menu.png "Add a real device menu")
 
@@ -303,7 +308,7 @@ Under the hood, Azure IoT Central uses the [Azure IoT Hub Device Provisioning Se
 
 Now that we have registered real devices, we will no longer be needing the simulated pump that was created for us when we defined our template.
 
-1. From the Devices list, check the checkbox next to the simulated pump, then press the **Delete** button.
+1. From the Devices list, check the checkbox next to the simulated pump, then select the **Delete** button.
 
     ![All of the devices are listed.  The simulated device is selected and circled for deletion. The delete link is circled.](media/delete-simulated-device.png "Delete Simulated Device")
 
@@ -315,11 +320,11 @@ Included with this lab is source code that will simulate the connection and tele
 
 ### Task 1: Generate device connection strings
 
-1. In IoT Central, select _Devices_ from the left-hand menu. Then, from the devices list, select the link for _Rod Pump - DEVICE001_, and press the _Connect_ button located in the upper right corner of the device's page. Make note of the Scope ID, Device ID, as well as the primary and secondary key values.
+1. In IoT Central, select _Devices_ from the left-hand menu. Then, from the devices list, select the link for _Rod Pump - DEVICE001_, and select the _Connect_ button located in the upper right corner of the device's page. Make note of the Scope ID, Device ID, as well as the primary and secondary key values.
 
     ![The device connection key information is displayed.](media/device-connection-info.png "Device Connection Info")
 
-2. Utilizing one of the keys from the values you recorded in #5 we will be generating a connection string to be used within the source code running on the device. We will generate the connection string using command line tooling. Ensure you have Node v.8+ installed, open a command prompt, and execute the following to globally install the key generator utility:
+2. Utilizing one of the keys from the values you recorded in #5, we will be generating a connection string to be used within the source code running on the device. We will generate the connection string using command line tooling. Ensure you have Node v.8+ installed, open a command prompt, and execute the following to globally install the key generator utility:
 
     ```
     npm i -g dps-keygen
@@ -341,9 +346,11 @@ Included with this lab is source code that will simulate the connection and tele
 
 ### Task 2: Open the Visual Studio solution, and update connection string values
 
-1. Using Visual Studio Code, open the `C:\MCW-Predictive-Maintenance-for-remote-field-devices-master\Hands-on lab\Resources\FieldDeviceSimulator\Fabrikam.FieldDevice.Generator` folder.
+1. Using Visual Studio Code, open the `C:\MCW-Predictive-Maintenance-for-remote-field-devices-master\Hands-on lab\Resources\FieldDeviceSimulator` folder.
 
-2. Open _appsettings.json_ and copy & paste the connection strings that you generated in Task 1 into this file.
+    > If you are prompted by Visual Studio code to install additional components to enable debugging, please select the option to install the components.
+
+2. Expand the `Fabrikam.FieldDevice.Generator` folder, then open _appsettings.json_ and copy & paste the connection strings that you generated in Task 1 into this file.
 
     ![The screenshot shows the connection strings for all three devices.](media/appsettings-updated.png "Updated appsettings.json")
 
@@ -353,19 +360,23 @@ Included with this lab is source code that will simulate the connection and tele
 
 ### Task 3: Run the application
 
-1. Using Visual Studio Code, Debug the current project by pressing _F5_.
+1. Within Visual Studio Code, expand the **.vscode** sub-folder, then open **launch.json**. Update the `console` setting to **externalTerminal**. This will cause the debugger to launch the console window into an external terminal instead of within Visual Studio Code. This is a required step since the internal terminal does not support entering values (ReadLine).
 
-2. Once the menu is displayed, select option 1 to generate and send telemetry to IoT Central.
+    ![The console setting is highlighted in launch.json.](media/vs-code-launch-settings.png "launch.json")
+
+2. Using Visual Studio Code, Debug the current project by pressing _F5_.
+
+3. Once the menu is displayed, select option 1 to generate and send telemetry to IoT Central.
 
     ![The command prompt displays the choice to generate and send telemetry to IoT Central.](media/generate-and-send-telemetry.png "Generate and Send Telemetry to IoT Central")
 
-3. Allow the simulator to start sending telemetry data to IoT Central, you will see output similar to the following:
+4. Allow the simulator to start sending telemetry data to IoT Central, you will see output similar to the following:
 
     ![A command prompt shows a few provisioned devices and their corresponding measurements.](media/telemetry-data-generated.png "Sample Telemetry")
 
-4. Allow the simulator to run while continuing with this lab.
+5. Allow the simulator to run while continuing with this lab.
 
-5. After some time has passed, in IoT Central press the _Devices_ item in the left-hand menu. Note that the provisioning status of DEVICE001, DEVICE002, and DEVICE003 now indicate _Provisioned_.
+6. After some time has passed, in IoT Central select the _Devices_ item in the left-hand menu. Note that the provisioning status of DEVICE001, DEVICE002, and DEVICE003 now indicate _Provisioned_.
 
     ![A list of provisioned devices is displayed.](media/provisioned-devices.png "Provisioned Devices")
 
@@ -379,15 +390,11 @@ DEVICE001 is the rod pump that will gradually fail. Upon running the simulator f
 
     ![Motor power telemetry graphing options are displayed. The graph shows a line with a drop off.](media/device001-focus-telemetry-chart.png "Focus Telemetry Chart to Motor Power")
 
-3. Observe how the Motor Power usage of DEVICE001 gradually degrades.
+3. Observe how the Motor Power usage of DEVICE001 gradually degrades.  **Note**: You may not yet see the degradation at this stage. The motor power will gradually decrease after running for several minutes.
 
     ![The average Motor Power measurements are displayed in a graph. The graph shows Motor Power usage degradation.](media/device001-gradual-failure-power.png "Motor Power usage degradation")
 
-4. Press the _Rules_ tab, and select the alert for _Low Motor Power (kW)_, be sure to set the _Time Range_ to the _Last Hour_ for a higher level look at the telemetry values received. Notice how when the pump is operating normally, it is over the 30 kW line shown by the horizontal dotted line on the chart. Once the pump starts failing, you see the gradual decrease of pump power usage as it ventures below the 30 kW threshold.
-
-    ![The screen shows the device telemetry rule creation options. Low motor power is highlighted.](media/device001-rules-chart.png "DEVICE001 Motor Power Rules Chart")
-
-5. Repeat 1-4 and observe that DEVICE002, the non-failing pump, remains above the 30 kW threshold. DEVICE003 is also a failing pump, but displays an immediate failure versus a gradual one.
+4. Repeat 1-3 and observe that DEVICE002, the non-failing pump, remains above the 30 kW threshold. DEVICE003 is also a failing pump but displays an immediate failure versus a gradual one.
 
     ![Low motor measurements are being displayed in a graph. Power measurements show steady.](media/device002-normal-operation.png "DEVICE002 Motor Power Rules Chart")
 
@@ -395,13 +402,13 @@ DEVICE001 is the rod pump that will gradually fail. Upon running the simulator f
 
 ### Task 5: Restart a failing pump remotely
 
-After observing the failure of two of the rod pumps, you are able cycle the power state of the pump remotely. The simulator is setup to receive the Toggle Motor Power command from IoT Central, and will update the state accordingly and start/stop sending telemetry to the cloud.
+After observing the failure of two of the rod pumps, you are able cycle the power state of the pump remotely. The simulator is setup to receive the Toggle Motor Power command from IoT Central and will update the state accordingly and start/stop sending telemetry to the cloud.
 
-1. In IoT Central, select _Devices_ from the left-hand menu, then press _Rod Pump - DEVICE001_ from the device list. Observe that even though the pump has in all purposes failed, that there is still power to the motor - indicated by the Power State bar at the bottom of the device's Measurements chart.
+1. In IoT Central, select _Devices_ from the left-hand menu, then select _Rod Pump - DEVICE001_ from the device list. Observe that even though the pump has in all purposes failed, that there is still power to the motor - indicated by the Power State bar at the bottom of the device's Measurements chart.
 
     ![A graph of device telemetry measurements is displayed. The Motor Power measurement is highlighted. DEVICE001 Power State is in a failure.](media/device001-powerstate-in-failure.png "DEVICE001 Power State in Failure")
 
-2. In order to recover DEVICE001, select the _Commands_ tab. You will see the _Toggle Motor Power_ command. Press the _Run_ button on the command to turn the pump motor off.
+2. In order to recover DEVICE001, select the _Commands_ tab. You will see the _Toggle Motor Power_ command. Select the _Run_ button on the command to turn the pump motor off.
 
     ![Device command options are displayed.  The Run command is circled.](media/device001-run-toggle-command.png "DEVICE001 Run Toggle Motor Power Command")
 
@@ -413,7 +420,7 @@ After observing the failure of two of the rod pumps, you are able cycle the powe
 
     ![Device DEVICE001 is in a Power State Off with no telemetry coming in.](media/device001-stopped-telemetry-power-state-off.png "Rod Pump DEVICE001 Measurements")
 
-5. Return to the _Commands_ tab, and toggle the motor power back on again by pressing the _Run_ button once more. On the measurements tab, you will see the Power State switch back to online, and telemetry to start flowing again. Due to the restart of the rod pump - it has now recovered and telemetry is back into normal ranges!
+5. Return to the _Commands_ tab and toggle the motor power back on again by pressing the _Run_ button once more. On the measurements tab, you will see the Power State switch back to online, and telemetry to start flowing again. Due to the restart of the rod pump - it has now recovered and telemetry is back into normal ranges!
 
     ![A graph of device telemetry measurements is displayed. DEVICE001 recovered after Pump Power State has been cycled.](media/device001-recovered-1.png "Instance of pump recovery")
 
@@ -427,7 +434,7 @@ Device sets allow you to create logical groupings of IoT Devices in the field by
 
 ### Task 1: Create a device set using a filter
 
-1. In the left-hand menu, select the _Device sets_ menu item. You will see a single default device set in the list.Press the _+ New_ button in the upper right-hand side of the listing.
+1. In the left-hand menu, select the _Device sets_ menu item. You will see a single default device set in the list. Select the _+ New_ button in the upper right-hand side of the listing.
 
     ![A screen displays the current device sets.  There is a add new button circled.](media/device-set-list.png "Device set listing")
 
@@ -448,7 +455,7 @@ Device sets allow you to create logical groupings of IoT Devices in the field by
 
     ![The screen shows the device set configuration values.  There is a list of devices and their settings displayed on the right.](media/texas-rod-pump-devices.png "Texas Rod Pumps")
 
-4. Similar to devices, you are also able to create a dashboard specific to this Device Set. Press the _Dashboard_ tab from the top menu, then press the _Edit_ button on the right-hand side of the screen.
+4. Similar to devices, you are also able to create a dashboard specific to this Device Set. Select the _Dashboard_ tab from the top menu, then select the _Edit_ button on the right-hand side of the screen.
 
     ![The edit device menu is presented. The dashboard item is circled.](media/device-set-dashboard-edit.png "Device Set Dashboard Edit")
 
@@ -456,19 +463,17 @@ Device sets allow you to create logical groupings of IoT Devices in the field by
 
     ![The editing dashboard options are displayed.  The map menu item is circled.](media/device-set-add-map.png "Device Set Dashboard Add Map")
 
-6. Configure the map as follows, and press _Save_:
+6. Configure the map as follows, and select _Save_:
 
     | Field             | Value                       |
     | ----------------- | --------------------------- |
-    | Device Template   | Rod Pump (1.0.0)            |
-    | Device Instance   | Rod Pump - DEVICE001        |
-    | Title             | Rod Pump - DEVICE001 Status |
-    | Location          | Rod Pump Location           |
+    | Title             | Texas Rod Pumps |
+    | Location          | Pump Location           |
     | State Measurement | Power State                 |
 
     ![The device configurations are displayed. The save button is circled.](media/device-set-configure-map.png "Device set configure map")
 
-7. End Dashboard editing by pressing the _Done_ button on upper-right corner of the dashboard editor.
+7. End Dashboard editing by selecting the _Done_ button on upper-right corner of the dashboard editor.
 
     ![A map of the Texas rod pumps is displayed. The done button is circled in the upper right-hand corner.](media/device-set-dashboard-done.png "Device set dashboard complete editing")
 
@@ -482,11 +487,11 @@ One of the main features of IoT Central is the ability to visualize the health o
 
 ### Task 1: Clearing out the default dashboard
 
-1. In the left-hand menu, press the _Dashboard_ item. Then, in the upper right corner of the dashboard - press the _Edit_ button.
+1. In the left-hand menu, select the _Dashboard_ item. Then, in the upper right corner of the dashboard - select the _Edit_ button.
 
     ![The dashboard editing options are presented to the user.](media/dashboard-edit-button.png "Edit Dashboard")
 
-2. Press the _X_ on each tile that you do not wish to see on the dashboard to remove them. The _X_ will display when you hover over the tile.
+2. Select the _X_ on each tile that you do not wish to see on the dashboard to remove them. The _X_ will display when you hover over the tile.
 
     ![The create device template card is displayed. The close button in the upper right-hand corner is selected.](media/delete-dashboard-card.png "Delete Dashboard Tile")
 
@@ -496,7 +501,7 @@ One of the main features of IoT Central is the ability to visualize the health o
 
     ![The Library menu items are displayed. The Image menu item is circled.](media/dashboard-library-image.png "Dashboard library Image")
 
-2. Configure the logo with the following file _/Media/fabrikam-logo.png_.
+2. Configure the logo with the following file _C:\MCW-Predictive-Maintenance-for-remote-field-devices-master\Hands-on lab\media\fabrikam-logo.png_.
 
     ![The company logo configuration options are displayed.](media/configure-dashboard-logo.png "Configure Logo Image")
 
@@ -510,11 +515,11 @@ In the previous exercise, we created a device set that contains the devices loca
 
 1. Remaining in the edit dashboard mode, select _Device Set Grid_ from the _Library_ menu.
 
-2. Configure the device list by selecting the _Texas Rod Pumps_ Device Set, and assigning it the title of _Texas Rod Pumps_.
+2. Configure the device list by selecting the _Texas Rod Pumps_ Device Set and assigning it the title of _Texas Rod Pumps_.
 
-3. Add columns by pressing the _Add/Remove_, we will add _Device ID_ and _IP Address_.
+3. Add columns by selecting the _Add/Remove_, we will add _Device ID_ and _IP Address_.
 
-4. Press the _Save_ button to add the tile to the dashboard.
+4. Select the _Save_ button to add the tile to the dashboard.
 
     ![The panel for device list configuration is displayed.](media/device-list-configure1.png "Configure list")
 
@@ -524,7 +529,7 @@ In the previous exercise, we created a device set that contains the devices loca
 
 It is beneficial to see the location and power state of certain critical Texas rod pumps. We will add a map that will display the location and current power state of DEVICE001.
 
-1. Select _Map_ from the _Library_ menu, configure the map as follows, and press _Save_:
+1. Select _Map_ from the _Library_ menu, configure the map as follows, and select _Save_:
 
     | Field             | Value                       |
     | ----------------- | --------------------------- |
@@ -538,7 +543,7 @@ It is beneficial to see the location and power state of certain critical Texas r
 
     ![The Rod Pump location is displayed in a map. A list of devices and their IP addresses are listed on the right-hand side.](media/completed-dashboard.png "Completed Dashboard")
 
-2. Press the _Done_ button in the upper right corner of the Dashboard to finish editing.
+2. Select the _Done_ button in the upper right corner of the Dashboard to finish editing.
 
     ![The Rod Pump location is displayed in a map. A list of devices and their IP addresses are listed on the right-hand side. The done button is circled.](media/done-dashboard-editing.png "Done dashboard editing")
 
@@ -558,15 +563,15 @@ The Event Hub we will be creating will act as a collector for data coming into I
 
 3. Open your **Fabrikam_Oil** resource group.
 
-4. On the top of the screen, press the **Add** button, when the marketplace screen displays search for and select **Event Hubs**, this will allow you to create a new Event Hub Namespace resource.
+4. On the top of the screen, select the **Add** button. When the marketplace screen displays, search for and select **Event Hubs**. This will allow you to create a new Event Hub Namespace resource.
 
    ![Searching for the Event Hubs in the Azure Marketplace.](media/search-event-hubs.png "Search Event Hubs")
 
-5. Configure the event hub as follows, and press the **Create** button:
+5. Configure the event hub as follows, and select the **Create** button:
 
    | Field          | Value                                 |
    | -------------- | ------------------------------------- |
-   | Name           | _anything must be globally unique_    |
+   | Name           | _anything (must be globally unique)_    |
    | Pricing Tier   | Standard                              |
    | Subscription   | _select the appropriate subscription_ |
    | Resource Group | Fabrikam_Oil                          |
@@ -574,11 +579,11 @@ The Event Hub we will be creating will act as a collector for data coming into I
 
    ![The creating event hub namespace options are displayed.](media/create-eventhub-namespace-form.png "Configure Event Hub Namespace")
 
-6. Once the Event Hubs namespace has been created, open it and press the **+ Event Hub** button at the top of the screen.
+6. Once the Event Hubs namespace has been created, open it and select the **+ Event Hub** button at the top of the screen.
 
    ![The Event Hub namespace screen is displayed. The create event hub button is circled.](media/add-eventhub-menu.png "Add new Event Hub")
 
-7. In the Create Event Hub form, configure the hub as follows and press the **Create** button:
+7. In the Create Event Hub form, configure the hub as follows and select the **Create** button:
 
    | Field        | Value            |
    | ------------ | ---------------- |
@@ -593,7 +598,7 @@ The Event Hub we will be creating will act as a collector for data coming into I
 
    ![The event hubs are listed. IOT central feed is shown and circled.](media/event-hub-listing.png "Event Hub Listing")
 
-9. From the top menu, press the **+ Consumer Group** button to create a new consumer group for the hub. Name the consumer group _ingressprocessing_ and press the **Create** button.
+9. From the top menu, select the **+ Consumer Group** button to create a new consumer group for the hub. Name the consumer group _ingressprocessing_ and select the **Create** button.
 
    ![The event hub screen shows the ability to create a consumer group. The name is entered and the create button is circled.](media/create-consumer-group-form.png "Create Consumer Group")
 
@@ -603,11 +608,11 @@ The Event Hub we will be creating will act as a collector for data coming into I
 
    ![The dashboard is displayed and the left-hand menu has the Data Export link circled.](media/data-export-menu.png "Data Export Menu")
 
-2. From the _Data Export_ screen, press the **+ New** button from the upper right menu, and select **Azure Event Hubs**.
+2. From the _Data Export_ screen, select the **+ New** button from the upper right menu, and select **Azure Event Hubs**.
 
    ![The new Data Export options are displayed. The Azure Event Hubs option is circled.](media/ce-eventhubs-menu.png "New Event Hubs export")
 
-3. IoT Central will automatically retrieve Event Hubs namespaces and Event Hubs from the connected Azure Account. Configure the data export as follows and press the **Save** button:
+3. IoT Central will automatically retrieve Event Hubs namespaces and Event Hubs from the connected Azure Account. Configure the data export as follows and select the **Save** button:
 
    | Field                | Value                                            |
    | -------------------- | ------------------------------------------------ |
@@ -620,6 +625,20 @@ The Event Hub we will be creating will act as a collector for data coming into I
    | Device Templates     | Off                                              |
 
    ![The data export configuration fields are displayed.  The save button is circled.](media/create-data-export-form.png "Configure Data Export")
+
+   > **Note**: If you cannot browse your subscription for the Event Hubs namespace due to using a trial app instead of pay-as-you-go, perform the following steps:
+
+   ![The error stating the user is unable to browse Event Hubs is highlighted.](media/iot-central-cannot-browse-event-hubs.png "Cannot browse event hubs")
+
+   1. Navigate to your Event Hubs namespace in the Azure portal.
+
+   2. Select **Shared access policies** on the left-hand menu, then select the **RootManageSharedAccessKey** and copy the **Connection string-primary key**.
+
+        ![The Event Hubs connection string is highlighted.](media/event-hubs-connection-string.png "Event Hubs connection string")
+
+   3. Return to IoT Central and paste the connection string into the **Connection string** field, then select the `iot-central-feed` event hub you created.
+
+        ![The data export configuration form is updated with the manual connection string for Event Hubs.](media/create-data-export-form-connection-string.png "Connection string added")
 
 4. The Event Hub Feed export will be created, and then started (it may take a few minutes for the export to start)
 
@@ -671,36 +690,46 @@ We will be using an Azure Function to read incoming telemetry from IoT Hub and s
 
 1. Return to the [Azure Portal](https://portal.azure.com).
 
-2. From the left-hand menu, select the **Create a resource** item.
+2. Open your resource group for this lab.
 
-3. From the top menu, press the **+ Add** button, and search for Function App.
+3. From the top menu, select the **+ Add** button, and search for Function App.
 
-4. Configure the Function App as follows and press the **Create** button:
+4. Configure the Function App as follows, then select **Next: Hosting >**:
 
-   | Field         | Value                                           |
-   | ------------- | ----------------------------------------------- |
-   | App Name      | _your choice, must be globally unique_          |
-   | Subscription  | _select the appropriate subscription_           |
-   | ResourceGroup | use existing, and select Fabrikam_Oil           |
-   | OS            | Windows                                         |
-   | Hosting Plan  | Consumption                                     |
-   | Location      | _select the location nearest to you_            |
-   | Runtime Stack | .Net Core                                       |
-   | Storage       | select Create new, and retain the default value |
+    | Field         | Value                                           |
+    | ------------- | ----------------------------------------------- |
+    | App Name      | _your choice, must be globally unique_          |
+    | Subscription  | _select the appropriate subscription_           |
+    | Resource Group | use existing, and _select Fabrikam_Oil_           |
+    | Publish       | _select Code_ |
+    | Runtime Stack | _select .Net Core_                                       |
+    | Location      | _select the location nearest to you_            |
 
-   ![The create Function App blade is displayed. All of the Function App configurations are displayed.  The create button is circled.](media/create-azure-function-app-form.png "Create Azure Function App")
+    ![The create Function App blade is displayed. All of the Function App configurations are displayed.  The create button is circled.](media/create-azure-function-app-form.png "Create Azure Function App")
+
+5. Configure the Hosting options as follows, then select **Review + create**:
+
+    | Field         | Value                                           |
+    | ------------- | ----------------------------------------------- |
+    | Storage Account | _retain the default value of create new_ |
+    | Operating System | Windows |
+    | Plan Type | Consumption                                     |
+
+    ![The create Function App blade is displayed. All of the Function App configurations are displayed.  The create button is circled.](media/create-azure-function-app-form2.png "Create Azure Function App")
+
+6. On the Review blade, select **Create**, then **wait until the Function App is created** before continuing.
 
 ### Task 2: Create a notification table in Azure Storage
 
 One of the things we would like to avoid is sending repeated notifications to the workforce in the field. Notifications should only be sent once every 24 hour period per device. To keep track of when a notification was last sent for a device, we will use a table in a Storage Account.
 
-1. In the [Azure Portal](https://portal.azure.com), select **Resource groups** from the left-hand menu, then select the **Fabrikam_Oil** link from the listing.
+1. In the [Azure portal](https://portal.azure.com), select **Resource groups** from the left-hand menu, then select the **Fabrikam_Oil** link from the listing.
 
-2. Select the link for the storage account that was created in Task 1.
+2. Select the link for the storage account that was created with the Function App in Task 1. The name will start with "storageaccount".
 
    ![The resources are listed in the blade. The storage account is circled.](media/select-function-storage-account.png "Select the Storage Account")
 
-3. From the Storage Account left-hand menu, select **Tables** from the _Table service_ section, then press the **+ Table** button, and create a new table named **DeviceNotifications**.
+3. From the Storage Account left-hand menu, select **Tables** from the _Table service_ section, then select the **+ Table** button, and create a new table named **DeviceNotifications**.
 
    ![The storage account table administration blade is displayed. The tables link is circled on the left-hand side and the Add Table button is circled in the header.](media/create-storage-table-menu.png "Create Table in the Storage Account")
 
@@ -710,13 +739,13 @@ One of the things we would like to avoid is sending repeated notifications to th
 
 There are many ways to trigger flows in Microsoft Flow. One of them is having Flow monitor an Azure Queue. We will use a Queue in our Azure Storage Account to host this queue.
 
-1. From the Storage Account left-hand menu, select **Queues** located beneath the _Queue service_ section, then press the **+ Queue** button, and create a new queue named **flownotificationqueue**.
+1. From the Storage Account left-hand menu, select **Queues** located beneath the _Queue service_ section, then select the **+ Queue** button, and create a new queue named **flownotificationqueue**.
 
    ![The queues administration blade is displayed. The Add Queue button is circled.](media/create-storage-queue-menu.png "Create Queue in the Storage Account")
 
-2. Navigate to the storage account. Obtain the Shared Storage Key for the storage account by selecting left-hand menu item **Access keys**. Copy the _Key_ value of _key1_ and retain this value. We will be using it later in the next task. Also, retain the name of your Storage Account. (in the image below, the name of the Storage Account is _pumpfunctions8600_)
+2. Navigate to the storage account. Obtain the Shared Storage Key for the storage account by selecting the left-hand menu item **Access keys**. Copy the _Key_ value of _key1_ and retain this value. We will be using it later in the next task. Also, retain the name of your Storage Account. (in the image below, the name of the Storage Account is _storageaccountfabribce9_)
 
-   ![The pump function access key information is displayed.  Key 1 is circled. Connection string has the focus.](media/copy-function-storage-access-key.png "Copy access key for the Storage Account")
+   ![The pump function access key information is displayed. Key 1 is circled.](media/copy-function-storage-access-key.png "Copy access key for the Storage Account")
 
 ### Task 4: Create notification service in Microsoft Flow
 
@@ -736,7 +765,7 @@ We will be using [Microsoft Flow](https://flow.microsoft.com/) as a means to ema
 
    ![The trigger dialog is displayed. Create a trigger to respond to a message in the Azure Queue is selected and circled.](media/select-flow-trigger-type.png "Select Queue Trigger")
 
-5. Fill out the form as follows, then press the **Create** button:
+5. Fill out the form as follows, then select the **Create** button:
 
    | Field                | Value                                      |
    | -------------------- | ------------------------------------------ |
@@ -746,7 +775,7 @@ We will be using [Microsoft Flow](https://flow.microsoft.com/) as a means to ema
 
    ![The queue connection configuration fields are displayed. The create button is circled.](media/create-flow-queue-step.png "Create Queue Step")
 
-6. In the queue step, select the **flownotificationqueue** item, then press the **+ New step** button.
+6. In the queue step, select the **flownotificationqueue** item, then select the **+ New step** button.
 
    ![Message queue step event dialog is displayed. The New step button is circled.](media/create-flow-select-queue.png "Select Queue")
 
@@ -756,13 +785,13 @@ We will be using [Microsoft Flow](https://flow.microsoft.com/) as a means to ema
 
 8. You may need to accept the terms and conditions of the SendGrid service, a free service that provides the underlying email capabilities of this email step.
 
-9. In the Send an email notification (v3) form, fill it out as follows, then press the **+ New Step** button.
+9. In the Send an email notification (v3) form, fill it out as follows, then select the **+ New Step** button.
 
    | Field      | Value                                                                                |
    | ---------- | ------------------------------------------------------------------------------------ |
    | To         | _enter your email address_                                                           |
    | Subject    | Action Required: Pump needs maintenance                                              |
-   | Email Body | _put cursor in the field, then press **Message Text** from the Dynamic Content menu_ |
+   | Email Body | _put cursor in the field, then select **Message Text** from the Dynamic Content menu_ |
 
    ![The Flow action for sending an email is displayed. The message text option and New step button are circled.](media/create-flow-email-form.png "Email form")
 
@@ -770,13 +799,13 @@ We will be using [Microsoft Flow](https://flow.microsoft.com/) as a means to ema
 
     ![The Flow Action pane is displayed. The queue text is listed in the search field.](media/create-flow-delete-message-step.png "Delete queue message step")
 
-11. In the Delete message form, fill it out as follows, then press the **Save** button.
+11. In the Delete message form, fill it out as follows, then select the **Save** button.
 
     | Field       | Value                                                                               |
     | ----------- | ----------------------------------------------------------------------------------- |
     | Queue Name  | flownotificationqueue                                                               |
-    | Message ID  | _put cursor in the field, then press **Message ID** from the Dynamic Content menu_  |
-    | Pop Receipt | _put cursor in the field, then press **Pop Receipt** from the Dynamic Content menu_ |
+    | Message ID  | _put cursor in the field, then select **Message ID** from the Dynamic Content menu_  |
+    | Pop Receipt | _put cursor in the field, then select **Pop Receipt** from the Dynamic Content menu_ |
 
     ![The Flow dialog displays the Delete message step. Message ID and Pop Receipt fields are populated. The Save button is circled. The available dynamic content pane has the available fields listed.](media/create-flow-delete-message-form.png "Delete queue message form")
 
@@ -786,15 +815,15 @@ We will be using [Microsoft Flow](https://flow.microsoft.com/) as a means to ema
 
 ### Task 5: Obtain connection settings for use with the Azure Function implementation
 
-1. Once the Function App has been provisioned, open the **Fabrikam_Oil** resource group and select the link for the Storage Account that was created in Task 2.
+1. Once the Function App has been provisioned, open the **Fabrikam_Oil** resource group and select the link for the storage account that was created with the Function App in Task 1. The name will start with "storageaccount".
 
-   ![The Azure resource list is displayed. The newly created function app is circled.](media/select-function-storage-account.png "Select Function Storage Account")
+   ![The resources are listed in the blade. The storage account is circled.](media/select-function-storage-account.png "Select the Storage Account")
 
 2. From the left-hand menu, select **Access Keys** and copy the key 1 Connection String, keep this value handy as we'll be needing it in the next task.
 
-   ![The pump function access keys are displayed. Key 1 is circled. The copy button for Connection string value is circled.](media/copy-function-storage-access-key.png "Copy Function Storage Connection String")
+   ![The pump function access keys are displayed. Key 1 is circled. The copy button for Connection string value is circled.](media/copy-function-storage-access-key-connection-string.png "Copy Function Storage Connection String")
 
-3. Return to the **Fabrikam_Oil** resource group, and select the link for the Event Hubs Namespace.
+3. Return to the **Fabrikam_Oil** resource group and select the link for the Event Hubs Namespace.
 
    ![A screen displays Azure resources. Event hub is circled.](media/select-event-hubs-namespace.png "Select the Event Hubs Namespace")
 
@@ -810,9 +839,9 @@ We will be using [Microsoft Flow](https://flow.microsoft.com/) as a means to ema
 
 It is recommended that you never check in secrets, such as connection strings, into source control. One way to do this is to use settings files. The values stored in these files mimic environment values used in production. The local settings file is never checked into source control.
 
-1. Using Visual Studio Code, open the `\Hands-on lab\Resources\FailurePredictionFunction` folder.
+1. Using Visual Studio Code, open the `C:\MCW-Predictive-Maintenance-for-remote-field-devices-master\Hands-on lab\Resources\FailurePredictionFunction` folder.
 
-2. Upon opening the folder in Visual Studio Code, you may be prompted to restore unresolved dependencies. If this is the case, press the **Restore** button.
+2. Upon opening the folder in Visual Studio Code, you may be prompted to restore unresolved dependencies. If this is the case, select the **Restore** button.
 
    ![A sample Restore Unresolved Dependencies dialog is displayed. The Restore button is available.](media/unresolveddependencies.png "Restore Unresolved Dependencies Dialog")
 
@@ -832,7 +861,7 @@ It is recommended that you never check in secrets, such as connection strings, i
 
 ### Task 7: Review the Azure Function code
 
-1. Observe the static _Run_ function. It identifies that the function will run every time the _iot-central-feed_ event hub receives a message. It also uses a specific Consumer Group. These groups are used when there is a possibility that more than one process may be utilizing the data received in the hub. This ensures that dependent processes receive all messages once - thus avoiding any contingency problems. The method receives an array (batch) of events from the hub on each execution, as well as an instance of a logger in case you wish to see values in the console (locally or in the cloud).
+1. Observe the static _Run_ function located in **PumpFailurePrediction.cs**. It identifies that the function will run every time the _iot-central-feed_ event hub receives a message. It also uses a specific Consumer Group. These groups are used when there is a possibility that more than one process may be utilizing the data received in the hub. This ensures that dependent processes receive all messages once - thus avoiding any contingency problems. The method receives an array (batch) of events from the hub on each execution, as well as an instance of a logger in case you wish to see values in the console (locally or in the cloud).
 
    ```c#
    public static async Task Run([EventHubTrigger("iot-central-feed", Connection = "fabrikam-oil_RootManageSharedAccessKey_EVENTHUB",
@@ -841,7 +870,7 @@ It is recommended that you never check in secrets, such as connection strings, i
 
 2. On line 29, the message body received from the event is deserialized into a Telemetry object. The Telemetry class matches the telemetry sent by the pumps. The Telemetry class can be found in the `Models/Telemetry.cs` file.
 
-3. On line 31, the Device ID is pulled from the system properties of the event. This will let us know from which device the telemetry data came, and allows us to group the telemetry by device so we can perform aggregates on the sensor data.
+3. On line 31, the Device ID is pulled from the system properties of the event. This will let us know from which device the telemetry data came and allows us to group the telemetry by device so we can perform aggregates on the sensor data.
 
 4. From lines 42 - 54, we group the telemetry by Device ID and calculate the averages for each sensor reading. This helps us reduce the number of calls we send to the scoring service that contains our deployed prediction model.
 
@@ -851,7 +880,7 @@ It is recommended that you never check in secrets, such as connection strings, i
 
 ### Task 8: Run the Function App locally
 
-1. Press <kbd>Ctrl</kbd>+<kbd>F5</kbd> to run the Azure Function code.
+1. Select <kbd>Ctrl</kbd>+<kbd>F5</kbd> to run the Azure Function code.
 
 2. After some time, you should see log statements indicating that a message has been queued (indicating that Microsoft Flow will send a notification email).
 
@@ -882,19 +911,19 @@ It is recommended that you never check in secrets, such as connection strings, i
 
     ![The form to add an application setting is displayed, consisting of a name and value textbox.](media/functtionappaddremoveappsetting.png "Add an Application Setting")
 
-4. Once complete, press the **Save** button from the top menu to commit the changes to the application configuration.
+4. Once complete, select the **Save** button from the top menu to commit the changes to the application configuration.
 
    ![The Application Settings tab is selected and the Save button is highlighted.](media/functionconfigurationsave.png "Save Application Setting")
 
 ### Task 10: Deploy the Function App into Azure
 
-1. Now that we have been able to successfully run our Functions locally, we are ready to deploy them to the cloud. The first step to deployment is to ensure that you are logged in to your Azure Account. To log into your Azure account, press the following shortcut to display the command palette: <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>p</kbd>.
+1. Now that we have been able to successfully run our Functions locally, we are ready to deploy them to the cloud. The first step to deployment is to ensure that you are logged in to your Azure Account. To log into your Azure account, select the following shortcut to display the command palette: <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>p</kbd>.
 
-2. In the textbox of the command palette, type in *Azure:Sign In*, and press enter (or select the command from the list). This will open a Microsoft Authentication webpage in your default browser. Logging into this window will authenticate Visual Studio Code with your ID.
+2. In the textbox of the command palette, type in *Azure:Sign In*, and select enter (or select the command from the list). This will open a Microsoft Authentication webpage in your default browser. Logging into this window will authenticate Visual Studio Code with your ID.
 
    ![The Visual Studio Code command palette is displaying Azure:Sign In as a command option. The Azure:Sign In command is highlighted.](media/commandpalettesignin.png "Azure Sign In Command")
 
-3. Once authenticated, we are ready to deploy - once again press <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>p</kbd> to open the command palette. Type *Azure Functions: Deploy* and select the *Azure Functions: Deploy to Function App* command from the list.
+3. Once authenticated, we are ready to deploy - once again select <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>p</kbd> to open the command palette. Type *Azure Functions: Deploy* and select the *Azure Functions: Deploy to Function App* command from the list.
 
    ![The Visual Studio Code command palette is displaying Azure Functions. The Deploy to Function App command is circled.](media/commandpalettedeploytofunctionapp.png "Deploy to Function App Command")
 
@@ -902,7 +931,7 @@ It is recommended that you never check in secrets, such as connection strings, i
 
    ![The Visual Studio Code command palette is displaying potential destinations for deployment of our function, the pumpfunctions function app is highlighted](media/funcdeploydestinationapp.png "pumpfunctions function app is highlighted")
 
-5. You may be prompted if you want to deploy to **pumpfunctions**, press the **Deploy** button in this dialog.
+5. You may be prompted if you want to deploy to **pumpfunctions**, select the **Deploy** button in this dialog.
 
    ![A dialog asking if we are sure we want to deploy to pump functions is displayed. The Deploy button is highlighted.](media/funcdeploymentdeploydialog.png "Deploy to Pump Functions")
 
@@ -924,11 +953,11 @@ Duration: 10 minutes
 
    ![The Administration panel is displayed and circled in the image. The delete button is highlighted as well.](media/delete-application.png "Delete the IoT Central application")
 
-2. In the [Azure Portal](https://portal.azure.com), select **Resource Groups**, open the resource group that you created in Exercise 6, and press the **Delete resource group** button.
+2. In the [Azure Portal](https://portal.azure.com), select **Resource Groups**, open the resource group that you created in Exercise 6, and select the **Delete resource group** button.
 
    ![The Azure Resource Group panel is displayed. The Delete resource group link is circled.](media/delete-resource-group.png "Delete the Resource Group")
 
-3. Delete Microsoft Flows that we created. Access Microsoft Flow and login. From the left-hand menu, select **My flows**. Press the ellipsis button next to each flow that we created in this lab and select **Delete**.
+3. Delete Microsoft Flows that we created. Access Microsoft Flow and login. From the left-hand menu, select **My flows**. Select the ellipsis button next to each flow that we created in this lab and select **Delete**.
 
    ![The Azure Flows panel is displayed. The ellipsis and delete links are circled.](media/delete-flow.png "Delete Microsoft Flow processes")
 

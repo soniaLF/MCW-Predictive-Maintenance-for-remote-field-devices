@@ -9,7 +9,7 @@ Before the hands-on lab setup guide
 </div>
 
 <div class="MCWHeader3">
-November 2019
+December 2019
 </div>
 
 Information in this document, including URL and other Internet Web site references, is subject to change without notice. Unless otherwise noted, the example companies, organizations, products, domain names, e-mail addresses, logos, people, places, and events depicted herein are fictitious, and no association with any real company, organization, product, domain name, e-mail address, logo, person, place or event is intended or should be inferred. Complying with all applicable copyright laws is the responsibility of the user. Without limiting the rights under copyright, no part of this document may be reproduced, stored in or introduced into a retrieval system, or transmitted in any form or by any means (electronic, mechanical, photocopying, recording, or otherwise), or for any purpose, without the express written permission of Microsoft Corporation.
@@ -64,17 +64,21 @@ In this task, you will create an Azure resource group for the resources used thr
 
 1. Log into the [Azure Portal](https://portal.azure.com).
 
-2. In the left-hand menu, select **Resource Groups**.
+2. On the top-left corner of the portal, select the menu icon to display the menu.
 
-3. At the top of the screen press the **Add** button.
+    ![The portal menu icon is displayed.](media/portal-menu-icon.png "Menu icon")
+
+3. In the left-hand menu, select **Resource Groups**.
+
+4. At the top of the screen select the **Add** button.
 
    ![Add Resource Group Menu](media/add-resource-group-menu.png 'Resource Group Menu')
 
-4. Create a new resource group with the name **Fabrikam_Oil**, ensure the proper subscription and region nearest you are selected. Then select **Review + Create**.
+5. Create a new resource group with the name **Fabrikam_Oil**, ensure the proper subscription and region nearest you are selected. Then select **Review + Create**.
 
    ![Create Resource Group](media/create-resource-group.png 'Resource Group')
 
-5. On the Summary blade, select **Create** to provision your resource group.
+6. On the Summary blade, select **Create** to provision your resource group.
 
 ### Task 2: Create an Azure Databricks service
 
@@ -122,8 +126,7 @@ Azure Databricks is used to train and deploy a machine learning model that predi
    | Cluster name               | _enter `lab`_                                                                                |
    | Cluster Mode               | _select `Standard`_                                                                          |
    | Pool                       | _select `None`_                                                                              |
-   | Databricks Runtime Version | _select `Runtime 5.5 LTS (Scala 2.11, Spark 2.4.3)`_                                         |
-   | Python Version             | _enter `3`_                                                                                  |
+   | Databricks Runtime Version | _select `Runtime 6.2 (Scala 2.11, Spark 2.4.4)`_                                         |
    | Autopilot Options          | _uncheck `Enable autoscaling` and check `Terminate after...`, with a value of `120` minutes_ |
    | Worker Type                | _select `Standard_DS3_v2`_                                                                   |
    | Driver Type                | _select `Same as worker`_                                                                    |
@@ -153,13 +156,13 @@ In this task, you will import the Databricks notebooks into your workspace.
 
 1. Navigate to the [Azure portal](https://portal.azure.com).
 
-2. Select **+ Create a resource**, type in "machine learning" in the search field, then select **Machine Learning service workspace** from the results.
+2. Select **+ Create a resource**, type in "machine learning" in the search field, then select **Machine Learning** from the results.
 
-   ![Create a resource is highlighted and Machine Learning service workspace is selected.](media/azure-create-aml-search.png 'SQL Database')
+   ![Create a resource is highlighted and Machine Learning is selected.](media/azure-create-aml-search.png 'SQL Database')
 
 3. Select **Create** in the Azure Databricks details page.
 
-4. Within the **Azure Databricks Service** form, complete the following:
+4. Within the **Machine Learning** form, complete the following:
 
    | Field          | Value                                      |
    | -------------- | ------------------------------------------ |
@@ -167,6 +170,7 @@ In this task, you will import the Databricks notebooks into your workspace.
    | Subscription   | _select the appropriate subscription_      |
    | Resource Group | _select use existing, then `Fabrikam_Oil`_ |
    | Location       | _select the location nearest to you_       |
+   | Workspace edition | _select Basic_ |
 
    ![The form fields are completed with the previously described settings.](media/azure-create-aml.png 'Machine Learning service workspace')
 
