@@ -129,7 +129,7 @@ The first task is to identify the data that the equipment will be sending to the
 
 The telemetry being reported by the Fabrikam rod pumps are as follows, we will be using this information later in the lab:
 
-#### Telemetry Schema
+#### Telemetry schema
 
 | Field          | Type     | Description                                                                                                                                                                        |
 | -------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -142,7 +142,7 @@ The telemetry being reported by the Fabrikam rod pumps are as follows, we will b
 | MotorSpeed     | Numeric  | including slip (RPM)                                                                                                                                                               |
 | CasingFriction | Numeric  | Measured in PSI (psi)                                                                                                                                                              |
 
-### Task 2: Create an IoT Central Application
+### Task 2: Create an IoT Central application
 
 1. Access the (Azure IoT Central)[https://azure.microsoft.com/en-us/services/iot-central/] website.
 
@@ -234,7 +234,7 @@ The telemetry being reported by the Fabrikam rod pumps are as follows, we will b
     | IP Address    | IPAddress    | text      | The IP address of the rod pump    |
     | Pump Location | Location     | location  | The geo. location of the rod pump |
 
-11. Operators and field workers will want to be able to turn on and off the pumps remotely. In order to do this, we will define commands. Select the _Commands_ tab, and select the _New_ button to add a new command.
+11. Operators and field workers will want to be able to turn on and off the pumps remotely. In order to do this, we will define commands. Select the _Commands_ tab and select the _New_ button to add a new command.
 
     ![The screen displays the configuration menu for the Rod Pump 1. The Commands menu item is selected and the New Command link is circled.](media/device-template-add-command.png "Add Command")
 
@@ -248,7 +248,7 @@ The telemetry being reported by the Fabrikam rod pumps are as follows, we will b
 
     ![The screen shows the configure command options. The save button is circled.](media/template-configure-command.png "Configure Command")
 
-13. Now, we can define the dashboard by pressing the _Dashboard_ option in the top menu, and selecting _Line Chart_ from the left-hand menu. Define a line chart for each of the telemetry fields (PumpRate, TimePumpOn, MotorPower, MotorSpeed, CasingFriction) - keeping all the default values:
+13. Now, we can define the dashboard by pressing the _Dashboard_ option in the top menu and selecting _Line Chart_ from the left-hand menu. Define a line chart for each of the telemetry fields (PumpRate, TimePumpOn, MotorPower, MotorSpeed, CasingFriction) - keeping all the default values:
 
     ![The screen shows the Dashboard menu item is selected and circled. The Library menu has the Line Chart menu item selected.](media/line-chart.png "Line Chart")
 
@@ -266,7 +266,7 @@ The telemetry being reported by the Fabrikam rod pumps are as follows, we will b
 
     ![The dashboard configuration options are displayed.](media/dashboard-charts-definition.png "Dashboard Charts Definition")
 
-16. Finally, we can add an image to represent the equipment. Select on the circle icon left of the template name, and select an image file. The image used in this lab can be found on [PixaBay](https://pixabay.com/photos/pumpjack-texas-oil-rig-pump-591934/).
+16. Finally, we can add an image to represent the equipment. Select on the circle icon left of the template name and select an image file. The image used in this lab can be found on [PixaBay](https://pixabay.com/photos/pumpjack-texas-oil-rig-pump-591934/).
 
     ![A Rod Pump 1 device is displayed. The device picture has focus.](media/device-template-thumbnail.png "Device Template Thumbnail")
 
@@ -394,7 +394,7 @@ DEVICE001 is the rod pump that will gradually fail. Upon running the simulator f
 
     ![The average Motor Power measurements are displayed in a graph. The graph shows Motor Power usage degradation.](media/device001-gradual-failure-power.png "Motor Power usage degradation")
 
-4. Repeat 1-3 and observe that DEVICE002, the non-failing pump, remains above the 30 kW threshold. DEVICE003 is also a failing pump, but displays an immediate failure versus a gradual one.
+4. Repeat 1-3 and observe that DEVICE002, the non-failing pump, remains above the 30 kW threshold. DEVICE003 is also a failing pump but displays an immediate failure versus a gradual one.
 
     ![Low motor measurements are being displayed in a graph. Power measurements show steady.](media/device002-normal-operation.png "DEVICE002 Motor Power Rules Chart")
 
@@ -402,7 +402,7 @@ DEVICE001 is the rod pump that will gradually fail. Upon running the simulator f
 
 ### Task 5: Restart a failing pump remotely
 
-After observing the failure of two of the rod pumps, you are able cycle the power state of the pump remotely. The simulator is setup to receive the Toggle Motor Power command from IoT Central, and will update the state accordingly and start/stop sending telemetry to the cloud.
+After observing the failure of two of the rod pumps, you are able cycle the power state of the pump remotely. The simulator is setup to receive the Toggle Motor Power command from IoT Central and will update the state accordingly and start/stop sending telemetry to the cloud.
 
 1. In IoT Central, select _Devices_ from the left-hand menu, then select _Rod Pump - DEVICE001_ from the device list. Observe that even though the pump has in all purposes failed, that there is still power to the motor - indicated by the Power State bar at the bottom of the device's Measurements chart.
 
@@ -420,7 +420,7 @@ After observing the failure of two of the rod pumps, you are able cycle the powe
 
     ![Device DEVICE001 is in a Power State Off with no telemetry coming in.](media/device001-stopped-telemetry-power-state-off.png "Rod Pump DEVICE001 Measurements")
 
-5. Return to the _Commands_ tab, and toggle the motor power back on again by pressing the _Run_ button once more. On the measurements tab, you will see the Power State switch back to online, and telemetry to start flowing again. Due to the restart of the rod pump - it has now recovered and telemetry is back into normal ranges!
+5. Return to the _Commands_ tab and toggle the motor power back on again by pressing the _Run_ button once more. On the measurements tab, you will see the Power State switch back to online, and telemetry to start flowing again. Due to the restart of the rod pump - it has now recovered and telemetry is back into normal ranges!
 
     ![A graph of device telemetry measurements is displayed. DEVICE001 recovered after Pump Power State has been cycled.](media/device001-recovered-1.png "Instance of pump recovery")
 
@@ -515,7 +515,7 @@ In the previous exercise, we created a device set that contains the devices loca
 
 1. Remaining in the edit dashboard mode, select _Device Set Grid_ from the _Library_ menu.
 
-2. Configure the device list by selecting the _Texas Rod Pumps_ Device Set, and assigning it the title of _Texas Rod Pumps_.
+2. Configure the device list by selecting the _Texas Rod Pumps_ Device Set and assigning it the title of _Texas Rod Pumps_.
 
 3. Add columns by selecting the _Add/Remove_, we will add _Device ID_ and _IP Address_.
 
@@ -823,7 +823,7 @@ We will be using [Microsoft Flow](https://flow.microsoft.com/) as a means to ema
 
    ![The pump function access keys are displayed. Key 1 is circled. The copy button for Connection string value is circled.](media/copy-function-storage-access-key-connection-string.png "Copy Function Storage Connection String")
 
-3. Return to the **Fabrikam_Oil** resource group, and select the link for the Event Hubs Namespace.
+3. Return to the **Fabrikam_Oil** resource group and select the link for the Event Hubs Namespace.
 
    ![A screen displays Azure resources. Event hub is circled.](media/select-event-hubs-namespace.png "Select the Event Hubs Namespace")
 
@@ -870,7 +870,7 @@ It is recommended that you never check in secrets, such as connection strings, i
 
 2. On line 29, the message body received from the event is deserialized into a Telemetry object. The Telemetry class matches the telemetry sent by the pumps. The Telemetry class can be found in the `Models/Telemetry.cs` file.
 
-3. On line 31, the Device ID is pulled from the system properties of the event. This will let us know from which device the telemetry data came, and allows us to group the telemetry by device so we can perform aggregates on the sensor data.
+3. On line 31, the Device ID is pulled from the system properties of the event. This will let us know from which device the telemetry data came and allows us to group the telemetry by device so we can perform aggregates on the sensor data.
 
 4. From lines 42 - 54, we group the telemetry by Device ID and calculate the averages for each sensor reading. This helps us reduce the number of calls we send to the scoring service that contains our deployed prediction model.
 
