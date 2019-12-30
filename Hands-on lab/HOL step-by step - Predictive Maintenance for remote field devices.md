@@ -34,8 +34,8 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
   - [Before the hands-on lab](#before-the-hands-on-lab)
   - [Exercise 1: Configuring IoT Central with devices and metadata](#exercise-1-configuring-iot-central-with-devices-and-metadata)
     - [Task 1: Model the telemetry data](#task-1-model-the-telemetry-data)
-      - [Telemetry Schema](#telemetry-schema)
-    - [Task 2: Create an IoT Central Application](#task-2-create-an-iot-central-application)
+      - [Telemetry schema](#telemetry-schema)
+    - [Task 2: Create an IoT Central application](#task-2-create-an-iot-central-application)
     - [Task 3: Create the Device Template](#task-3-create-the-device-template)
     - [Task 4: Create and provision real devices](#task-4-create-and-provision-real-devices)
     - [Task 5: Delete the simulated device](#task-5-delete-the-simulated-device)
@@ -102,7 +102,7 @@ The diagram above shows the components of IoT Central's architecture that pertai
 ## Requirements
 
 1. Microsoft Azure subscription (non-Microsoft subscription, must be a pay-as-you subscription).
-2. [.Net Core 2.2](https://dotnet.microsoft.com/download/dotnet-core/2.2)
+2. [.Net Core 3.1](https://dotnet.microsoft.com/download/dotnet-core/3.1)
 3. [Visual Studio Code](https://code.visualstudio.com/) version 1.39 or greater
 4. [C# Visual Studio Code Extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode.csharp)
 5. [Azure Functions Core Tools version 2.x (using NPM or Chocolatey - see readme on GitHub repository)](https://github.com/Azure/azure-functions-core-tools)
@@ -588,8 +588,8 @@ The Event Hub we will be creating will act as a collector for data coming into I
    | Field        | Value            |
    | ------------ | ---------------- |
    | Name         | iot-central-feed |
-   | Pricing Tier | 1                |
-   | Subscription | 1                |
+   | Partition Count | 2                |
+   | Message Retention | 1                |
    | Capture      | Off              |
 
    ![The event hub creation screen is displaying the configuration options.  The create button is circled.](media/create-eventhub-form.png "Configure Event Hub")
