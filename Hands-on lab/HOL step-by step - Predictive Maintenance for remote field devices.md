@@ -168,9 +168,9 @@ The telemetry being reported by the Fabrikam rod pumps are as follows, we will b
 
     b. *URL* - this will be the URL for your application, it needs to be globally unique.
 
-    c. *Application Template* - select *Legacy application (2018)*.
+    c. *Application Template* - select *Custom application (legacy)*.
 
-    d. *7 day free trial* - select this option to enable the free trial.
+    d. *Pricing plan* - select the *Free* option to enable the free 7-day trial.
 
     e. Fill out your contact information (First Name, Last Name, Email Address, Phone Number, Country/Region).
 
