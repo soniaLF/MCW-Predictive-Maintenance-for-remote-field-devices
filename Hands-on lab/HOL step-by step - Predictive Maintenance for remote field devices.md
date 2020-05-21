@@ -327,7 +327,7 @@ Included with this lab is source code that will simulate the connection and tele
 2. Utilizing one of the keys from the values you recorded in #5, we will be generating a connection string to be used within the source code running on the device. We will generate the connection string using command line tooling. Ensure you have Node v.8+ installed, open a command prompt, and execute the following to globally install the key generator utility:
 
     ```
-    npm i -g dps-keygen
+    npm i -g dps-keygen@0.3.3
     ```
 
     ![The command prompt displays the npm dps-keygen installation package result message.](media/global-install-keyutil.png "Global Install of Key Generator Utility")
@@ -567,7 +567,7 @@ The Event Hub we will be creating will act as a collector for data coming into I
 
    ![Searching for the Event Hubs in the Azure Marketplace.](media/search-event-hubs.png "Search Event Hubs")
 
-5. Configure the event hub as follows, and select the **Create** button:
+5. Configure the event hub as follows, select the *Review + create** button, and then **Create**:
 
    | Field          | Value                                 |
    | -------------- | ------------------------------------- |
@@ -608,7 +608,7 @@ The Event Hub we will be creating will act as a collector for data coming into I
 
    ![The dashboard is displayed and the left-hand menu has the Data Export link circled.](media/data-export-menu.png "Data Export Menu")
 
-2. From the _Data Export_ screen, select the **+ New** button from the upper right menu, and select **Azure Event Hubs**.
+2. From the _Data Export_ screen, select the **+ New** button from the top menu, and select **Azure Event Hubs**.
 
    ![The new Data Export options are displayed. The Azure Event Hubs option is circled.](media/ce-eventhubs-menu.png "New Event Hubs export")
 
@@ -703,6 +703,7 @@ We will be using an Azure Function to read incoming telemetry from IoT Hub and s
     | Resource Group | use existing, and _select Fabrikam_Oil_           |
     | Publish       | _select Code_ |
     | Runtime Stack | _select .Net Core_                                       |
+    | Version | _select 3.1_ |
     | Location      | _select the location nearest to you_            |
 
     ![The create Function App blade is displayed. All of the Function App configurations are displayed.  The create button is circled.](media/create-azure-function-app-form.png "Create Azure Function App")
@@ -713,7 +714,7 @@ We will be using an Azure Function to read incoming telemetry from IoT Hub and s
     | ------------- | ----------------------------------------------- |
     | Storage Account | _retain the default value of create new_ |
     | Operating System | Windows |
-    | Plan Type | Consumption                                     |
+    | Plan Type | Consumption (Serverless)                                     |
 
     ![The create Function App blade is displayed. All of the Function App configurations are displayed.  The create button is circled.](media/create-azure-function-app-form2.png "Create Azure Function App")
 
@@ -896,7 +897,7 @@ It is recommended that you never check in secrets, such as connection strings, i
 
 1. In Task 6, we created a local settings file to hold environment variables that are used in our function code. We need to mirror these values in the Azure Function App as well. In the Azure portal, access the **Fabrikam_Oil** resource group, and open the **pumpfunctions** Function Application.
 
-2. In the Overview pane of the Function app, select the **Configuration** option from below the Configured features heading.
+2. Select the **Configuration** option in the left-hand menu.
 
    ![The Azure Function Application Overview window is displayed with the Configuration item highlighted.](media/functionconfigurationsettingsmenu.png "Azure Function Application Overview window")
 
