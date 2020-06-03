@@ -9,7 +9,7 @@ Hands-on lab step-by-step
 </div>
 
 <div class="MCWHeader3">
-December 2019
+May 2020
 </div>
 
 Information in this document, including URL and other Internet Web site references, is subject to change without notice. Unless otherwise noted, the example companies, organizations, products, domain names, e-mail addresses, logos, people, places, and events depicted herein are fictitious, and no association with any real company, organization, product, domain name, e-mail address, logo, person, place or event is intended or should be inferred. Complying with all applicable copyright laws is the responsibility of the user. Without limiting the rights under copyright, no part of this document may be reproduced, stored in or introduced into a retrieval system, or transmitted in any form or by any means (electronic, mechanical, photocopying, recording, or otherwise), or for any purpose, without the express written permission of Microsoft Corporation.
@@ -18,7 +18,7 @@ Microsoft may have patents, patent applications, trademarks, copyrights, or othe
 
 The names of manufacturers, products, or URLs are provided for informational purposes only and Microsoft makes no representations and warranties, either expressed, implied, or statutory, regarding these manufacturers or the use of the products with any Microsoft technologies. The inclusion of a manufacturer or product does not imply endorsement of Microsoft of the manufacturer or product. Links may be provided to third party sites. Such sites are not under the control of Microsoft and Microsoft is not responsible for the contents of any linked site or any link contained in a linked site, or any changes or updates to such sites. Microsoft is not responsible for webcasting or any other form of transmission received from any linked site. Microsoft is providing these links to you only as a convenience, and the inclusion of any link does not imply endorsement of Microsoft of the site or the products contained therein.
 
-© 2019 Microsoft Corporation. All rights reserved.
+© 2020 Microsoft Corporation. All rights reserved.
 
 Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/intellectualproperty/Trademarks/Usage/General.aspx> are trademarks of the Microsoft group of companies. All other trademarks are property of their respective owners.
 
@@ -144,7 +144,7 @@ The telemetry being reported by the Fabrikam rod pumps are as follows, we will b
 
 ### Task 2: Create an IoT Central application
 
-1. Access the (Azure IoT Central)[https://azure.microsoft.com/en-us/services/iot-central/] website.
+1. Access the [Azure IoT Central](https://azure.microsoft.com/en-us/services/iot-central/) website.
 
 2. Select the _Build a solution_ button.
 
@@ -168,9 +168,9 @@ The telemetry being reported by the Fabrikam rod pumps are as follows, we will b
 
     b. *URL* - this will be the URL for your application, it needs to be globally unique.
 
-    c. *Application Template* - select *Legacy application (2018)*.
+    c. *Application Template* - select *Custom application (legacy)*.
 
-    d. *7 day free trial* - select this option to enable the free trial.
+    d. *Pricing plan* - select the *Free* option to enable the free 7-day trial.
 
     e. Fill out your contact information (First Name, Last Name, Email Address, Phone Number, Country/Region).
 
@@ -327,7 +327,7 @@ Included with this lab is source code that will simulate the connection and tele
 2. Utilizing one of the keys from the values you recorded in #5, we will be generating a connection string to be used within the source code running on the device. We will generate the connection string using command line tooling. Ensure you have Node v.8+ installed, open a command prompt, and execute the following to globally install the key generator utility:
 
     ```
-    npm i -g dps-keygen
+    npm i -g dps-keygen@0.3.3
     ```
 
     ![The command prompt displays the npm dps-keygen installation package result message.](media/global-install-keyutil.png "Global Install of Key Generator Utility")
@@ -567,7 +567,7 @@ The Event Hub we will be creating will act as a collector for data coming into I
 
    ![Searching for the Event Hubs in the Azure Marketplace.](media/search-event-hubs.png "Search Event Hubs")
 
-5. Configure the event hub as follows, and select the **Create** button:
+5. Configure the event hub as follows, select the *Review + create** button, and then **Create**:
 
    | Field          | Value                                 |
    | -------------- | ------------------------------------- |
@@ -608,7 +608,7 @@ The Event Hub we will be creating will act as a collector for data coming into I
 
    ![The dashboard is displayed and the left-hand menu has the Data Export link circled.](media/data-export-menu.png "Data Export Menu")
 
-2. From the _Data Export_ screen, select the **+ New** button from the upper right menu, and select **Azure Event Hubs**.
+2. From the _Data Export_ screen, select the **+ New** button from the top menu, and select **Azure Event Hubs**.
 
    ![The new Data Export options are displayed. The Azure Event Hubs option is circled.](media/ce-eventhubs-menu.png "New Event Hubs export")
 
@@ -703,6 +703,7 @@ We will be using an Azure Function to read incoming telemetry from IoT Hub and s
     | Resource Group | use existing, and _select Fabrikam_Oil_           |
     | Publish       | _select Code_ |
     | Runtime Stack | _select .Net Core_                                       |
+    | Version | _select 3.1_ |
     | Location      | _select the location nearest to you_            |
 
     ![The create Function App blade is displayed. All of the Function App configurations are displayed.  The create button is circled.](media/create-azure-function-app-form.png "Create Azure Function App")
@@ -713,7 +714,7 @@ We will be using an Azure Function to read incoming telemetry from IoT Hub and s
     | ------------- | ----------------------------------------------- |
     | Storage Account | _retain the default value of create new_ |
     | Operating System | Windows |
-    | Plan Type | Consumption                                     |
+    | Plan Type | Consumption (Serverless)                                     |
 
     ![The create Function App blade is displayed. All of the Function App configurations are displayed.  The create button is circled.](media/create-azure-function-app-form2.png "Create Azure Function App")
 
@@ -896,7 +897,7 @@ It is recommended that you never check in secrets, such as connection strings, i
 
 1. In Task 6, we created a local settings file to hold environment variables that are used in our function code. We need to mirror these values in the Azure Function App as well. In the Azure portal, access the **Fabrikam_Oil** resource group, and open the **pumpfunctions** Function Application.
 
-2. In the Overview pane of the Function app, select the **Configuration** option from below the Configured features heading.
+2. Select the **Configuration** option in the left-hand menu.
 
    ![The Azure Function Application Overview window is displayed with the Configuration item highlighted.](media/functionconfigurationsettingsmenu.png "Azure Function Application Overview window")
 

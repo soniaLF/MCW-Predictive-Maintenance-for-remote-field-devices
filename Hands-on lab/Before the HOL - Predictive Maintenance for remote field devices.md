@@ -9,7 +9,7 @@ Before the hands-on lab setup guide
 </div>
 
 <div class="MCWHeader3">
-December 2019
+May 2020
 </div>
 
 Information in this document, including URL and other Internet Web site references, is subject to change without notice. Unless otherwise noted, the example companies, organizations, products, domain names, e-mail addresses, logos, people, places, and events depicted herein are fictitious, and no association with any real company, organization, product, domain name, e-mail address, logo, person, place or event is intended or should be inferred. Complying with all applicable copyright laws is the responsibility of the user. Without limiting the rights under copyright, no part of this document may be reproduced, stored in or introduced into a retrieval system, or transmitted in any form or by any means (electronic, mechanical, photocopying, recording, or otherwise), or for any purpose, without the express written permission of Microsoft Corporation.
@@ -18,7 +18,7 @@ Microsoft may have patents, patent applications, trademarks, copyrights, or othe
 
 The names of manufacturers, products, or URLs are provided for informational purposes only and Microsoft makes no representations and warranties, either expressed, implied, or statutory, regarding these manufacturers or the use of the products with any Microsoft technologies. The inclusion of a manufacturer or product does not imply endorsement of Microsoft of the manufacturer or product. Links may be provided to third party sites. Such sites are not under the control of Microsoft and Microsoft is not responsible for the contents of any linked site or any link contained in a linked site, or any changes or updates to such sites. Microsoft is not responsible for webcasting or any other form of transmission received from any linked site. Microsoft is providing these links to you only as a convenience, and the inclusion of any link does not imply endorsement of Microsoft of the site or the products contained therein.
 
-© 2019 Microsoft Corporation. All rights reserved.
+© 2020 Microsoft Corporation. All rights reserved.
 
 Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/intellectualproperty/Trademarks/Usage/General.aspx> are trademarks of the Microsoft group of companies. All other trademarks are property of their respective owners.
 
@@ -101,11 +101,10 @@ Azure Databricks is used to train and deploy a machine learning model that predi
    | Resource Group                 | _select use existing, then `Fabrikam_Oil`_ |
    | Location                       | _select the location nearest to you_       |
    | Pricing tier                   | _select Standard_                          |
-   | Deploy in your Virtual Network | _select No_                                |
 
    ![The form fields are completed with the previously described settings.](media/azure-create-databricks.png 'Azure Databricks Service')
 
-5. Select **Create**.
+5. Select **Review + Create**. On the review screen, select **Create**.
 
 ### Task 3: Create Azure Databricks cluster
 
@@ -126,7 +125,7 @@ Azure Databricks is used to train and deploy a machine learning model that predi
    | Cluster name               | _enter `lab`_                                                                                |
    | Cluster Mode               | _select `Standard`_                                                                          |
    | Pool                       | _select `None`_                                                                              |
-   | Databricks Runtime Version | _select `Runtime 6.2 (Scala 2.11, Spark 2.4.4)`_                                         |
+   | Databricks Runtime Version | _select `Runtime 6.4 (Scala 2.11, Spark 2.4.5)`_                                         |
    | Autopilot Options          | _uncheck `Enable autoscaling` and check `Terminate after...`, with a value of `120` minutes_ |
    | Worker Type                | _select `Standard_DS3_v2`_                                                                   |
    | Driver Type                | _select `Same as worker`_                                                                    |
@@ -174,7 +173,7 @@ In this task, you will import the Databricks notebooks into your workspace.
 
    ![The form fields are completed with the previously described settings.](media/azure-create-aml.png 'Machine Learning service workspace')
 
-5. Select **Create**.
+5. Select **Review + Create**. On the review screen, select **Create**.
 
 ### Task 6: Download the lab files
 
