@@ -144,7 +144,7 @@ The telemetry being reported by the Fabrikam rod pumps are as follows, we will b
 
 ### Task 2: Create an IoT Central application
 
-1. Access the (Azure IoT Central)[https://azure.microsoft.com/en-us/services/iot-central/] website.
+1. Access the [Azure IoT Central](https://azure.microsoft.com/en-us/services/iot-central/) website.
 
 2. Select the _Build a solution_ button.
 
