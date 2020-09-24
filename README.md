@@ -1,6 +1,3 @@
-### Let us know how we’re doing!  
-Please take a moment to fill out the [Microsoft Cloud Workshop Survey]( https://forms.office.com/Pages/DesignPage.aspx#FormId=v4j5cvGGr0GRqy180BHbRyEtIpX7sDdChuWsXhzKJXJUNjFBVkROWDhSSVdYT0dSRkY4UVFCVzZBVy4u&Token=d8027e9aa480420fa80d97e143eee1ed) and help us improve our offerings.
-
 # Predictive Maintenance for remote field devices
 
 Fabrikam, Inc. creates innovated IoT solutions for the oil and gas manufacturing industry. It is beginning work on a new, predictive maintenance solution that targets rod pumps (the iconic pivoting pumps that dot oil fields around the world). With their solution in place, companies will be able to monitor and configure pump settings and operations remotely, and only send personnel onsite when necessary for repair or maintenance when the solution indicates that something has gone wrong. However, Fabrikam wants to go beyond reactive alerting- they want to want to enable the solution with the ability to _predict_ problems so they can be averted before a fault occurs and damage is done.
