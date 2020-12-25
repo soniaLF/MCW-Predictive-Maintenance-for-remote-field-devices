@@ -49,6 +49,7 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
 5. [Azure Functions Core Tools version 2.x (using NPM or Chocolatey - see readme on GitHub repository)](https://github.com/Azure/azure-functions-core-tools)
 6. [Azure Functions Visual Studio Code Extension](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurefunctions)
 7. An Azure Databricks cluster running Databricks Runtime 5.1 or above.
+8. [Node.js 8.0 or above.](https://nodejs.org)
 
 ## Before the hands-on lab
 
@@ -125,7 +126,7 @@ Azure Databricks is used to train and deploy a machine learning model that predi
    | Cluster name               | _enter `lab`_                                                                                |
    | Cluster Mode               | _select `Standard`_                                                                          |
    | Pool                       | _select `None`_                                                                              |
-   | Databricks Runtime Version | _select `Runtime 6.4 (Scala 2.11, Spark 2.4.5)`_                                         |
+   | Databricks Runtime Version | _select `Runtime: 6.4 (Scala 2.11, Spark 2.4.5)`_                                         |
    | Autopilot Options          | _uncheck `Enable autoscaling` and check `Terminate after...`, with a value of `120` minutes_ |
    | Worker Type                | _select `Standard_DS3_v2`_                                                                   |
    | Driver Type                | _select `Same as worker`_                                                                    |
@@ -139,15 +140,19 @@ Azure Databricks is used to train and deploy a machine learning model that predi
 
 In this task, you will import the Databricks notebooks into your workspace.
 
-1. Within your Azure Databricks service, select **Workspace**, select **Users**, select the dropdown to the right of your username, then select **Import**.
+1. In a new browser tab, navigate to: `https://github.com/microsoft/MCW-Predictive-Maintenance-for-Remote-Field-Devices/blob/master/Hands-on%20lab/Resources/Notebooks/Anomaly-Detection.dbc`, then select the **Download** button to save this file locally.
+
+   ![A GitHub screen is shown with the Download button highlighted.](media/databricks-notebook-collection-download.png "Download file from GitHub")
+
+2. Within your Azure Databricks service, select **Workspace**, select **Users**, select the dropdown to the right of your username, then select **Import**.
 
    ![The Import link is highlighted in the Workspace.](media/databricks-import-link.png 'Workspace')
 
-2. Select **URL** next to **Import from**, paste the following into the text box: `https://github.com/microsoft/MCW-Predictive-Maintenance-for-Remote-Field-Devices/blob/master/Hands-on%20lab/Resources/Notebooks/Anomaly-Detection.dbc`, then select **Import**.
+3. Keep **File** selected next to **Import from**, select or drag and drop the file you just downloaded, then select **Import**.
 
-   ![The URL has been entered in the import form.](media/databricks-import.png 'Import Notebooks')
+   ![The file import form is displayed with the Anomaly-detection.dbc file selected.](media/databricks-import.png 'Import Notebooks')
 
-3. After importing, select your username. You will see a new folder named `Anomaly Detection`, which contains two notebooks.
+4. After importing, select your username. You will see a new folder named `Anomaly Detection`, which contains two notebooks.
 
    ![The imported notebooks are displayed.](media/databricks-notebooks.png 'Imported notebooks')
 
@@ -165,11 +170,14 @@ In this task, you will import the Databricks notebooks into your workspace.
 
    | Field          | Value                                      |
    | -------------- | ------------------------------------------ |
-   | Workspace name | _globally unique name_                     |
    | Subscription   | _select the appropriate subscription_      |
-   | Resource Group | _select use existing, then `Fabrikam_Oil`_ |
-   | Location       | _select the location nearest to you_       |
-   | Workspace edition | _select Basic_ |
+   | Resource Group | _select `Fabrikam_Oil`_ |
+   | Workspace name | _globally unique name_                     |
+   | Region         | _select the region nearest to you_         |
+   | Storage account | _keep the default_ |
+   | Key vault       | _keep the default_ |
+   | Application insights | _keep the default_ |
+   | Container registry | _None_ |
 
    ![The form fields are completed with the previously described settings.](media/azure-create-aml.png 'Machine Learning service workspace')
 
@@ -181,7 +189,7 @@ Download the lab artifacts from GitHub.
 
 1. In a web browser, navigate to the [Predictive Maintenance for remote field devices GitHub repo](https://github.com/microsoft/MCW-Predictive-Maintenance-for-remote-field-devices).
 
-2. On the repo page, select **Clone or download**, then select **Download ZIP**.
+2. On the repo page, expand the **Code**, then select **Download ZIP**.
 
    ![Download .zip containing the repository](media/github-download-repo.png 'Download ZIP')
 
