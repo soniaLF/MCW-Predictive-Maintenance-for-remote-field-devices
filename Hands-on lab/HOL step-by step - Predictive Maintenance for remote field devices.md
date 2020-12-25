@@ -44,13 +44,13 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
     - [Task 3: Run the application](#task-3-run-the-application)
     - [Task 4: Interpret telemetry data](#task-4-interpret-telemetry-data)
     - [Task 5: Restart a failing pump remotely](#task-5-restart-a-failing-pump-remotely)
-  - [Exercise 3: Creating a device set](#exercise-3-creating-a-device-set)
-    - [Task 1: Create a device set using a filter](#task-1-create-a-device-set-using-a-filter)
+  - [Exercise 3: Creating a device group](#exercise-3-creating-a-device-group)
+    - [Task 1: Create a device group using a filter](#task-1-create-a-device-group-using-a-filter)
   - [Exercise 4: Creating a useful dashboard](#exercise-4-creating-a-useful-dashboard)
     - [Task 1: Clearing out the default dashboard](#task-1-clearing-out-the-default-dashboard)
     - [Task 2: Add your company logo](#task-2-add-your-company-logo)
     - [Task 3: Add a list of Texas Rod Pumps](#task-3-add-a-list-of-texas-rod-pumps)
-    - [Task 4: Add a map displaying the power state of DEVICE001](#task-4-add-a-map-displaying-the-power-state-of-device001)
+    - [Task 4: Add a map displaying the locations of the Texas Rod Pumps](#task-4-add-a-map-displaying-the-locations-of-the-texas-rod-pumps)
   - [Exercise 5: Create an Event Hub and continuously export data from IoT Central](#exercise-5-create-an-event-hub-and-continuously-export-data-from-iot-central)
     - [Task 1: Create an Event Hub](#task-1-create-an-event-hub)
     - [Task 2: Configure continuous data export from IoT Central](#task-2-configure-continuous-data-export-from-iot-central)
@@ -342,17 +342,13 @@ DEVICE001 is the rod pump that will gradually fail. Upon running the simulator f
 
 1. In IoT Central, select the _Devices_ menu item, then select the link for _Rod Pump - DEVICE001_ in the Devices list.
 
-2. Ensure the _Measurements_ tab is selected, then you can toggle off all telemetry values except for Motor Power so the chart will be focused solely on this telemetry property.
-
-    ![Motor power telemetry graphing options are displayed. The graph shows a line with a drop off.](media/device001-focus-telemetry-chart.png "Focus Telemetry Chart to Motor Power")
-
-3. Observe how the Motor Power usage of DEVICE001 gradually degrades.  **Note**: You may not yet see the degradation at this stage. The motor power will gradually decrease after running for several minutes.
+2. Ensure the _Dashboard_ tab is selected and observe how the Motor Power usage of DEVICE001 gradually degrades.  **Note**: You may not yet see the degradation at this stage. The motor power will gradually decrease after running for several minutes.
 
     ![The average Motor Power measurements are displayed in a graph. The graph shows Motor Power usage degradation.](media/device001-gradual-failure-power.png "Motor Power usage degradation")
 
-4. Repeat 1-3 and observe that DEVICE002, the non-failing pump, remains above the 30 kW threshold. DEVICE003 is also a failing pump but displays an immediate failure versus a gradual one.
+3. Repeat 1-3 and observe that DEVICE002, the non-failing pump, remains above the 30 kW threshold. DEVICE003 is also a failing pump but displays an immediate failure versus a gradual one.
 
-    ![Low motor measurements are being displayed in a graph. Power measurements show steady.](media/device002-normal-operation.png "DEVICE002 Motor Power Rules Chart")
+    ![Regular range motor power is displayed in a graph. Power measurements show steady.](media/device002-normal-operation.png "DEVICE002 Motor Power Chart")
 
     ![Low motor measurements are being displayed in a graph. There is a steep power drop off around 3:52 PM.](media/device003-immediate-failure.png "DEVICE003 Immediate Failure")
 
@@ -360,80 +356,48 @@ DEVICE001 is the rod pump that will gradually fail. Upon running the simulator f
 
 After observing the failure of two of the rod pumps, you are able cycle the power state of the pump remotely. The simulator is setup to receive the Toggle Motor Power command from IoT Central and will update the state accordingly and start/stop sending telemetry to the cloud.
 
-1. In IoT Central, select _Devices_ from the left-hand menu, then select _Rod Pump - DEVICE001_ from the device list. Observe that even though the pump has in all purposes failed, that there is still power to the motor - indicated by the Power State bar at the bottom of the device's Measurements chart.
+1. In IoT Central, select _Devices_ from the left-hand menu, then select _Rod Pump - DEVICE001_ from the device list. Observe that even though the pump has in all purposes failed, that there is still power to the motor. In order to recover DEVICE001, select the _Command_ tab. You will see the _Toggle Motor Power_ command with a Toggle (checkbox) parameter. Ensure the _Toggle_ parameter is unchecked, then select the _Run_ button on the command to turn the pump motor off.
 
-    ![A graph of device telemetry measurements is displayed. The Motor Power measurement is highlighted. DEVICE001 Power State is in a failure.](media/device001-powerstate-in-failure.png "DEVICE001 Power State in Failure")
+    ![Device Toggle Motor Power command options are displayed. The Run button is highlighted.](media/device001-run-toggle-command.png "DEVICE001 Run Toggle Motor Power Command")
 
-2. In order to recover DEVICE001, select the _Commands_ tab. You will see the _Toggle Motor Power_ command. Select the _Run_ button on the command to turn the pump motor off.
-
-    ![Device command options are displayed.  The Run command is circled.](media/device001-run-toggle-command.png "DEVICE001 Run Toggle Motor Power Command")
-
-3. The simulator will also indicate that the command has been received from the cloud. Note in the output of the simulator, that DEVICE001 is no longer sending telemetry due to the pump motor being off.
+2. The simulator will also indicate that the command has been received from the cloud. Note in the output of the simulator, that DEVICE001 is no longer sending telemetry due to the pump motor being off.
 
     ![Command prompt displays several messages. Simulator showing DEVICE001 received the cloud message. Device power cycle is displayed.](media/device001-simulator-power-off.png "Simulator showing DEVICE001 received the cloud message")
 
-4. After a few moments, return to the _Measurements_ tab of _DEVICE001_ in IoT Central. Note the receipt of telemetry has stopped, and the state indicates the motor power state is off.
+3. After a few moments, return to the _Dashboard_ tab of _DEVICE001_ in IoT Central. Note the receipt of telemetry has stopped, and the state indicates the motor power state is off.
 
     ![Device DEVICE001 is in a Power State Off with no telemetry coming in.](media/device001-stopped-telemetry-power-state-off.png "Rod Pump DEVICE001 Measurements")
 
-5. Return to the _Commands_ tab and toggle the motor power back on again by pressing the _Run_ button once more. On the measurements tab, you will see the Power State switch back to online, and telemetry to start flowing again. Due to the restart of the rod pump - it has now recovered and telemetry is back into normal ranges!
+4. Return to the _Commands_ tab and toggle the motor power back on again by checking the _Toggle_ checkbox and pressing the _Run_ button once more. On the _Dashboard_ tab, you will see the Power State switch back to online, and telemetry to start flowing again. Due to the restart of the rod pump - it has now recovered and telemetry is back into normal ranges!
 
     ![A graph of device telemetry measurements is displayed. DEVICE001 recovered after Pump Power State has been cycled.](media/device001-recovered-1.png "Instance of pump recovery")
 
-    ![Another graph of device telemetry measurements is displayed. DEVICE001 recovered after Pump Power State has been cycled.](media/device001-recovery-2.png "Another Instance of Pump Recovery")
-
-## Exercise 3: Creating a device set
+## Exercise 3: Creating a device group
 
 Duration: 10 minutes
 
-Device sets allow you to create logical groupings of IoT Devices in the field by the properties that defined them. In this case, we will want to create a device set that contains only the rod pumps located in the state of Texas (this will exclude the simulated Rod Pump).
+Device groups allow you to create logical groupings of IoT Devices in the field by the properties that defined them. In this case, we will want to create a device set that contains only the rod pumps located in the state of Texas.
 
-### Task 1: Create a device set using a filter
+### Task 1: Create a device group using a filter
 
-1. In the left-hand menu, select the _Device sets_ menu item. You will see a single default device set in the list. Select the _+ New_ button in the upper right-hand side of the listing.
+1. In the left-hand menu, select the _Device groups_ menu item. You will see a single default device group in the list (_Rod Pump - All devices_). Select the _+ New_ button in toolbar.
 
-    ![A screen displays the current device sets.  There is a add new button circled.](media/device-set-list.png "Device set listing")
+    ![A screen displays the current device groups. The + New button is highlighted.](media/device-set-list.png "Device group listing")
 
-2. In the field, all Texas pumps are located in the *192.168.1.* subnet, so we will create a filter to include only those pumps in this device set. Create the Device set with a condition as follows:
+2. In the field, all Texas pumps are located in the *192.168.1.* subnet, so we will create a filter to include only those pumps in this device group. Create the Device group with the filter as described in the following table. Feel free to _Run query_ to see the devices included, then select _Save_ from the toolbar:
 
-    ![The screen shows the device set creation options.  There is a list of devices and their settings displayed on the right.](media/new-device-set.png "New device set")
+    ![The screen shows the device group creation options. There is a list of devices and their settings displayed in a results table.](media/new-device-set.png "New device group")
 
     | Field               | Value                      |
     | ------------------- | -------------------------- |
-    | Device Set Name     | Texas Rod Pumps            |
-    | Description         | Rod pumps located in Texas |
-    | Device Template     | Rod Pump (1.0.0)           |
-    | Condition: Property | IP Address                 |
-    | Condition: Operator | contains                   |
-    | Condition: Value    | 192.168.1.                 |
+    | Device Group Name (in header) | Texas Rod Pumps            |
+    | Description (in header)       | Rod pumps located in Texas |
+    | Scope Device Template     | Rod Pump           |
+    | Filter: Property | IP Address                 |
+    | Filter: Operator | contains                   |
+    | Filter: Value    | 192.168.1.                 |
 
-3. Note how the device list for this device set is automatically filtered to include only the real devices based on their IP Address. You are now able to act upon this group of devices as a single unit in IoT Central.
-
-    ![The screen shows the device set configuration values.  There is a list of devices and their settings displayed on the right.](media/texas-rod-pump-devices.png "Texas Rod Pumps")
-
-4. Similar to devices, you are also able to create a dashboard specific to this Device Set. Select the _Dashboard_ tab from the top menu, then select the _Edit_ button on the right-hand side of the screen.
-
-    ![The edit device menu is presented. The dashboard item is circled.](media/device-set-dashboard-edit.png "Device Set Dashboard Edit")
-
-5. In this case, we will add a map that will show the location and current power state of each rod pump in the device set. From the _Library_ menu, select _Map_.
-
-    ![The editing dashboard options are displayed.  The map menu item is circled.](media/device-set-add-map.png "Device Set Dashboard Add Map")
-
-6. Configure the map as follows, and select _Save_:
-
-    | Field             | Value                       |
-    | ----------------- | --------------------------- |
-    | Title             | Texas Rod Pumps |
-    | Location          | Pump Location           |
-    | State Measurement | Power State                 |
-
-    ![The device configurations are displayed. The save button is circled.](media/device-set-configure-map.png "Device set configure map")
-
-7. End Dashboard editing by selecting the _Done_ button on upper-right corner of the dashboard editor.
-
-    ![A map of the Texas rod pumps is displayed. The done button is circled in the upper right-hand corner.](media/device-set-dashboard-done.png "Device set dashboard complete editing")
-
-8. Observe how the device set now has a map displaying markers for each device in the set. Feel free to adjust to zoom to better infer their location.
+3. Once the Device group is saved, you are able to act upon this group of devices as a single unit within IoT Central.
 
 ## Exercise 4: Creating a useful dashboard
 
@@ -447,17 +411,17 @@ One of the main features of IoT Central is the ability to visualize the health o
 
     ![The dashboard editing options are presented to the user.](media/dashboard-edit-button.png "Edit Dashboard")
 
-2. Select the _X_ on each tile that you do not wish to see on the dashboard to remove them. The _X_ will display when you hover over the tile.
+2. Expand the ellipsis menu on each tile that you do not wish to see on the dashboard and select _Delete_ to remove them. Some tiles are deleted by selecting the _X_ button on the tile.
 
-    ![The create device template card is displayed. The close button in the upper right-hand corner is selected.](media/delete-dashboard-card.png "Delete Dashboard Tile")
+    ![The ellipsis menu on a tile is expanded with the Delete menu item selected.](media/delete-dashboard-card.png "Delete Dashboard Tile")
 
 ### Task 2: Add your company logo
 
-1. Remaining in the edit mode of the dashboard, select _Image_ from the _Library_ menu.
+1. Remaining in the edit mode of the dashboard, select _Image_ from the _Custom tiles_ section of the menu. Select _Add tile_.
 
-    ![The Library menu items are displayed. The Image menu item is circled.](media/dashboard-library-image.png "Dashboard library Image")
+    ![The Custom tiles items are displayed. The Image item is checked.](media/dashboard-library-image.png "Custom tiles")
 
-2. Configure the logo with the following file _C:\MCW-Predictive-Maintenance-for-remote-field-devices-master\Hands-on lab\media\fabrikam-logo.png_.
+2. Once the tile is added to the design surface. Expand the ellipsis menu on the tile, and select _Configure_. Configure the logo with the following file _C:\MCW-Predictive-Maintenance-for-remote-field-devices-master\Hands-on lab\media\fabrikam-logo.png_. Select the _Update_ button once complete.
 
     ![The company logo configuration options are displayed.](media/configure-dashboard-logo.png "Configure Logo Image")
 
@@ -467,47 +431,35 @@ One of the main features of IoT Central is the ability to visualize the health o
 
 ### Task 3: Add a list of Texas Rod Pumps
 
-In the previous exercise, we created a device set that contains the devices located in Texas. We will leverage this device set to display this filtered information.
+In the previous exercise, we created a device group that contains the devices located in Texas. We will leverage this device set to display this filtered information.
 
-1. Remaining in the edit dashboard mode, select _Device Set Grid_ from the _Library_ menu.
+1. Remaining in the edit dashboard mode, select _Texas Rod Pumps_ from the _Device group_ dropdown, then select each of the devices in the _Devices_ list.
 
-2. Configure the device list by selecting the _Texas Rod Pumps_ Device Set and assigning it the title of _Texas Rod Pumps_.
+2. In the _Property_ section, select the _Serial Number_, and _IP Address_ properties. Add properties by selecting the _+ Property_ button. Once complete, select the _Add tile_ button.
 
-3. Add columns by selecting the _Add/Remove_, we will add _Device ID_ and _IP Address_.
-
-4. Select the _Save_ button to add the tile to the dashboard.
-
-    ![The panel for device list configuration is displayed.](media/device-list-configure1.png "Configure list")
+    ![The blade for adding the list tile is displayed.](media/device-list-configure1.png "Configure list tile")
 
     ![The dashboard shows company logo and the device IDs and IP addresses.](media/dashboard-inprogress-1.png "Dashboard in progress")
 
-### Task 4: Add a map displaying the power state of DEVICE001
+### Task 4: Add a map displaying the locations of the Texas Rod Pumps
 
-It is beneficial to see the location and power state of certain critical Texas rod pumps. We will add a map that will display the location and current power state of DEVICE001.
+It is beneficial to see the location of certain critical Texas rod pumps. We will add a map that will display the location of each of the Texas Rod Pump devices.
 
-1. Select _Map_ from the _Library_ menu, configure the map as follows, and select _Save_:
-
-    | Field             | Value                       |
-    | ----------------- | --------------------------- |
-    | Device Template   | Rod Pump (1.0.0)            |
-    | Device Instance   | Rod Pump - DEVICE001        |
-    | Title             | Rod Pump - DEVICE001 Status |
-    | Location          | Rod Pump Location           |
-    | State Measurement | Power State                 |
-
-    ![The map configurations are displayed.](media/dashboard-configure-map.png "Configure Map")
+1. Return to the _Edit_ view of the Dashboard. As in the previous task, select the _Texas Rod Pumps_ and all the devices in the _Devices_ list. In the _Property_ drop down, select _Pump Location_.Select _Add tile_, then select _Save_ from the Dashboard toolbar menu.
 
     ![The Rod Pump location is displayed in a map. A list of devices and their IP addresses are listed on the right-hand side.](media/completed-dashboard.png "Completed Dashboard")
 
-2. Select the _Done_ button in the upper right corner of the Dashboard to finish editing.
+2. Observe how the device group now has a map displaying markers for each device in the set. Feel free to adjust to zoom to better infer their location.
 
-    ![The Rod Pump location is displayed in a map. A list of devices and their IP addresses are listed on the right-hand side. The done button is circled.](media/done-dashboard-editing.png "Done dashboard editing")
+3. Return to the edit view of the Dashboard and experiment adding additional visualizations relative to the Texas Rod Pump device group. For instance, add a tile that shows the Motor Power data for all of the devices in a single chart.
+
+    ![A Motor Power (kW) tile has been added to the dashboard showing the current values for every device in the Texas Rod Pump device group.](media/dashboard-experiment.png "Completed Dashboard with Telemetry chart")
 
 ## Exercise 5: Create an Event Hub and continuously export data from IoT Central
 
 Duration: 15 minutes
 
-IoT Central provides a great first stepping stone into a larger IoT solution. Earlier in this lab, we responded to a crossed threshold by initiating an email sent to Fabrikam field workers through Flow directly from IoT Central. While this approach certainly does add value, a more mature IoT solution typically involves a machine learning model that will process incoming telemetry to logically determine if a failure of a pump is imminent. The first step into this implementation is to create an Event Hub to act as a destination for IoT Centrals continuously exported data.
+IoT Central provides a great first stepping stone into a larger IoT solution. A more mature IoT solution typically involves a machine learning model that will process incoming telemetry to logically determine if a failure of a pump is imminent. The first step into this implementation is to create an Event Hub to act as a destination for IoT Central's continuously exported data.
 
 ### Task 1: Create an Event Hub
 
