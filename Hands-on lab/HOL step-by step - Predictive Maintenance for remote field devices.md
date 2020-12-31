@@ -465,17 +465,13 @@ IoT Central provides a great first stepping stone into a larger IoT solution. A 
 
 The Event Hub we will be creating will act as a collector for data coming into IoT Central. The receipt of a message into this hub will ultimately serve as a trigger to send data into a machine learning model to determine if a pump is in a failing state. We will also create a Consumer Group on the event hub to serve as an input to an Azure Function that will be created later on in this lab.
 
-1. Log into the [Azure Portal](https://portal.azure.com).
+1. Log into the [Azure Portal](https://portal.azure.com), and open your **Fabrikam_Oil** resource group.
 
-2. In the left-hand menu, select **Resource Groups**.
-
-3. Open your **Fabrikam_Oil** resource group.
-
-4. On the top of the screen, select the **Add** button. When the marketplace screen displays, search for and select **Event Hubs**. This will allow you to create a new Event Hub Namespace resource.
+2. On the top of the screen, select the **Add** button. When the marketplace screen displays, search for and select **Event Hubs**. This will allow you to create a new Event Hub Namespace resource. Select the _Create_ button on the resource overview screen.
 
    ![Searching for the Event Hubs in the Azure Marketplace.](media/search-event-hubs.png "Search Event Hubs")
 
-5. Configure the event hub as follows, select the *Review + create** button, and then **Create**:
+3. Configure the event hub as follows, select the *Review + create** button, and then **Create**:
 
    | Field          | Value                                 |
    | -------------- | ------------------------------------- |
@@ -487,11 +483,11 @@ The Event Hub we will be creating will act as a collector for data coming into I
 
    ![The creating event hub namespace options are displayed.](media/create-eventhub-namespace-form.png "Configure Event Hub Namespace")
 
-6. Once the Event Hubs namespace has been created, open it and select the **+ Event Hub** button at the top of the screen.
+4. Once the Event Hubs namespace has been created, open it and select the **+ Event Hub** button at the top of the screen.
 
    ![The Event Hub namespace screen is displayed. The create event hub button is circled.](media/add-eventhub-menu.png "Add new Event Hub")
 
-7. In the Create Event Hub form, configure the hub as follows and select the **Create** button:
+5. In the Create Event Hub form, configure the hub as follows and select the **Create** button:
 
    | Field        | Value            |
    | ------------ | ---------------- |
@@ -502,41 +498,38 @@ The Event Hub we will be creating will act as a collector for data coming into I
 
    ![The event hub creation screen is displaying the configuration options.  The create button is circled.](media/create-eventhub-form.png "Configure Event Hub")
 
-8. Once the Event Hub has been created, open it by selecting _Event Hubs_ in the left-hand menu, and selecting the hub from the list.
+6. Once the Event Hub has been created, open it by selecting _Event Hubs_ in the left-hand menu, and selecting the hub from the list.
 
-   ![The event hubs are listed. IOT central feed is shown and circled.](media/event-hub-listing.png "Event Hub Listing")
+   ![The event hubs are listed. iot-central-feed is highlighted.](media/event-hub-listing.png "Event Hub Listing")
 
-9. From the top menu, select the **+ Consumer Group** button to create a new consumer group for the hub. Name the consumer group _ingressprocessing_ and select the **Create** button.
+7. From the top menu, select the **+ Consumer Group** button to create a new consumer group for the hub. Name the consumer group _ingressprocessing_ and select the **Create** button.
 
    ![The event hub screen shows the ability to create a consumer group. The name is entered and the create button is circled.](media/create-consumer-group-form.png "Create Consumer Group")
 
 ### Task 2: Configure continuous data export from IoT Central
 
-1. Return to the IoT Central application, from the left-hand menu, select **Data Export**.
+1. Return to the IoT Central application, from the left-hand menu, select **Data export**. Then select the **+ New** button from the toolbar menu.
 
-   ![The dashboard is displayed and the left-hand menu has the Data Export link circled.](media/data-export-menu.png "Data Export Menu")
+   ![On the left-hand menu has the Data Export link highlighted along with the + New export button on the toolbar.](media/data-export-menu.png "Data Export Menu")
 
-2. From the _Data Export_ screen, select the **+ New** button from the top menu, and select **Azure Event Hubs**.
-
-   ![The new Data Export options are displayed. The Azure Event Hubs option is circled.](media/ce-eventhubs-menu.png "New Event Hubs export")
-
-3. IoT Central will automatically retrieve Event Hubs namespaces and Event Hubs from the connected Azure Account. Configure the data export as follows and select the **Save** button:
+2. Begin configuring the data export with the following values:
 
    | Field                | Value                                            |
    | -------------------- | ------------------------------------------------ |
-   | Display Name         | Event Hub Feed                                   |
-   | Enabled              | On                                               |
-   | Event Hubs Namespace | _select the namespace you created in Exercise 6_ |
-   | Event Hub            | iot-central-feed                                 |
-   | Measurements         | On                                               |
-   | Devices              | Off                                              |
-   | Device Templates     | Off                                              |
+   | Display Name  (Header)        | Event Hub Feed                                   |
+   | Enabled (Header)              | On                                               |
+   | Type of data to export | Telemetry |
+  
+3. In the _Destinations_ section, select the _create a new one_ link. Configure the new destination as follows, then select the _Create_ button:
 
-   ![The data export configuration fields are displayed.  The save button is circled.](media/create-data-export-form.png "Configure Data Export")
+    | Field                | Value                                            |
+    | -------------------- | ------------------------------------------------ |
+    | Destination name     | iot-central-event-hub-feed                                   |
+    | Destination type              | Azure Event Hubs                                               |
+    | Connection string | see subsection below on how to get the connection string |
+    | Event Hub | iot-central-feed |
 
-   > **Note**: If you cannot browse your subscription for the Event Hubs namespace due to using a trial app instead of pay-as-you-go, perform the following steps:
-
-   ![The error stating the user is unable to browse Event Hubs is highlighted.](media/iot-central-cannot-browse-event-hubs.png "Cannot browse event hubs")
+   Obtain the connection string as follows:
 
    1. Navigate to your Event Hubs namespace in the Azure portal.
 
@@ -546,13 +539,15 @@ The Event Hub we will be creating will act as a collector for data coming into I
 
    3. Return to IoT Central and paste the connection string into the **Connection string** field, then select the `iot-central-feed` event hub you created.
 
-        ![The data export configuration form is updated with the manual connection string for Event Hubs.](media/create-data-export-form-connection-string.png "Connection string added")
+   ![The Create destination modal is shown populated.](media/create-data-export-destination.png "Create destination modal")
 
-4. The Event Hub Feed export will be created, and then started (it may take a few minutes for the export to start)
+   ![The data export configuration fields are displayed.](media/create-data-export-form.png "Configure Data Export")
 
-   ![The Data Export screen displays the status of Event Hub creation. The status of starting is displayed.](media/ce-eventhubfeed-starting.png "Event Hub Export Starting")
+4. Select the _Save_ button from the toolbar menu on the _Event Hub Feed_ continuous export screen.
 
-   ![The Data Export screen displays the status of Event Hub creation. The status of running is displayed.](media/ce-eventhubfeed-running.png "Event Hub Export Running")
+5. The Event Hub Feed export will be created, and then started (it may take a few minutes for the export to start). Return to the Data export list to see the current status of the feed.
+
+   ![The Data Export screen displays the status of Event Hub creation. The status of healthy is displayed.](media/ce-eventhubfeed-running.png "Event Hub Feed is Healthy")
 
 ## Exercise 6: Use Azure Databricks and Azure Machine Learning service to train and deploy predictive model
 
