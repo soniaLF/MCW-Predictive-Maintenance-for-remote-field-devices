@@ -29,12 +29,12 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
 - [Predictive Maintenance for remote field devices before the hands-on lab setup guide](#predictive-maintenance-for-remote-field-devices-before-the-hands-on-lab-setup-guide)
   - [Requirements](#requirements)
   - [Before the hands-on lab](#before-the-hands-on-lab)
-    - [Task 1: Provision a resource group](#task-1-provision-a-resource-group)
-    - [Task 2: Create an Azure Databricks service](#task-2-create-an-azure-databricks-service)
-    - [Task 3: Create Azure Databricks cluster](#task-3-create-azure-databricks-cluster)
-    - [Task 4: Import lab notebook into Azure Databricks](#task-4-import-lab-notebook-into-azure-databricks)
-    - [Task 5: Create Azure Machine Learning service workspace](#task-5-create-azure-machine-learning-service-workspace)
-    - [Task 6: Download the lab files](#task-6-download-the-lab-files)
+    - [Task 1: Download the lab files](#task-1-download-the-lab-files)
+    - [Task 2: Provision a resource group](#task-2-provision-a-resource-group)
+    - [Task 3: Create an Azure Databricks service](#task-3-create-an-azure-databricks-service)
+    - [Task 4: Create Azure Databricks cluster](#task-4-create-azure-databricks-cluster)
+    - [Task 5: Import lab notebook into Azure Databricks](#task-5-import-lab-notebook-into-azure-databricks)
+    - [Task 6: Create Azure Machine Learning service workspace](#task-6-create-azure-machine-learning-service-workspace)
 
 <!-- /TOC -->
 
@@ -59,7 +59,19 @@ In the Before the hands-on lab exercise, you will set up your environment for us
 
 > **Important**: Most Azure resources require unique names. Throughout this lab you will see the word “SUFFIX” as part of resource names. You should replace this with your Microsoft alias, initials, or another value to ensure the resource is uniquely named.
 
-### Task 1: Provision a resource group
+### Task 1: Download the lab files
+
+Download the lab artifacts from GitHub.
+
+1. In a web browser, navigate to the [Predictive Maintenance for remote field devices GitHub repo](https://github.com/microsoft/MCW-Predictive-Maintenance-for-remote-field-devices).
+
+2. On the repo page, expand the **Code**, then select **Download ZIP**.
+
+   ![Download .zip containing the repository](media/github-download-repo.png 'Download ZIP')
+
+3. Unzip the contents to your root hard drive (i.e. `C:\`). This will create a folder on your root drive named `MCW-Predictive-Maintenance-for-remote-field-devices-master`.
+
+### Task 2: Provision a resource group
 
 In this task, you will create an Azure resource group for the resources used throughout this lab.
 
@@ -81,7 +93,7 @@ In this task, you will create an Azure resource group for the resources used thr
 
 6. On the Summary blade, select **Create** to provision your resource group.
 
-### Task 2: Create an Azure Databricks service
+### Task 3: Create an Azure Databricks service
 
 Azure Databricks is used to train and deploy a machine learning model that predicts an oil pump failure, based on incoming telemetry.
 
@@ -107,7 +119,7 @@ Azure Databricks is used to train and deploy a machine learning model that predi
 
 5. Select **Review + Create**. On the review screen, select **Create**.
 
-### Task 3: Create Azure Databricks cluster
+### Task 4: Create Azure Databricks cluster
 
 1. In the [Azure portal](https://portal.azure.com), open your Azure Databricks service you created in the previous task.
 
@@ -136,27 +148,23 @@ Azure Databricks is used to train and deploy a machine learning model that predi
 
 5. Select **Create Cluster**.
 
-### Task 4: Import lab notebook into Azure Databricks
+### Task 5: Import lab notebook into Azure Databricks
 
-In this task, you will import the Databricks notebooks into your workspace.
+In this task, you will import a Databricks notebook into your workspace.
 
-1. In a new browser tab, navigate to: `https://github.com/microsoft/MCW-Predictive-Maintenance-for-Remote-Field-Devices/blob/master/Hands-on%20lab/Resources/Notebooks/AnomalyDetection.ipynb`, then select the **Download** button to save this file locally.
-
-   ![A GitHub screen is shown with the Download button highlighted.](media/databricks-notebook-collection-download.png "Download file from GitHub")
-
-2. Within your Azure Databricks service, select **Workspace**, select **Users**, select the dropdown to the right of your username, then select **Import**.
+1. Within your Azure Databricks service, select **Workspace**, select **Users**, select the dropdown to the right of your username, then select **Import**.
 
    ![The Import link is highlighted in the Workspace.](media/databricks-import-link.png 'Workspace')
 
-3. Keep **File** selected next to **Import from**, select or drag and drop the file you just downloaded, then select **Import**.
+2. Keep **File** selected next to **Import from**, select or drag and drop the file `C:\MCW-Predictive-Maintenance-for-remote-field-devices-master\Hands-on lab\Resources\Notebooks\Anomaly Detection.ipynb`, then select **Import**.
 
-   ![The file import form is displayed with the Anomaly-detection.dbc file selected.](media/databricks-import.png 'Import Notebooks')
+   ![The file import form is displayed with the Anomaly Detection.ipynb file selected.](media/databricks-import.png 'Import Notebooks')
 
-4. After importing, select your username. You will see a new notebook named `Anomaly Detection`.
+3. After importing, select your username. You will see a new notebook named `Anomaly Detection`.
 
    ![The imported notebooks are displayed.](media/databricks-notebooks.png 'Imported notebooks')
 
-### Task 5: Create Azure Machine Learning service workspace
+### Task 6: Create Azure Machine Learning service workspace
 
 1. Navigate to the [Azure portal](https://portal.azure.com).
 
@@ -182,17 +190,5 @@ In this task, you will import the Databricks notebooks into your workspace.
    ![The form fields are completed with the previously described settings.](media/azure-create-aml.png 'Machine Learning service workspace')
 
 5. Select **Review + Create**. On the review screen, select **Create**.
-
-### Task 6: Download the lab files
-
-Download the lab artifacts from GitHub.
-
-1. In a web browser, navigate to the [Predictive Maintenance for remote field devices GitHub repo](https://github.com/microsoft/MCW-Predictive-Maintenance-for-remote-field-devices).
-
-2. On the repo page, expand the **Code**, then select **Download ZIP**.
-
-   ![Download .zip containing the repository](media/github-download-repo.png 'Download ZIP')
-
-3. Unzip the contents to your root hard drive (i.e. `C:\`). This will create a folder on your root drive named `MCW-Predictive-Maintenance-for-remote-field-devices-master`.
 
 You should follow all steps provided _before_ performing the Hands-on lab.

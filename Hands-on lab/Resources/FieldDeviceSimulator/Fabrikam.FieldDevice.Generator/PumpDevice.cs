@@ -4,6 +4,8 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Azure.Devices.Client;
+using Microsoft.Azure.Devices.Provisioning.Client;
+using Microsoft.Azure.Devices.Provisioning.Client.Transport;
 using Microsoft.Azure.Devices.Shared;
 using Newtonsoft.Json;
 using Message = Microsoft.Azure.Devices.Client.Message;
@@ -21,6 +23,9 @@ namespace Fabrikam.FieldDevice.Generator
         private DeviceClient _deviceClient = null;
         private int _messagesSent = 0;
         private readonly string _deviceId;
+        private readonly string _deviceKey;
+        private readonly string _idScope;
+        private readonly string _dpsEndpoint;
         private readonly string _serialNumber;
         private readonly string _ipAddress;
         private readonly Location _location;
@@ -42,27 +47,46 @@ namespace Fabrikam.FieldDevice.Generator
         /// Public constructor for Rod Pump class.
         /// </summary>
         /// <param name="deviceNumber">Integer number of the data series device to send.</param>
-        /// <param name="deviceConnectionString">Connection string for the IoT Central device.</param>
+        /// <param name="deviceKey">SAS Key for the IoT Central device.</param>
         /// <param name="serialNumber">The device's serial number property.</param>
         /// <param name="ipAddress">The device's IP address property.</param>
         /// <param name="pumpTelemetryData">Simulated device data for the pump.</param>
-        public PumpDevice(int deviceNumber, string deviceConnectionString, string serialNumber, string ipAddress,
+        public PumpDevice(int deviceNumber, string deviceKey, string idScope, string dpsEndpoint, string serialNumber, string ipAddress,
             Location location, IEnumerable<PumpTelemetryItem> pumpTelemetryData)
         {
-            _deviceId = $"Client_{deviceNumber:000}";
+            _deviceId = $"DEVICE{deviceNumber:000}";
+            _deviceKey = deviceKey;
+            _idScope = idScope;
+            _dpsEndpoint = dpsEndpoint;
             _serialNumber = serialNumber;
             _ipAddress = ipAddress;
             _location = location;
-            _pumpTelemetryData = pumpTelemetryData;
-            _deviceClient = DeviceClient.CreateFromConnectionString(deviceConnectionString, TransportType.Mqtt);
-            _deviceClient.SetMethodHandlerAsync(CLOUDTOGGLEPOWERCOMMAND, TogglePowerCommandReceived, null);
-            PumpPowerState = Generator.PumpPowerState.ON;
+            _pumpTelemetryData = pumpTelemetryData;            
         }
 
         private void ResetDevice()
         {
             _localCancellationSource = new CancellationTokenSource();
             
+        }
+
+        public async Task RegisterAndConnectDeviceAsync() {
+
+            // dps
+            using var security = new SecurityProviderSymmetricKey(_deviceId, _deviceKey, null);
+            using var transportHandler = new ProvisioningTransportHandlerMqtt();
+            ProvisioningDeviceClient provClient = ProvisioningDeviceClient.Create(_dpsEndpoint, _idScope, security, transportHandler);
+            DeviceRegistrationResult result = await provClient.RegisterAsync();
+            IAuthenticationMethod auth = new DeviceAuthenticationWithRegistrySymmetricKey(result.DeviceId, security.GetPrimaryKey());
+
+            // initialize client
+            _deviceClient = DeviceClient.Create(result.AssignedHub, auth, TransportType.Mqtt);
+            await _deviceClient.SetMethodHandlerAsync(CLOUDTOGGLEPOWERCOMMAND, TogglePowerCommandReceived, null);
+
+            //set default state
+            PumpPowerState = Generator.PumpPowerState.ON;
+
+            await SendDevicePropertiesAndInitialState();
         }
 
         /// <summary>
@@ -83,7 +107,7 @@ namespace Fabrikam.FieldDevice.Generator
         /// <summary>
         /// Updates the device properties.
         /// </summary>
-        public async void SendDevicePropertiesAndInitialState()
+        private async Task SendDevicePropertiesAndInitialState()
         {
             try
             {
@@ -124,8 +148,7 @@ namespace Fabrikam.FieldDevice.Generator
 
         /// <summary>
         /// Uses the DeviceClient to send a message to the IoT Central.
-        /// </summary>
-        /// <param name="deviceClient">Azure Devices client for connecting to and send data to IoT Central.</param>
+        /// </summary>        
         /// <param name="message">JSON string representing serialized device data.</param>
         /// <returns>Task for async execution.</returns>
         private async Task SendEvent(string message, CancellationToken cancellationToken)
@@ -145,7 +168,18 @@ namespace Fabrikam.FieldDevice.Generator
 
         private Task<MethodResponse> TogglePowerCommandReceived(MethodRequest methodRequest, object userContext)
         {
-            
+            var desiredState = false;
+            if(methodRequest.DataAsJson != "null"){
+                desiredState = Convert.ToBoolean(methodRequest.DataAsJson);
+            }
+
+            if(desiredState && _pumpPowerState == Generator.PumpPowerState.ON ||
+                !desiredState && _pumpPowerState == Generator.PumpPowerState.OFF) {
+                //no action necessary [on requesting on or off requesting off]
+                 Console.WriteLine($"Device: {DeviceId} Commanded by the Cloud to Toggle Power, already in the desired state: {_pumpPowerState}");
+                return Task.FromResult(new MethodResponse(new byte[0], 200));
+            }
+
             if(_pumpPowerState == Generator.PumpPowerState.ON)
             {
                 CancelCurrentRun();
@@ -160,7 +194,7 @@ namespace Fabrikam.FieldDevice.Generator
             OnPumpPowerStateChanged(new PumpPowerStateChangedArgs() { DeviceId = DeviceId, PumpPowerState = _pumpPowerState });
             
             SendEvent(JsonConvert.SerializeObject(new { PowerState = _pumpPowerState }), _localCancellationSource.Token).ConfigureAwait(false);
-            Console.WriteLine($"Device: {DeviceId} Commanded by the Cloud to Toggle Power, Power is now {_pumpPowerState}");
+            Console.WriteLine($"Device: {DeviceId} Commanded by the Cloud to Toggle Power to desired state {desiredState}, Power is now {_pumpPowerState}");
             return Task.FromResult(new MethodResponse(new byte[0], 200));
         }
 

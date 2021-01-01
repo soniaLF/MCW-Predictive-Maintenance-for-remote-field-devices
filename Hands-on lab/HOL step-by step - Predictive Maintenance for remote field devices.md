@@ -294,7 +294,7 @@ Included with this lab is source code that will simulate the connection and tele
 
     ![The device screen for DEVICE001 is displayed with the Connect button highlighted.](media/device-connect-menu.png "DEVICE001 Screen")
 
-2. A Device connection modal is displayed, make note of the Scope ID, Device ID, as well as the primary key values.
+2. A Device connection modal is displayed, make note of the ID Scope, Device ID, as well as the primary key values.
 
     ![The device connection key information is displayed.](media/device-connection-info.png "Device Connection Info")
 
@@ -306,7 +306,7 @@ Included with this lab is source code that will simulate the connection and tele
 
     > If you are prompted by Visual Studio code to install additional components to enable debugging, please select the option to install the components.
 
-2. Open the _appsettings.json_ file, and copy & paste the Scope ID and Device Primary Key values into the file.
+2. Open the _appsettings.json_ file, and copy & paste the ID Scope and Device Primary Key values into the file.
 
     ![The screenshot shows the applications settings that include the key values for all three devices.](media/appsettings-updated.png "Updated appsettings.json")
 
@@ -469,7 +469,7 @@ The Event Hub we will be creating will act as a collector for data coming into I
 
 2. On the top of the screen, select the **Add** button. When the marketplace screen displays, search for and select **Event Hubs**. This will allow you to create a new Event Hub Namespace resource. Select the _Create_ button on the resource overview screen.
 
-   ![Searching for the Event Hubs in the Azure Marketplace.](media/search-event-hubs.png "Search Event Hubs")
+    ![The marketplace search box contains Event Hubs, and the Event Hubs suggestion is highlighted.](media/marketplace_eventhubs.png "New Event Hub")
 
 3. Configure the event hub as follows, select the *Review + create** button, and then **Create**:
 
@@ -567,7 +567,7 @@ After training the model, we validate it, then register the model in your Azure 
 
 3. In Azure Databricks, select **Workspace**, select **Users**, then select your username.
 
-4. Select the `Anomaly Detection` folder, then select the **Anomaly Detection** notebook to open it.
+4. Select the `Anomaly Detection` notebook to open it.
 
    ![The Anomaly Detection notebook is highlighted.](media/databricks-anomaly-detection-notebook.png "Workspace Folder")
 
@@ -577,11 +577,9 @@ After training the model, we validate it, then register the model in your Azure 
 
 6. You may use keyboard shortcuts to execute the cells, such as **Ctrl+Enter** to execute a single cell, or **Shift+Enter** to execute a cell and move to the next one below.
 
-7. Run all of the cells in the notebook and read the instructions and explanations to understand how the model is trained and deployed. You will need to provide values in the `Cmd 60` cell.
+7. Run all of the cells in the notebook and read the instructions and explanations to understand how the model is trained and deployed. You will need to provide values in the `Cmd 56` cell.
 
 8. Copy the scoring web service URL from the last cell's result after executing it. You will use this value to update a setting in your Azure function in the next exercise to let it know where the model is deployed.
-
-> You are not required to run the _Generated-signal-visualizations_ notebook for this lab. This notebook only contains the visualizations for the training data and is available for your reference.
 
 ## Exercise 7: Create an Azure Function to predict pump failure
 
