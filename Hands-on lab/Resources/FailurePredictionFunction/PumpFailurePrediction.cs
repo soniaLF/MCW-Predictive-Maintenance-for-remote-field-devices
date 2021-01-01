@@ -98,7 +98,7 @@ namespace Fabrikam.Oil.Pumps
                             var replaceEntityOp = TableOperation.InsertOrReplace(entity);
                             await table.ExecuteAsync(replaceEntityOp);
 
-                            // Notify workforce via Microsoft Flow triggered by queue entry.
+                            // Notify workforce via Microsoft Power Automate triggered by queue entry.
                             var queue = cloudStorageAccount.CreateCloudQueueClient().GetQueueReference("flownotificationqueue");
                             var message = new StringBuilder(device.DeviceID + " has been flagged as requiring maintenance by the ");
                             message.Append("predictive maintenance system. ");

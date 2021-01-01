@@ -267,5 +267,5 @@ Directions: Tables reconvene with the larger group to hear the facilitator/SME s
 | What is Azure Machine Learning service?                               | <https://docs.microsoft.com/azure/machine-learning/service/overview-what-is-azure-ml>                |
 | Azure Kubernetes Service (AKS)                                        | <https://docs.microsoft.com/azure/aks/>                                                              |
 | Azure functions                                                       | <https://docs.microsoft.com/azure/azure-functions/functions-overview>                                |
-| Microsoft Flow                                                        | <https://flow.microsoft.com/>                                                                        |
+| Microsoft Power Automate                                                       | <https://flow.microsoft.com/>                                                                        |
 | What is Azure Logic Apps?                                             | <https://docs.microsoft.com/azure/logic-apps/logic-apps-overview>                                    |

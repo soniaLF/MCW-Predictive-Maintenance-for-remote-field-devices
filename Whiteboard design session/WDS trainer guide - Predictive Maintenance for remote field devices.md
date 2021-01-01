@@ -391,7 +391,7 @@ Directions: Tables reconvene with the larger group to hear the facilitator/SME s
 | What is Azure Machine Learning service?                               | <https://docs.microsoft.com/azure/machine-learning/service/overview-what-is-azure-ml>                |
 | Azure Kubernetes Service (AKS)                                        | <https://docs.microsoft.com/azure/aks/>                                                              |
 | Azure functions                                                       | <https://docs.microsoft.com/azure/azure-functions/functions-overview>                                |
-| Microsoft Flow                                                        | <https://flow.microsoft.com/>                                                                        |
+| Microsoft Power Automate                                                        | <https://flow.microsoft.com/>                                                                        |
 | What is Azure Logic Apps?                                             | <https://docs.microsoft.com/azure/logic-apps/logic-apps-overview>                                    |
 
 # Predictive Maintenance for remote field devices whiteboard design session trainer guide
@@ -450,7 +450,7 @@ _High-level architecture_
 
     ![The architecture diagram shows the components of the preferred solution.](media/preferred-solution.png "High-level architecture")
 
-    [Azure IoT Central](https://docs.microsoft.com/azure/iot-central/overview-iot-central) is at the core of the preferred solution. It is used for data ingest, device management, data storage, and reporting. IoT field devices securely connect to IoT Central through its cloud gateway. The continuous export component sends device telemetry data to [Azure Blob storage](https://docs.microsoft.com/azure/storage/blobs/storage-blobs-overview) for cold storage, and the same data to [Azure Event Hubs](https://docs.microsoft.com/azure/event-hubs/event-hubs-about) for real-time processing. Azure Databricks uses the data stored in cold storage to periodically re-train a Machine Learning (ML) model to detect oil pump failures. It is also used to deploy the trained model to a web service hosted by [Azure Kubernetes Service](https://docs.microsoft.com/azure/aks/) (AKS) or [Azure Container Instances](https://docs.microsoft.com/azure/container-instances/) (ACI), using [Azure Machine Learning service](https://docs.microsoft.com/azure/machine-learning/service/overview-what-is-azure-ml). An [Azure function](https://docs.microsoft.com/azure/azure-functions/functions-overview) is triggered by events flowing through Event Hubs. It sends the event data for each pump to the web service hosting the deployed model, then sends an alert through [Microsoft Flow](https://flow.microsoft.com/) if an alert has not been sent within a configurable period of time. The alert is sent in the form of an email, identifying the failing oil pump with a suggestion to service the device.
+    [Azure IoT Central](https://docs.microsoft.com/azure/iot-central/overview-iot-central) is at the core of the preferred solution. It is used for data ingest, device management, data storage, and reporting. IoT field devices securely connect to IoT Central through its cloud gateway. The continuous export component sends device telemetry data to [Azure Blob storage](https://docs.microsoft.com/azure/storage/blobs/storage-blobs-overview) for cold storage, and the same data to [Azure Event Hubs](https://docs.microsoft.com/azure/event-hubs/event-hubs-about) for real-time processing. Azure Databricks uses the data stored in cold storage to periodically re-train a Machine Learning (ML) model to detect oil pump failures. It is also used to deploy the trained model to a web service hosted by [Azure Kubernetes Service](https://docs.microsoft.com/azure/aks/) (AKS) or [Azure Container Instances](https://docs.microsoft.com/azure/container-instances/) (ACI), using [Azure Machine Learning service](https://docs.microsoft.com/azure/machine-learning/service/overview-what-is-azure-ml). An [Azure function](https://docs.microsoft.com/azure/azure-functions/functions-overview) is triggered by events flowing through Event Hubs. It sends the event data for each pump to the web service hosting the deployed model, then sends an alert through [Microsoft Power Automate](https://flow.microsoft.com/) if an alert has not been sent within a configurable period of time. The alert is sent in the form of an email, identifying the failing oil pump with a suggestion to service the device.
     
     _Azure IoT Central architecture_
 
@@ -492,20 +492,12 @@ _Device and metadata management_
 1. How do you connect devices one at a time?
 
     Connect single devices for rapid testing and building small proofs of concept. Since Azure IoT Central uses Azure IoT Hub under the covers, you use the [Azure IoT Hub Device Provisioning Service (DPS)](https://docs.microsoft.com/azure/iot-dps/about-iot-dps) to manage device registration and connections.
-    
-    The first step is to create a device template in IoT Central. This template defines the device metadata, such as properties and telemetry fields, that are common to one or more IoT devices you connect to IoT Central. The next step is to select the template and add a new real device. The options here are to add a simulated device that IoT Central manages and uses to generate simulated telemetry or a real device. Real devices represent IoT devices that you connect to IoT Central through application code, or credentials flashed to the device. Finally, select the real device in IoT Central and click Connect to display the connection details, Scope ID, Device ID, and Device Primary key. These values are used with the `dps-keygen` command-line [key generator utility](https://github.com/Azure/dps-keygen) to generate a shared access signature (SAS) connection string:
-    
-    `dps-keygen -di:<Device ID> -dk:<Primary or Secondary Key> -si:<Scope ID>`
-    
-    Use the connection string on your device to connect to IoT Central.
+
+    The first step is to create a device template in IoT Central. This template defines the device metadata, such as properties and telemetry fields, that are common to one or more IoT devices you connect to IoT Central. The next step is to select the template and add a new real device. The options here are to add a simulated device that IoT Central manages and uses to generate simulated telemetry or a real device. Real devices represent IoT devices that you connect to IoT Central through application code, or credentials flashed to the device. Finally, select the real device in IoT Central and click Connect to display the connection details, Scope ID, Device ID, and Device Primary key. This information is used to register the device with the DPS which then forwards the necessary connection information to the device.
 
 2. How do you connect multiple devices at scale? What options are there to secure device connections?
 
     There are two types of device authentication you can use when connecting devices. For testing and development, use shared access signature (SAS) connection strings. For production workloads, use industry-standard X.509 certificates.
-
-    SAS device keys are generated using the `dps-keygen` command-line [key generator utility](https://github.com/Azure/dps-keygen), along with the group Primary Key value from the Device Connection page under Administration in IoT Central, and the unique, lower-case Device ID for each device you add in bulk:
-
-    `dps-keygen -mk:<Primary_Key(GroupSAS)> -di:<device_id>`
 
     Flash each IoT device with the Scope ID (also found in the Device Connection page), Device ID, and the generated SAS key. When turned on, the device will connect to DPS to retrieve its IoT Central registration information, then connect to the IoT Central application.
 
@@ -555,10 +547,6 @@ _Device and metadata management_
 
     An IoT device is associated with a device template, allowing it to send telemetry, set properties, receive settings and commands, and appear in dashboards and other visualizations in IoT Central. Fabrikam writes code that runs on their IoT devices to perform these interactions. The code can be written in any language that is compatible with the device platform. However, Azure IoT software development kits (SDKs) can be used to accelerate and simplify device application development. There are [SDKs available](https://github.com/Azure/azure-iot-sdks) in C, Python, Node.js, Java, and .NET. Developers use the SDKs to connect devices, send device telemetry, set properties, and receive command messages and settings.
 
-    Below is a screenshot of device properties that were set by application code running on a rod pump device:
-
-    ![Device properties for the DEVICE001 rod pump device are displayed.](media/device-template-properties.png "Device properties")
-
     Device templates come with automatic versioning. This is to help prevent breaking changes from impacting connected devices because often, changes that trigger a version change also require code changes on the devices that are using the template. Versioning helps you rapidly iterate changes by testing new device code on new template versions. When you are ready to apply code changes to your other devices, you deploy the updated device code and migrate the updated devices to the new device template version.
 
     Changes that prompt a version change are adding or deleting a required property, changing the field name of a property, adding or deleting a setting, or changing the field name of a setting.
@@ -566,14 +554,14 @@ _Device and metadata management_
 6. How can control messages be sent to rod pump controllers from the cloud to perform tasks like turn off the pump engine or change settings?
 
     Use the IoT Central portal to edit a device template to add settings and configure commands.
-    
+
     Settings control a device and allow operators to apply persistent settings to the device through the IoT Central application. These settings, which can be anything you want, such as temperature or fan speed, are applied to the device, even after it restarts. Define a setting by editing a device template, choosing the Settings tab, then entering values for the setting name, description, field name, unit of measure (RPM, psi, etc.), data type (e.g. number, text, date, or toggle), initial value, and minimum or maximum values allowed, if applicable. Once added, an operator can use the Device Explorer to change the setting on a device.
 
     Use commands to run commands on the device remotely from IoT Central instantly. The application code on the IoT device watches for commands sent from IoT Central. When it receives a command, code is executed to perform control actions on that device or other devices to which it has access. For example, create a command to restart the device remotely. Once created, the operator will see the command in the Device Explorer and use it to run the command when the device is connected instantly.
 
-    In Fabrikam's case, they want to issue commands to the rod pump controller from the cloud. To do this, Fabrikam created a new command that sends a power cycle command to the controller. Included in the device telemetry is the power state that indicates whether the power to the pump is on. In the screenshot below, the telemetry displayed in the line chart shows a steady decrease in all levels, indicating impending failure. The red box shows the power state change from ON to OFF, including a gap in telemetry, indicated by the dotted lines. When the power cycled back on, the pump's telemetry showed normal operating levels.
+    In Fabrikam's case, they want to issue commands to the rod pump controller from the cloud. To do this, Fabrikam created a new command that sends a power cycle command to the controller. Included in the device telemetry is the power state that indicates whether the power to the pump is on. In the screenshot below, the telemetry displayed in the line chart shows a steady decrease in all levels, indicating impending failure. The dashboard shows the power state change from ON to OFF, including a gap in telemetry, indicated by the dotted lines. When the power cycled back on, the pump's telemetry showed normal operating levels.
 
-    ![The rod pump telemetry is shown with the information described in the previous paragraph.](media/rod-pump-telemetry-with-restart.png "Rod pump telemetry with restart")
+    ![Dashboard indicating power cycle and resulting telemetry recovery.](media/dashboard.png "IoT Central charts")
 
 _Dashboards and telemetry analysis_
 
@@ -584,7 +572,7 @@ _Dashboards and telemetry analysis_
     Each of the device's telemetry items can be displayed or hidden when viewing a device. Since the data is time series-based, there are time filters to show events within predefined time windows or a custom range. Charts are displayed based on the data type, and chart options can be set to adjust the visualizations. Telemetry can also be viewed on a map if there is location-based data. Any location movements are displayed on the map for the filtered time range. Finally, all data can be displayed in a grid.
 
 2. How can they create shared dashboards, and can users create their own personalized dashboards?
-   
+
     IoT Central includes a shared dashboard on the application's home page. This dashboard is visible to all users and is initially blank when the Custom Application template is used. The dashboard is composed of tiles that can be sized and positioned, and include links, images, labels, device settings and properties, maps, charts, state history, event history, KPIs, and last known value.
 
     Users can create a personalized dashboard by selecting New on the shared dashboard and supplying a name. Only they can see the new dashboard.
@@ -594,7 +582,7 @@ _Dashboards and telemetry analysis_
 3. Can telemetry be automatically exported to external storage for offline batch processing? What other options are available to gain access to telemetry outside of the core IoT solution?
 
     When using IoT Central, all device and telemetry data is stored within underlying Azure services, such as Azure Time Series Analytics, that are hidden from view. You cannot directly access this data beyond the IoT Central application portal interface. However, IoT Central provides a feature called **continuous data export** to automatically export your data to your own Azure Blob storage, Azure Event Hubs, and Azure Service Bus instances. The data that is available to export includes measurements, devices, and device templates.
-    
+ 
     It is important to note that the only data that gets exported using this feature is any data added after enabling continuous data export. You cannot retrieve data that existed before turning on the feature. Because of this limitation, you should turn on the feature early.
 
     Using continuous data export enables many integration options, depending on the data target. When you choose Azure Blob storage as the export destination, data is exported to your storage account once per minute, and the files are stored in your selected container in Apache Avro format. The exported files use the same format as the message files exported by [IoT Hub message routing](https://docs.microsoft.com/azure/iot-hub/iot-hub-csharp-csharp-process-d2c) to Blob storage. The exported data can be used for cold path processing and analytics like training machine learning models in Azure Machine Learning or Azure Databricks. It can also be used for long-term trend analysis in Microsoft Power BI. The path to landing the telemetry in Power BI involves a handful of Azure services, such as Azure Functions, Azure Data Factory, and Azure SQL Database, but this is just a [simple example](https://docs.microsoft.com/azure/iot-central/howto-connect-powerbi) of one option for adding on a custom workflow to your data.
@@ -655,7 +643,7 @@ _Alerts and integrations_
 2. How can Fabrikam make real-time predictions with the trained model and send alerts if needed? They are interested in available integrations that may work with services they already use, like Office 365 or Dynamics CRM.
 
     The trained ML model is deployed within a web service hosted by AKS, which provides a REST-based HTTP endpoint that accepts pump telemetry data and returns a prediction (true or false) whether the pump should be maintained to avoid possible failure. Although IoT Central does not directly support sending telemetry to an HTTP endpoint, we can use Azure services alongside IoT Central to perform additional processing.
-    
+
     The first step is to create a new Event Hub that will act as a collector for data coming into IoT Central. The receipt of a message into this hub ultimately serves as a trigger to send data into a machine learning model to determine if a pump is in a failing state.
 
     The next step is to configure continuous data export in IoT Central to send data to the Event Hub. Once configured, all new telemetry will be sent to the selected Event Hub for downstream processing.
@@ -664,7 +652,7 @@ _Alerts and integrations_
 
     One of the things we would like to avoid is sending repeated notifications to the workforce in the field. Notifications should only be sent once every few hours per device. To keep track of when a notification was last sent for a device, use a table in a Storage Account. A table provides a simple key/value store, making it fast and efficient for keeping track of whether an alert for the pump has been sent within the configured time period.
 
-    There are several options for sending alerts from an Azure function. For a code-free option that uses a visual interface to create a notification workflow, use Azure Logic Apps or Microsoft Flow. These services jointly integrate with hundreds of Azure and 3rd-party services, including Office 365 and Twilio. There are many ways to trigger either a Microsoft Flow or Logic App workflow, including using queues or direct HTTP calls. In this case, we recommend using a queue such as an Azure Storage Queue. Queues add resiliency to your solution by allowing the function to add items to the queue, whether or not the workflow is available to process the alert request, as opposed to attempting to send an HTTP request to a workflow that is disabled or unable to execute due to some sort of failure. Once an alert is queued for a pump, an entry is created in table storage along with a timestamp to prevent sending a flood of notifications.
+    There are several options for sending alerts from an Azure function. For a code-free option that uses a visual interface to create a notification workflow, use Azure Logic Apps or Microsoft Power Automate. These services jointly integrate with hundreds of Azure and 3rd-party services, including Office 365 and Twilio. There are many ways to trigger either a Microsoft Power Automate or Logic App workflow, including using queues or direct HTTP calls. In this case, we recommend using a queue such as an Azure Storage Queue. Queues add resiliency to your solution by allowing the function to add items to the queue, whether or not the workflow is available to process the alert request, as opposed to attempting to send an HTTP request to a workflow that is disabled or unable to execute due to some sort of failure. Once an alert is queued for a pump, an entry is created in table storage along with a timestamp to prevent sending a flood of notifications.
 
 ## Checklist of preferred objection handling
 

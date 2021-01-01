@@ -60,7 +60,7 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
     - [Task 1: Create an Azure Function Application](#task-1-create-an-azure-function-application)
     - [Task 2: Create a notification table in Azure Storage](#task-2-create-a-notification-table-in-azure-storage)
     - [Task 3: Create a notification queue in Azure Storage](#task-3-create-a-notification-queue-in-azure-storage)
-    - [Task 4: Create notification service in Microsoft Flow](#task-4-create-notification-service-in-microsoft-flow)
+    - [Task 4: Create notification service in Microsoft Power Automate](#task-4-create-notification-service-in-microsoft-power-automate)
     - [Task 5: Obtain connection settings for use with the Azure Function implementation](#task-5-obtain-connection-settings-for-use-with-the-azure-function-implementation)
     - [Task 6: Create the local settings file for the Azure Functions project](#task-6-create-the-local-settings-file-for-the-azure-functions-project)
     - [Task 7: Review the Azure Function code](#task-7-review-the-azure-function-code)
@@ -90,7 +90,7 @@ The Predictive Maintenance for Remote Field Devices hands-on lab is an exercise 
 
 ![The architecture diagram shows the components of the preferred solution.](media/preferred-solution.png "High-level architecture")
 
-[Azure IoT Central](https://docs.microsoft.com/azure/iot-central/overview-iot-central) is at the core of the preferred solution. It is used for data ingest, device management, data storage, and reporting. IoT field devices securely connect to IoT Central through its cloud gateway. The continuous export component sends device telemetry data to [Azure Blob storage](https://docs.microsoft.com/azure/storage/blobs/storage-blobs-overview) for cold storage, and the same data to [Azure Event Hubs](https://docs.microsoft.com/azure/event-hubs/event-hubs-about) for real-time processing. Azure Databricks uses the data stored in cold storage to periodically re-train a Machine Learning (ML) model to detect oil pump failures. It is also used to deploy the trained model to a web service hosted by [Azure Kubernetes Service](https://docs.microsoft.com/azure/aks/) (AKS) or [Azure Container Instances](https://docs.microsoft.com/azure/container-instances/) (ACI), using [Azure Machine Learning](https://docs.microsoft.com/azure/machine-learning/service/overview-what-is-azure-ml). An [Azure function](https://docs.microsoft.com/azure/azure-functions/functions-overview) is triggered by events flowing through Event Hubs. It sends the event data for each pump to the web service hosting the deployed model, then sends an alert through [Microsoft Flow](https://flow.microsoft.com/) if an alert has not been sent within a configurable period of time. The alert is sent in the form of an email, identifying the failing oil pump with a suggestion to service the device.
+[Azure IoT Central](https://docs.microsoft.com/azure/iot-central/overview-iot-central) is at the core of the preferred solution. It is used for data ingest, device management, data storage, and reporting. IoT field devices securely connect to IoT Central through its cloud gateway. The continuous export component sends device telemetry data to [Azure Blob storage](https://docs.microsoft.com/azure/storage/blobs/storage-blobs-overview) for cold storage, and the same data to [Azure Event Hubs](https://docs.microsoft.com/azure/event-hubs/event-hubs-about) for real-time processing. Azure Databricks uses the data stored in cold storage to periodically re-train a Machine Learning (ML) model to detect oil pump failures. It is also used to deploy the trained model to a web service hosted by [Azure Kubernetes Service](https://docs.microsoft.com/azure/aks/) (AKS) or [Azure Container Instances](https://docs.microsoft.com/azure/container-instances/) (ACI), using [Azure Machine Learning](https://docs.microsoft.com/azure/machine-learning/service/overview-what-is-azure-ml). An [Azure function](https://docs.microsoft.com/azure/azure-functions/functions-overview) is triggered by events flowing through Event Hubs. It sends the event data for each pump to the web service hosting the deployed model, then sends an alert through [Microsoft Power Automate](https://flow.microsoft.com/) if an alert has not been sent within a configurable period of time. The alert is sent in the form of an email, identifying the failing oil pump with a suggestion to service the device.
 
 _Azure IoT Central architecture_
 
@@ -197,8 +197,8 @@ The telemetry being reported by the Fabrikam rod pumps are as follows, we will b
 
 9. The `Capabilities` of the device model describe the _telemetry_ expected from the device, the _commands_ it responds to, and its _properties_ ([device twin properties](https://docs.microsoft.com/en-us/azure/iot-central/core/howto-use-properties)). We'll begin defining the `Telemetry` values, populate the capabilities as described in the following table. Use the _+ Add capability_ button at the bottom of the screen to add additional telemetry values. Select the _Save_ button from the toolbar once complete.
 
-    | Display Name    | Name           | Capability Type | Semantic Type | Schema | Unit   |  Display Unit | Description |
-    | --------------- | -------------- | ------- | ---------- | ---------- | -------------- |
+    | Display Name   | Name     | Capability Type | Semantic Type | Schema | Unit   |  Display Unit | Description |
+    |----------------|----------|-----------------| --------------|--------|--------|---------------|-------------|
     | Pump Rate       | PumpRate       | Telemetry | None | Double | None |  SPM     | Speed calculated over the time duration between the last two times the crank arm has passed the proximity sensor measured in Strokes Per Minute (SPM)  |
     | Time Pump On    | TimePumpOn     | Telemetry | Time Span | Double | m |  Minutes | Number of minutes the pump has been on |
     | Motor Power     | MotorPowerKw   | Telemetry | Power | Double | None |  kW      | Measured in Kilowatts (kW) |
@@ -649,7 +649,7 @@ There are many ways to trigger flows in Microsoft Power Automate. One of them is
 
    ![The pump function access key information is displayed. Key 1 is circled.](media/copy-function-storage-access-key.png "Copy access key for the Storage Account")
 
-### Task 4: Create notification service in Microsoft Flow
+### Task 4: Create notification service in Microsoft Power Automate
 
 We will be using [Microsoft Power Automate](https://flow.microsoft.com/) as a means to email notifications to the workforce in the field. This flow will respond to new messages placed on the queue that we created in Task 3.
 
@@ -788,7 +788,7 @@ It is recommended that you never check in secrets, such as connection strings, i
 
 3. Once a message has been placed on the _flownotificationqueue_, it will trigger the notification flow that we created and send an email to the field workers. These emails are sent in 5 minute intervals.
 
-   ![A sample Microsoft Flow pump maintenance message is displayed.](media/flow-email-receipt.png "Notification email received")
+   ![A sample Microsoft Power Automate email message is displayed.](media/flow-email-receipt.png "Notification email received")
 
 4. You can now exit the locally running functions by selecting the Terminal window by pressing the <kbd>Ctrl</kbd>+<kbd>c</kbd> keys.
 
