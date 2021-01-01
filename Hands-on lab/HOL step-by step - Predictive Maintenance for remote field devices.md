@@ -475,7 +475,7 @@ The Event Hub we will be creating will act as a collector for data coming into I
 
    | Field          | Value                                 |
    | -------------- | ------------------------------------- |
-   | Name           | _anything (must be globally unique)_    |
+   | Name           | _anything (must be globally unique)_  |
    | Pricing Tier   | Standard                              |
    | Subscription   | _select the appropriate subscription_ |
    | Resource Group | Fabrikam_Oil                          |
@@ -641,7 +641,7 @@ One of the things we would like to avoid is sending repeated notifications to th
 
 ### Task 3: Create a notification queue in Azure Storage
 
-There are many ways to trigger flows in Microsoft Flow. One of them is having Flow monitor an Azure Queue. We will use a Queue in our Azure Storage Account to host this queue.
+There are many ways to trigger flows in Microsoft Power Automate. One of them is monitoring an Azure Queue. We will use a Queue in our Azure Storage Account to host this queue.
 
 1. From the Storage Account left-hand menu, select **Queues** located beneath the _Queue service_ section, then select the **+ Queue** button, and create a new queue named **flownotificationqueue**.
 
@@ -653,21 +653,21 @@ There are many ways to trigger flows in Microsoft Flow. One of them is having Fl
 
 ### Task 4: Create notification service in Microsoft Flow
 
-We will be using [Microsoft Flow](https://flow.microsoft.com/) as a means to email the workforce in the field. This flow will respond to new messages placed on the queue that we created in Task 3.
+We will be using [Microsoft Power Automate](https://flow.microsoft.com/) as a means to email notifications to the workforce in the field. This flow will respond to new messages placed on the queue that we created in Task 3.
 
-1. Access [Microsoft Flow](https://flow.microsoft.com) and sign in (create an account if you don't already have one).
+1. Access [Microsoft Power Automate](https://flow.microsoft.com) and sign in (create an account if you don't already have one).
 
-2. From the left-hand menu, select **+ Create**, then choose **Instant flow**.
+2. From the left-hand menu, select **+ Create**, then choose **Instant cloud flow**.
 
-   ![The three options for creating a flow are displayed. The Instant Flow is circled.](media/create-flow-menu.png "Create Instant Flow")
+   ![Options for creating a flow are displayed. The Instant cloud flow item is highlighted.](media/create-flow-menu.png "Create Instant cloud flow")
 
 3. When the dialog displays, select the **Skip** link at the bottom to dismiss it.
 
-   ![A Flow informational dialog is displayed. A beginner workflow step is presented. The skip button is circled.](media/instant-flow-skip-dialog.png "Dismiss Dialog")
+   ![An informational dialog is displayed. The skip button is highlighted.](media/instant-flow-skip-dialog.png "Dismiss Dialog")
 
 4. From the search bar, type _queue_ to filter connectors and triggers. Then, select the **When there are messages in a queue** item from the filtered list of Triggers.
 
-   ![The trigger dialog is displayed. Create a trigger to respond to a message in the Azure Queue is selected and circled.](media/select-flow-trigger-type.png "Select Queue Trigger")
+   ![The trigger dialog is displayed. Create a trigger to respond to a message in the Azure Queue is selected.](media/select-flow-trigger-type.png "Select Queue Trigger")
 
 5. Fill out the form as follows, then select the **Create** button:
 
@@ -713,7 +713,7 @@ We will be using [Microsoft Flow](https://flow.microsoft.com/) as a means to ema
 
     ![The Flow dialog displays the Delete message step. Message ID and Pop Receipt fields are populated. The Save button is circled. The available dynamic content pane has the available fields listed.](media/create-flow-delete-message-form.png "Delete queue message form")
 
-12. Microsoft will automatically name the Flow. You are able to edit this Flow in the future by selecting **My flows** from the left-hand menu.
+12. Microsoft Power Automate will automatically name the Flow. You are able to edit this Flow in the future by selecting **My flows** from the left-hand menu.
 
     ![The Azure Flow blade is displayed. In the left pane, the My flows link is circled. The Send an email step is circled.](media/new-flow-created.png "New Flow created")
 
@@ -772,21 +772,19 @@ It is recommended that you never check in secrets, such as connection strings, i
                                 ConsumerGroup = "ingressprocessing")] EventData[] events, ILogger log)
    ```
 
-2. On line 29, the message body received from the event is deserialized into a Telemetry object. The Telemetry class matches the telemetry sent by the pumps. The Telemetry class can be found in the `Models/Telemetry.cs` file.
+2. On line 29-36, the message body received from the event is deserialized into a Telemetry object. The Telemetry class matches the telemetry sent by the pumps. The Telemetry class can be found in the `Models/Telemetry.cs` file.
 
-3. On line 31, the Device ID is pulled from the system properties of the event. This will let us know from which device the telemetry data came and allows us to group the telemetry by device so we can perform aggregates on the sensor data.
+3. From lines 48 - 60, we group the telemetry by Device ID and calculate the averages for each sensor reading. This helps us reduce the number of calls we send to the scoring service that contains our deployed prediction model.
 
-4. From lines 42 - 54, we group the telemetry by Device ID and calculate the averages for each sensor reading. This helps us reduce the number of calls we send to the scoring service that contains our deployed prediction model.
+4. Lines 66 through 75 sends the received telemetry to the scoring service endpoint. This service will respond with a 1 - meaning the pump requires maintenance, or a 0 meaning no maintenance notifications should be sent.
 
-5. Lines 67 through 69 sends the received telemetry to the scoring service endpoint. This service will respond with a 1 - meaning the pump requires maintenance, or a 0 meaning no maintenance notifications should be sent.
-
-6. Lines 75 through 101 checks Table storage to ensure a notification for the specific device hasn't been sent in the last 24 hours. If a notification is due to be sent, it will update the table storage record with the current timestamp and send a notification by queueing a message onto the _flownotificationqueue_ queue.
+5. Lines 81 through 109 checks Table storage to ensure a notification for the specific device hasn't been sent in the last 24 hours. If a notification is due to be sent, it will update the table storage record with the current timestamp and send a notification by queueing a message onto the _flownotificationqueue_ queue.
 
 ### Task 8: Run the Function App locally
 
 1. Select <kbd>Ctrl</kbd>+<kbd>F5</kbd> to run the Azure Function code.
 
-2. After some time, you should see log statements indicating that a message has been queued (indicating that Microsoft Flow will send a notification email).
+2. After some time, you should see log statements indicating that a message has been queued (indicating that Microsoft Power Automate will send a notification email).
 
    ![A sample function log is displayed. A notification of email has been sent is circled.](media/azure-function-output.png "Azure Function Output")
 
@@ -853,16 +851,12 @@ Duration: 10 minutes
 
 ### Task 1: Delete Lab Resources
 
-1. In IoT Central, select _Administration_ from the left-hand menu. In the _Application Settings_ screen, delete the application by pressing the _Delete_ button. This will automate the removal of the IoT Application as well as all of its resources.
-
-   ![The Administration panel is displayed and circled in the image. The delete button is highlighted as well.](media/delete-application.png "Delete the IoT Central application")
-
-2. In the [Azure Portal](https://portal.azure.com), select **Resource Groups**, open the resource group that you created in Exercise 6, and select the **Delete resource group** button.
+1. In the [Azure Portal](https://portal.azure.com), select **Resource Groups**, open the resource group that you created in Exercise 6, and select the **Delete resource group** button.
 
    ![The Azure Resource Group panel is displayed. The Delete resource group link is circled.](media/delete-resource-group.png "Delete the Resource Group")
 
-3. Delete Microsoft Flows that we created. Access Microsoft Flow and login. From the left-hand menu, select **My flows**. Select the ellipsis button next to each flow that we created in this lab and select **Delete**.
+2. Delete Microsoft Power Automate flow that we created. Access [Microsoft Power Automate](https://flow.microsoft.com) and login. From the left-hand menu, select **My flows**. Select the ellipsis button next to the flow we created in this lab and select **Delete**.
 
-   ![The Azure Flows panel is displayed. The ellipsis and delete links are circled.](media/delete-flow.png "Delete Microsoft Flow processes")
+   ![The Power Automate Flows panel is displayed. The ellipsis and delete links are circled.](media/delete-flow.png "Delete Microsoft Power Automate Flow")
 
 You should follow all steps provided *after* attending the Hands-on lab.

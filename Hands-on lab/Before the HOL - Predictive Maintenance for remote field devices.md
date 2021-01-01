@@ -32,7 +32,7 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
     - [Task 1: Provision a resource group](#task-1-provision-a-resource-group)
     - [Task 2: Create an Azure Databricks service](#task-2-create-an-azure-databricks-service)
     - [Task 3: Create Azure Databricks cluster](#task-3-create-azure-databricks-cluster)
-    - [Task 4: Import lab notebooks into Azure Databricks](#task-4-import-lab-notebooks-into-azure-databricks)
+    - [Task 4: Import lab notebook into Azure Databricks](#task-4-import-lab-notebook-into-azure-databricks)
     - [Task 5: Create Azure Machine Learning service workspace](#task-5-create-azure-machine-learning-service-workspace)
     - [Task 6: Download the lab files](#task-6-download-the-lab-files)
 
@@ -126,7 +126,7 @@ Azure Databricks is used to train and deploy a machine learning model that predi
    | Cluster name               | _enter `lab`_                                                                                |
    | Cluster Mode               | _select `Standard`_                                                                          |
    | Pool                       | _select `None`_                                                                              |
-   | Databricks Runtime Version | _select `Runtime: 6.4 (Scala 2.11, Spark 2.4.5)`_                                         |
+   | Databricks Runtime Version | _select `Runtime: 7.4 (Scala 2.12, Spark 3.0.1)`_                                         |
    | Autopilot Options          | _uncheck `Enable autoscaling` and check `Terminate after...`, with a value of `120` minutes_ |
    | Worker Type                | _select `Standard_DS3_v2`_                                                                   |
    | Driver Type                | _select `Same as worker`_                                                                    |
@@ -136,11 +136,11 @@ Azure Databricks is used to train and deploy a machine learning model that predi
 
 5. Select **Create Cluster**.
 
-### Task 4: Import lab notebooks into Azure Databricks
+### Task 4: Import lab notebook into Azure Databricks
 
 In this task, you will import the Databricks notebooks into your workspace.
 
-1. In a new browser tab, navigate to: `https://github.com/microsoft/MCW-Predictive-Maintenance-for-Remote-Field-Devices/blob/master/Hands-on%20lab/Resources/Notebooks/Anomaly-Detection.dbc`, then select the **Download** button to save this file locally.
+1. In a new browser tab, navigate to: `https://github.com/microsoft/MCW-Predictive-Maintenance-for-Remote-Field-Devices/blob/master/Hands-on%20lab/Resources/Notebooks/AnomalyDetection.ipynb`, then select the **Download** button to save this file locally.
 
    ![A GitHub screen is shown with the Download button highlighted.](media/databricks-notebook-collection-download.png "Download file from GitHub")
 
@@ -152,7 +152,7 @@ In this task, you will import the Databricks notebooks into your workspace.
 
    ![The file import form is displayed with the Anomaly-detection.dbc file selected.](media/databricks-import.png 'Import Notebooks')
 
-4. After importing, select your username. You will see a new folder named `Anomaly Detection`, which contains two notebooks.
+4. After importing, select your username. You will see a new notebook named `Anomaly Detection`.
 
    ![The imported notebooks are displayed.](media/databricks-notebooks.png 'Imported notebooks')
 
