@@ -5,6 +5,7 @@ using CsvHelper;
 using CsvHelper.Configuration;
 using Newtonsoft.Json;
 using MathNet.Numerics;
+using System.Globalization;
 
 namespace Fabrikam.FieldDevice.Generator
 {
@@ -128,7 +129,7 @@ namespace Fabrikam.FieldDevice.Generator
                 var telemetryItems = telemetry.ToPumpTelemetryItems();
 
                 using (var writer = new StreamWriter(fileName))
-                using (var csv = new CsvWriter(writer))
+                using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
                 {
                     csv.Configuration.RegisterClassMap<PumpTelemetryItemMap>();
                     csv.WriteRecords(telemetryItems);

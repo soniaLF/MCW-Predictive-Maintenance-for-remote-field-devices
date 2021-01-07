@@ -22,13 +22,19 @@ namespace Fabrikam.Oil.Pumps
         {
             var exceptions = new List<Exception>();
             var allTelemetry = new List<Telemetry>();
-
+          
             foreach (var eventData in events)
             {
                 // Deserialize message body into the Telemetry object.
-                var telemetry = JsonConvert.DeserializeObject<Telemetry>(
-                    Encoding.UTF8.GetString(eventData.Body.Array, eventData.Body.Offset, eventData.Body.Count));
-                telemetry.DeviceId = (string)eventData.SystemProperties["iothub-connection-device-id"];
+                var msg = Encoding.UTF8.GetString(eventData.Body.Array, eventData.Body.Offset, eventData.Body.Count);
+                dynamic msgData = JsonConvert.DeserializeObject(msg);
+                var telemetry =  new Telemetry{DeviceId = msgData.deviceId,
+                        CasingFriction = msgData.telemetry.CasingFriction,
+                        MotorPowerKw = msgData.telemetry.MotorPowerKw,
+                        MotorSpeed = msgData.telemetry.MotorSpeed,
+                        PumpRate = msgData.telemetry.PumpRate,
+                        TimePumpOn = msgData.telemetry.TimePumpOn };
+               
                 if (telemetry.MotorPowerKw > 0 && telemetry.MotorSpeed > 0 && telemetry.PumpRate > 0 &&
                     telemetry.TimePumpOn > 0 && telemetry.CasingFriction > 0)
                 {
@@ -92,7 +98,7 @@ namespace Fabrikam.Oil.Pumps
                             var replaceEntityOp = TableOperation.InsertOrReplace(entity);
                             await table.ExecuteAsync(replaceEntityOp);
 
-                            // Notify workforce via Microsoft Flow triggered by queue entry.
+                            // Notify workforce via Microsoft Power Automate triggered by queue entry.
                             var queue = cloudStorageAccount.CreateCloudQueueClient().GetQueueReference("flownotificationqueue");
                             var message = new StringBuilder(device.DeviceID + " has been flagged as requiring maintenance by the ");
                             message.Append("predictive maintenance system. ");

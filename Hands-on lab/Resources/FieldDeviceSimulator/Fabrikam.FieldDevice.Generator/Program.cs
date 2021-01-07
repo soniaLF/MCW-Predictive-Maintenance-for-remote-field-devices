@@ -17,7 +17,7 @@ namespace Fabrikam.FieldDevice.Generator
         private static readonly AutoResetEvent WaitHandle = new AutoResetEvent(false);
         private static CancellationTokenSource _cancellationSource = new CancellationTokenSource();
         private static Dictionary<string, Task> _runningDeviceTasks;
-
+        
         static void Main(string[] args)
         {
             // Setup configuration to either read from the appsettings.json file (if present) or environment variables.
@@ -73,7 +73,7 @@ namespace Fabrikam.FieldDevice.Generator
                     try
                     {
                         // Start sending telemetry to simulated devices:
-                        _runningDeviceTasks = SetupDeviceRunTasks();
+                        SetupDeviceRunTasks().GetAwaiter().GetResult();
                         var tasks = _runningDeviceTasks.Select(t => t.Value).ToList();
                         while (tasks.Count > 0)
                         {
@@ -84,6 +84,9 @@ namespace Fabrikam.FieldDevice.Generator
                             catch (TaskCanceledException)
                             {
                                 //expected
+                            }
+                            catch(Exception ex){
+                                Console.WriteLine(ex.Message);
                             }
                             
                             tasks = _runningDeviceTasks.Where(t=> !t.Value.IsCompleted).Select(t => t.Value).ToList();
@@ -138,7 +141,7 @@ namespace Fabrikam.FieldDevice.Generator
         /// Creates the set of tasks that will send data to the IoT hub.
         /// </summary>
         /// <returns></returns>
-        private static Dictionary<string,Task> SetupDeviceRunTasks()
+        private static async Task SetupDeviceRunTasks()
         {
             var deviceTasks = new Dictionary<string, Task>();
             var config = ParseConfiguration();
@@ -148,23 +151,23 @@ namespace Fabrikam.FieldDevice.Generator
             Console.WriteLine("Setting up simulated pump devices and generating random sample data. This may take a while...");
 
             // Add a pump that gradually fails.
-            devices.Add(new PumpDevice(1, config.Device1ConnectionString, "DEVICE001", "192.168.1.1", new Location(35.815090, -101.043192), 
+            devices.Add(new PumpDevice(1, config.Device1Key, config.IdScope, config.DpsEndpoint, "DEVICE001", "192.168.1.1", new Location(35.815090, -101.043192), 
                 GenerateData.GeneratePumpTelemetry(sampleSize, true, failOverXIterations)));
             // Add a pump that never fails.
-            devices.Add(new PumpDevice(2, config.Device2ConnectionString, "DEVICE002", "192.168.1.2", new Location(35.815862, -101.042167),
+            devices.Add(new PumpDevice(2, config.Device2Key, config.IdScope, config.DpsEndpoint, "DEVICE002", "192.168.1.2", new Location(35.815862, -101.042167),
                 GenerateData.GeneratePumpTelemetry(sampleSize + failOverXIterations, false, 0)));
             // Add a pump that immediately fails after a period of time.
-            devices.Add(new PumpDevice(3, config.Device3ConnectionString, "DEVICE003", "192.168.1.3", new Location(35.815743, -101.048099),  
+            devices.Add(new PumpDevice(3, config.Device3Key, config.IdScope, config.DpsEndpoint, "DEVICE003", "192.168.1.3", new Location(35.815743, -101.048099),  
                 GenerateData.GeneratePumpTelemetry(sampleSize + failOverXIterations, true, 0)));
 
             foreach (var device in devices)
             {
-                device.SendDevicePropertiesAndInitialState();
+                await device.RegisterAndConnectDeviceAsync(); //fire and forget
                 deviceTasks.Add(device.DeviceId, device.RunDeviceAsync());
                 device.PumpPowerStateChanged += Device_PumpPowerStateChanged;
             }
 
-            return deviceTasks;
+            _runningDeviceTasks = deviceTasks;           
         }
 
         private static void Device_PumpPowerStateChanged(object sender, PumpPowerStateChangedArgs e)
@@ -196,37 +199,53 @@ namespace Fabrikam.FieldDevice.Generator
         /// Extracts properties from either the appsettings.json file or system environment variables.
         /// </summary>
         /// <returns>
-        /// Device1ConnectionString: Connection string for the first pump device in IoT Central.
-        /// Device2ConnectionString: Connection string for the second pump device in IoT Central.
-        /// Device3ConnectionString: Connection string for the third pump device in IoT Central.
+        /// IdScope: ID Scope of the IoT Central application devices
+        /// DpsEndpoint: DPS Endpoint
+        /// Device1Key: Connection key for the first pump device in IoT Central.
+        /// Device2Key: Connection key for the second pump device in IoT Central.
+        /// Device3Key: Connection key for the third pump device in IoT Central.
         /// </returns>
-        private static (string Device1ConnectionString,
-                        string Device2ConnectionString,
-                        string Device3ConnectionString) ParseConfiguration()
+        private static (string IdScope,
+                        string DpsEndpoint,
+                        string Device1Key,
+                        string Device2Key,
+                        string Device3Key) ParseConfiguration()
         {
             try
             {
                 // The Configuration object will extract values either from the machine's environment variables, or the appsettings.json file.
-                var device1ConnectionString = _configuration["DEVICE_1_CONNECTION_STRING"];
-                var device2ConnectionString = _configuration["DEVICE_2_CONNECTION_STRING"];
-                var device3ConnectionString = _configuration["DEVICE_3_CONNECTION_STRING"];
+                var idScope = _configuration["ID_SCOPE"];
+                var dpsEndpoint = _configuration["DPS_ENDPOINT"];
+                var device1Key = _configuration["DEVICE_1_KEY"];
+                var device2Key = _configuration["DEVICE_2_KEY"];
+                var device3Key = _configuration["DEVICE_3_KEY"];
 
-                if (string.IsNullOrWhiteSpace(device1ConnectionString))
+                if (string.IsNullOrWhiteSpace(idScope))
                 {
-                    throw new ArgumentException("DEVICE_1_CONNECTION_STRING must be provided");
+                    throw new ArgumentException("ID_SCOPE must be provided");
+                }
+                
+                if (string.IsNullOrWhiteSpace(dpsEndpoint))
+                {
+                    throw new ArgumentException("DPS_ENDPOINT must be provided");
                 }
 
-                if (string.IsNullOrWhiteSpace(device2ConnectionString))
+                if (string.IsNullOrWhiteSpace(device1Key))
                 {
-                    throw new ArgumentException("DEVICE_2_CONNECTION_STRING must be provided");
+                    throw new ArgumentException("DEVICE_1_KEY must be provided");
                 }
 
-                if (string.IsNullOrWhiteSpace(device3ConnectionString))
+                if (string.IsNullOrWhiteSpace(device2Key))
                 {
-                    throw new ArgumentException("DEVICE_3_CONNECTION_STRING must be provided");
+                    throw new ArgumentException("DEVICE_2_KEY must be provided");
                 }
 
-                return (device1ConnectionString, device2ConnectionString, device3ConnectionString);
+                if (string.IsNullOrWhiteSpace(device3Key))
+                {
+                    throw new ArgumentException("DEVICE_3_Key must be provided");
+                }
+
+                return (idScope, dpsEndpoint, device1Key, device2Key, device3Key);
             }
             catch (Exception e)
             {

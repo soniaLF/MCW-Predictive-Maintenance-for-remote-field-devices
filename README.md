@@ -4,7 +4,7 @@ Fabrikam, Inc. creates innovated IoT solutions for the oil and gas manufacturing
 
 They would like to understand their options for expediting the implementation of the PoC. Specifically, they are looking to learn what offerings Azure provides that could enable a quick end-to-end start on the infrastructure for monitoring and managing devices and the system metadata. On top this, they are curious about what other platform services Azure provides that they should consider in this scenario.
 
-May 2020
+December 2020
 
 ## Target audience
 
@@ -41,12 +41,12 @@ At the end of this hands-on-lab, you will be better able to implement an IoT-bas
 - Azure Event Hubs
 - Azure Functions
 - Azure Storage
-- Microsoft Flow
+- Microsoft Power Automate
 
 ## Related references
 
-- [MCW](https://github.com/Microsoft/MCW)
-- Interested in deeper security for IoT solutions, see [Securing the IoT End-to-End MCW](https://github.com/microsoft/MCW-Securing-the-IoT-end-to-end)
+- [MCW](https://microsoftcloudworkshop.com/)
+- Interested in deeper security for IoT solutions, see [Securing Azure IoT solutions MCW](https://github.com/microsoft/MCW-Securing-Azure-IoT-solutions)
 
 ## Help & Support
 
