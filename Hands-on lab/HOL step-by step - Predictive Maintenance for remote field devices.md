@@ -9,7 +9,7 @@ Hands-on lab step-by-step
 </div>
 
 <div class="MCWHeader3">
-May 2020
+December 2020
 </div>
 
 Information in this document, including URL and other Internet Web site references, is subject to change without notice. Unless otherwise noted, the example companies, organizations, products, domain names, e-mail addresses, logos, people, places, and events depicted herein are fictitious, and no association with any real company, organization, product, domain name, e-mail address, logo, person, place or event is intended or should be inferred. Complying with all applicable copyright laws is the responsibility of the user. Without limiting the rights under copyright, no part of this document may be reproduced, stored in or introduced into a retrieval system, or transmitted in any form or by any means (electronic, mechanical, photocopying, recording, or otherwise), or for any purpose, without the express written permission of Microsoft Corporation.
@@ -223,14 +223,14 @@ The telemetry being reported by the Fabrikam rod pumps are as follows, we will b
 
 12. Operators and field workers will want to be able to turn on and off the pumps remotely. In order to do this, we will define a command. Remaining on the same screen, select _+ Add capability_. Select the _Commands_ tab and select the _New_ button to add a new command. Create a command as follows, and select _Save_ from the toolbar:
 
-    1. _Display Name_ - _Toggle Motor Power_
-    2. _Name_ - _ToggleMotorPower_
-    3. _Capability Type_ - _Command_
-    4. _Request_ - _On_
-    5. (Request) _Display name_ - _Toggle_
-    6. (Request) _Name_ - _Toggle_
-    7. (Request) _Schema_ - _Boolean_
-    8. _Description_ - _Toggle the motor power of the pump on and off_
+    - _Display Name_ - _Toggle Motor Power_
+    - _Name_ - _ToggleMotorPower_
+    - _Capability Type_ - _Command_
+    - _Request_ - _On_
+    - (Request) _Display name_ - _Toggle_
+    - (Request) _Name_ - _Toggle_
+    - (Request) _Schema_ - _Boolean_
+    - _Description_ - _Toggle the motor power of the pump on and off_.
 
     ![The command form fields are displayed and populated as described.](media/device-template-add-command.png "Create command capability")
   
@@ -623,7 +623,7 @@ We will be using an Azure Function to read incoming telemetry from IoT Hub and s
 
 ### Task 2: Create a notification table in Azure Storage
 
-One of the things we would like to avoid is sending repeated notifications to the workforce in the field. Notifications should only be sent once every 24 hour period per device. To keep track of when a notification was last sent for a device, we will use a table in a Storage Account.
+One of the things we would like to avoid is sending repeated notifications to the workforce in the field. Notifications should only be sent once every 24-hour period per device. To keep track of when a notification was last sent for a device, we will use a table in a Storage Account.
 
 1. In the [Azure portal](https://portal.azure.com), select **Resource groups** from the left-hand menu, then select the **Fabrikam_Oil** link from the listing.
 
@@ -786,7 +786,7 @@ It is recommended that you never check in secrets, such as connection strings, i
 
    ![A sample function log is displayed. A notification of email has been sent is circled.](media/azure-function-output.png "Azure Function Output")
 
-3. Once a message has been placed on the _flownotificationqueue_, it will trigger the notification flow that we created and send an email to the field workers. These emails are sent in 5 minute intervals.
+3. Once a message has been placed on the _flownotificationqueue_, it will trigger the notification flow that we created and send an email to the field workers. These emails are sent in 5-minute intervals.
 
    ![A sample Microsoft Power Automate email message is displayed.](media/flow-email-receipt.png "Notification email received")
 
