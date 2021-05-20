@@ -131,7 +131,7 @@ namespace Fabrikam.FieldDevice.Generator
                 using (var writer = new StreamWriter(fileName))
                 using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
                 {
-                    csv.Configuration.RegisterClassMap<PumpTelemetryItemMap>();
+                    csv.Context.RegisterClassMap<PumpTelemetryItemMap>();
                     csv.WriteRecords(telemetryItems);
                 }
 

@@ -9,7 +9,7 @@ Before the hands-on lab setup guide
 </div>
 
 <div class="MCWHeader3">
-December 2020
+May 2021
 </div>
 
 Information in this document, including URL and other Internet Web site references, is subject to change without notice. Unless otherwise noted, the example companies, organizations, products, domain names, e-mail addresses, logos, people, places, and events depicted herein are fictitious, and no association with any real company, organization, product, domain name, e-mail address, logo, person, place or event is intended or should be inferred. Complying with all applicable copyright laws is the responsibility of the user. Without limiting the rights under copyright, no part of this document may be reproduced, stored in or introduced into a retrieval system, or transmitted in any form or by any means (electronic, mechanical, photocopying, recording, or otherwise), or for any purpose, without the express written permission of Microsoft Corporation.
@@ -99,9 +99,9 @@ Azure Databricks is used to train and deploy a machine learning model that predi
 
 1. Navigate to the [Azure portal](https://portal.azure.com).
 
-2. Select **+ Create a resource**, type in "Databricks" in the search field, then select **Azure Databricks** from the results.
+2. Expand the left menu, and select **+ Create a resource**, type in "Azure Databricks" in the search field, then select **Azure Databricks** from the results.
 
-   ![Create a resource is highlighted and Azure Databricks is selected.](media/azure-create-databricks-search.png 'SQL Database')
+   ![Azure Databricks is entered in the search field and Azure Databricks is selected.](media/azure-create-databricks-search.png 'Azure Databricks')
 
 3. Select **Create** in the Azure Databricks details page.
 
@@ -109,9 +109,9 @@ Azure Databricks is used to train and deploy a machine learning model that predi
 
    | Field                          | Value                                      |
    | ------------------------------ | ------------------------------------------ |
-   | Workspace name                 | _globally unique name_                     |
    | Subscription                   | _select the appropriate subscription_      |
    | Resource Group                 | _select use existing, then `Fabrikam_Oil`_ |
+   | Workspace name                 | _globally unique name_                     |
    | Location                       | _select the location nearest to you_       |
    | Pricing tier                   | _select Standard_                          |
 

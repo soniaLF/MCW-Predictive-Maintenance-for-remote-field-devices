@@ -15,7 +15,7 @@ namespace Fabrikam.FieldDevice.Generator
 {
     public class PumpDevice
     {
-        private const string CLOUDTOGGLEPOWERCOMMAND = "MotorPower";
+        private const string CLOUDTOGGLEPOWERCOMMAND = "ToggleMotorPower";
         public event EventHandler<PumpPowerStateChangedArgs> PumpPowerStateChanged;
                
         private readonly TimeSpan CycleTime = TimeSpan.FromMilliseconds(500);

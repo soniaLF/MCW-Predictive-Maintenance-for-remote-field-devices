@@ -4,7 +4,7 @@ Fabrikam, Inc. creates innovated IoT solutions for the oil and gas manufacturing
 
 They would like to understand their options for expediting the implementation of the PoC. Specifically, they are looking to learn what offerings Azure provides that could enable a quick end-to-end start on the infrastructure for monitoring and managing devices and the system metadata. On top this, they are curious about what other platform services Azure provides that they should consider in this scenario.
 
-December 2020
+May 2021
 
 ## Target audience
 
@@ -23,7 +23,7 @@ At the end of this workshop, you will be better able to design an IoT-based pred
 
 ### Whiteboard design session
 
-In this whiteboard design session, you will work with a group to evaluate Azure's PaaS and SaaS-based IoT products and design a solution that uses the optimal combination of tools to fulfill Fabrikam's needs. You will provide guidance for designing a solution that simplifies IoT device management and reporting, enabling Fabrikam to more rapidly implement their IoT strategy without requiring a lot of custom development. Next, you will design a solution that deploys a trained predictive maintenance Machine Learning model and uses a stream processing pipeline that makes predictions with the model in near real-time. At the end of this pipeline is an alert that is sent to the oil pump maintenance team when a pump failure is imminent.
+In this whiteboard design session, you will work with a group to evaluate Azure's PaaS and SaaS-based IoT products and design a solution that uses the optimal combination of tools to fulfill Fabrikam's needs. You will provide guidance for designing a solution that simplifies IoT device management and reporting, enabling Fabrikam to more rapidly implement their IoT strategy without requiring a lot of custom development. Next, you will design a solution that deploys a trained predictive maintenance Machine Learning model and uses a stream processing pipeline that makes predictions with the model in near real-time. At the end of this pipeline an alert is sent to the oil pump maintenance team when a pump failure is imminent.
 
 At the end of this whiteboard design session, you will be better able to design an IoT-based predictive maintenance solution in Azure.
 
