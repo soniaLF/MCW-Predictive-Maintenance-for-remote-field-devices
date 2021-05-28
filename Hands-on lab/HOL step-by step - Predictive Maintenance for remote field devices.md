@@ -123,7 +123,7 @@ The Fabrikam CIO has recently heard of Azure IoT Central. This online offering w
 
 ### Task 1: Model the telemetry data
 
-The first task is to identify the data that the equipment will be sending to the cloud. This data will contain fields that represent the data read from the sensors at a specific instant in time. This data will be used downstream systems to identify patterns that can lead to cost savings, increased safety and more efficient work processes.
+The first task is to identify the data that the equipment will be sending to the cloud. This data will contain fields that represent the data read from the sensors at a specific instant in time. This data will be used in downstream systems to identify patterns that can lead to cost savings, increased safety and more efficient work processes.
 
 The telemetry being reported by the Fabrikam rod pumps are as follows, we will be using this information later in the lab:
 
