@@ -664,7 +664,7 @@ We will be using [Microsoft Power Automate](https://flow.microsoft.com/) as a me
 
    ![An informational dialog is displayed. The skip button is highlighted.](media/instant-flow-skip-dialog.png "Dismiss Dialog")
 
-4. From the search bar, type _queue_ to filter connectors and triggers. Then, select the **When there are messages in a queue** item from the filtered list of Triggers.
+4. From the search bar, type _queue_ to filter connectors and triggers. Then, select the **When there are messages in a queue (V2)(preview)** item from the filtered list of Triggers.
 
    ![The trigger dialog is displayed. Create a trigger to respond to a message in the Azure Queue is selected.](media/select-flow-trigger-type.png "Select Queue Trigger")
 
@@ -672,15 +672,15 @@ We will be using [Microsoft Power Automate](https://flow.microsoft.com/) as a me
 
    | Field                | Value                                      |
    | -------------------- | ------------------------------------------ |
-   | Connection Name      | Notification Queue                         |
+   | Authentication Type  | Access Key                                 |
    | Storage Account Name | _enter the generated storage account name_ |
    | Shared Storage Key   | _paste the Key value recorded in Task 3_   |
 
    ![The queue connection configuration fields are displayed. The create button is circled.](media/create-flow-queue-step.png "Create Queue Step")
 
-6. In the queue step, select the **flownotificationqueue** item, then select the **+ New step** button.
+6. In the queue step, for the **Storage account name** field, select the **Use connection settings (storageaccount{SUFFIX})** item. For the **Queue Name** field, select **flownotificationqueue**. Select the **+ New step** button.
 
-   ![Message queue step event dialog is displayed. The New step button is circled.](media/create-flow-select-queue.png "Select Queue")
+   ![Message queue step dialog is displayed. The New step button is circled.](media/create-flow-select-queue.png "Select Queue")
 
 7. In the search box for the next step, search for _email_, then select the **Send an email notification (V3)** item from the filtered list of Actions.
 
@@ -698,7 +698,7 @@ We will be using [Microsoft Power Automate](https://flow.microsoft.com/) as a me
 
    ![The Flow action for sending an email is displayed. The message text option and New step button are circled.](media/create-flow-email-form.png "Email form")
 
-10. In the search bar for the next step, search for _queue_ once more, then select the **Delete message** item from the filtered list of Actions.
+10. In the search bar for the next step, search for _queue_ once more, then select the **Delete message (V2)(preview)** item from the filtered list of Actions.
 
     ![The Flow Action pane is displayed. The queue text is listed in the search field.](media/create-flow-delete-message-step.png "Delete queue message step")
 
