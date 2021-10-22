@@ -418,9 +418,9 @@ One of the main features of IoT Central is the ability to visualize the health o
 
 ### Task 2: Add your company logo
 
-1. Remaining in the edit mode of the dashboard, select _Image_ from the _Custom tiles_ section of the menu. Select _Add tile_.
+1. Remaining in the edit mode of the dashboard, select _Image (static)_ from the _Add a tile_ section of the menu. Select _Add tile_.
 
-    ![The Custom tiles items are displayed. The Image item is checked.](media/dashboard-library-image.png "Custom tiles")
+    ![The Custom tiles items are displayed. The Image item is selected.](media/dashboard-library-image.png "Custom tiles")
 
 2. Once the tile is added to the design surface, expand the ellipsis menu on the tile, and select _Configure_. Configure the logo with the following file _C:\MCW-Predictive-Maintenance-for-remote-field-devices-master\Hands-on lab\media\fabrikam-logo.png_. Select the _Update_ button once complete.
 
