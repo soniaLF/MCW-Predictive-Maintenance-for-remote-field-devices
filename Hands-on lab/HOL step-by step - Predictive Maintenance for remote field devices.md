@@ -448,13 +448,26 @@ In the previous exercise, we created a device group that contains the devices lo
 
 It is beneficial to see the location of certain critical Texas rod pumps. We will add a map that will display the location of each of the Texas Rod Pump devices.
 
-1. Return to the _Edit_ view of the Dashboard. As in the previous task, select the _Texas Rod Pumps_ and all the devices in the _Devices_ list. In the _Property_ drop down, select _Pump Location_.Select _Add tile_, then select _Save_ from the Dashboard toolbar menu.
+1. Return to the _Edit_ view of the Dashboard. Select _Start with a visual_ from the _Add a tile_ section of the menu.  Select _Map (property)_. Select _Add tile_.
+
+    ![The Rod Pump location is displayed in a map. A list of devices and their IP addresses are listed on the right-hand side.](media/add-property-map-pump-locations.png "Add Map (property) tile")
+
+2.  Once the tile is added to the design surface, expand the ellipsis menu on the tile, and select _Configure_.  Configure the map with the following settings, then click _Update_ to save the configuration changes.
+
+   | Field          | Value                                 |
+   | -------------- | ------------------------------------- |
+   | Title          | Pump Location                         |
+   | Device Group   | Texas Rod Pumps                       |
+   | Devices        | _select each device_                  |
+   | Property       | Pump Location                         |
+   
+   ![The Rod Pump location is displayed in a map. A list of devices and their IP addresses are listed on the right-hand side.](media/configure-property-map-pump-locations.png "Configure Map (property) tile")
+
+3. Observe how the device group now has a map displaying markers for each device in the set. Feel free to adjust to zoom to better infer their location.
 
     ![The Rod Pump location is displayed in a map. A list of devices and their IP addresses are listed on the right-hand side.](media/completed-dashboard.png "Completed Dashboard")
 
-2. Observe how the device group now has a map displaying markers for each device in the set. Feel free to adjust to zoom to better infer their location.
-
-3. Return to the edit view of the Dashboard and experiment adding additional visualizations relative to the Texas Rod Pump device group. For instance, add a tile that shows the Motor Power data for all of the devices in a single chart.
+4. Return to the edit view of the Dashboard and experiment adding additional visualizations relative to the Texas Rod Pump device group. For instance, add a Line chart tile that shows the Motor Power data for all of the devices in a single chart.
 
     ![A Motor Power (kW) tile has been added to the dashboard showing the current values for every device in the Texas Rod Pump device group.](media/dashboard-experiment.png "Completed Dashboard with Telemetry chart")
 
