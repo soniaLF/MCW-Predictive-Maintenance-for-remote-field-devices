@@ -434,11 +434,13 @@ One of the main features of IoT Central is the ability to visualize the health o
 
 In the previous exercise, we created a device group that contains the devices located in Texas. We will leverage this device set to display this filtered information.
 
-1. Remaining in the edit dashboard mode, select _Texas Rod Pumps_ from the _Device group_ dropdown, then select each of the devices in the _Devices_ list.
+1. Remaining in the edit mode of the dashboard, select _Start with devices_ from the _Add a tile_ section of the menu.
 
-2. In the _Property_ section, select the _Serial Number_, and _IP Address_ properties. Add properties by selecting the _+ Property_ button. Once complete, select the _Add tile_ button.
+2. Select _Texas Rod Pumps_ from the _Device group_ dropdown, then select each of the devices in the _Devices_ list.
 
-    ![The blade for adding the list tile is displayed.](media/device-list-configure1.png "Configure list tile")
+3. In the _Property_ section, select the _Serial Number_, and _IP Address_ properties. Add properties by selecting the _+ Property_ button. Once complete, select the _Add tile_ button.
+
+    ![The blade for adding a tile is displayed.](media/device-list-configure1.png "Add a tile from devices")
 
     ![The dashboard shows company logo and the device IDs and IP addresses.](media/dashboard-inprogress-1.png "Dashboard in progress")
 
