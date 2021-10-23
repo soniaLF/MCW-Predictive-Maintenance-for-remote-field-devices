@@ -34,6 +34,7 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
   - [Before the hands-on lab](#before-the-hands-on-lab)
   - [Exercise 1: Configuring IoT Central with devices and metadata](#exercise-1-configuring-iot-central-with-devices-and-metadata)
     - [Task 1: Model the telemetry data](#task-1-model-the-telemetry-data)
+      - [Telemetry schema](#telemetry-schema)
     - [Task 2: Create an IoT Central application](#task-2-create-an-iot-central-application)
     - [Task 3: Create the Device Template](#task-3-create-the-device-template)
     - [Task 4: Create and provision real devices](#task-4-create-and-provision-real-devices)
@@ -661,9 +662,9 @@ There are many ways to trigger flows in Microsoft Power Automate. One of them is
 
    ![The queues administration blade is displayed. The Add Queue button is circled.](media/create-storage-queue-menu.png "Create Queue in the Storage Account")
 
-2. Navigate to the storage account. Obtain the Shared Storage Key for the storage account by selecting the left-hand menu item **Access keys**. Copy the _Key_ value of _key1_ and retain this value. We will be using it later in the next task. Also, retain the name of your Storage Account. (in the image below, the name of the Storage Account is _storageaccountfabribce9_)
+2. Navigate to the storage account. Obtain the Shared Storage Key for the storage account by selecting the left-hand menu item **Access keys**. The keys are hidden to start. Select _Show keys_ to see the keys. Copy the _Key_ value of _key1_ and retain this value. We will be using it later in the next task. Also, retain the name of your Storage Account.
 
-   ![The pump function access key information is displayed. Key 1 is circled.](media/copy-function-storage-access-key.png "Copy access key for the Storage Account")
+   ![The storage account access key information is displayed. Show keys is circled.](media/copy-function-storage-access-key.png "Copy access key for the Storage Account")
 
 ### Task 4: Create notification service in Microsoft Power Automate
 
