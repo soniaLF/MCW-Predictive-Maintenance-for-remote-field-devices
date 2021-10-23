@@ -244,9 +244,9 @@ The telemetry being reported by the Fabrikam rod pumps are as follows, we will b
 
     ![The Device templates Views screen is shown with the Visualizing the device card highlighted.](media/device-template-add-new-view.png "Device template views")
 
-15. A View is composed of one or more tiles that display information related to a specific device. In the Edit view form, set the _View name_ to _Dashboard_. Then expand the _Telemetry_ drop down and select each item individually, then choosing the _Add tile_ button to add the chart to the View surface. Feel free to arrange the tiles as desired on the View design surface.
+15. A View is composed of one or more tiles that display information related to a specific device. In the Create view form, set the _View name_ to _Dashboard_. Underneath _Add a tile_, select _Start with devices_. Then expand the _Telemetry_ drop down and select each item individually, then choosing the _Add tile_ button to add the chart to the View surface. Feel free to arrange the tiles as desired on the View design surface.
 
-    ![The device template Dashboard edit screen is shown, with an item selected in the Telemetry section, and the Add tile button highlighted.](media/view-adding-telemetry-tiles-view.png "Composing a device view")
+    ![The device template Dashboard create view screen is shown, with an item selected in the Telemetry section, and the Add tile button highlighted.](media/create-dashboard-layout.png "Composing a dashboard")
 
 16. Remaining on the Dashboard view, expand the `Property` drop down list, and add a tile for `IP Address`, `Serial Number`, and `Pump Location`. Note that the tile for `Pump Location` renders with a map icon, meaning that IoT Central has identified the property as geography-based data, and will render it on a map appropriately.
 
