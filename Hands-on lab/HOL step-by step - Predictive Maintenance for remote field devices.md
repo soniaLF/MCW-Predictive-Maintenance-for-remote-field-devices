@@ -243,9 +243,9 @@ The telemetry being reported by the Fabrikam rod pumps are as follows, we will b
 
     ![The Device templates Views screen is shown with the Visualizing the device card highlighted.](media/device-template-add-new-view.png "Device template views")
 
-15. A View is composed of one or more tiles that display information related to a specific device. In the Edit view form, set the _View name_ to _Dashboard_. Then expand the _Telemetry_ drop down and select each item individually, then choosing the _Add tile_ button to add the chart to the View surface. Feel free to arrange the tiles as desired on the View design surface.
+15. A View is composed of one or more tiles that display information related to a specific device. In the Create view form, set the _View name_ to _Dashboard_. Underneath _Add a tile_, select _Start with devices_. Then expand the _Telemetry_ drop down and select each item individually, then choosing the _Add tile_ button to add the chart to the View surface. Feel free to arrange the tiles as desired on the View design surface.
 
-    ![The device template Dashboard edit screen is shown, with an item selected in the Telemetry section, and the Add tile button highlighted.](media/view-adding-telemetry-tiles-view.png "Composing a device view")
+    ![The device template Dashboard create view screen is shown, with an item selected in the Telemetry section, and the Add tile button highlighted.](media/create-dashboard-layout.png "Composing a dashboard")
 
 16. Remaining on the Dashboard view, expand the `Property` drop down list, and add a tile for `IP Address`, `Serial Number`, and `Pump Location`. Note that the tile for `Pump Location` renders with a map icon, meaning that IoT Central has identified the property as geography-based data, and will render it on a map appropriately.
 
@@ -418,9 +418,9 @@ One of the main features of IoT Central is the ability to visualize the health o
 
 ### Task 2: Add your company logo
 
-1. Remaining in the edit mode of the dashboard, select _Image_ from the _Custom tiles_ section of the menu. Select _Add tile_.
+1. Remaining in the edit mode of the dashboard, select _Image (static)_ from the _Add a tile_ section of the menu. Select _Add tile_.
 
-    ![The Custom tiles items are displayed. The Image item is checked.](media/dashboard-library-image.png "Custom tiles")
+    ![The Custom tiles items are displayed. The Image item is selected.](media/dashboard-library-image.png "Custom tiles")
 
 2. Once the tile is added to the design surface, expand the ellipsis menu on the tile, and select _Configure_. Configure the logo with the following file _C:\MCW-Predictive-Maintenance-for-remote-field-devices-master\Hands-on lab\media\fabrikam-logo.png_. Select the _Update_ button once complete.
 
@@ -434,11 +434,13 @@ One of the main features of IoT Central is the ability to visualize the health o
 
 In the previous exercise, we created a device group that contains the devices located in Texas. We will leverage this device set to display this filtered information.
 
-1. Remaining in the edit dashboard mode, select _Texas Rod Pumps_ from the _Device group_ dropdown, then select each of the devices in the _Devices_ list.
+1. Remaining in the edit mode of the dashboard, select _Start with devices_ from the _Add a tile_ section of the menu.
 
-2. In the _Property_ section, select the _Serial Number_, and _IP Address_ properties. Add properties by selecting the _+ Property_ button. Once complete, select the _Add tile_ button.
+2. Select _Texas Rod Pumps_ from the _Device group_ dropdown, then select each of the devices in the _Devices_ list.
 
-    ![The blade for adding the list tile is displayed.](media/device-list-configure1.png "Configure list tile")
+3. In the _Property_ section, select the _Serial Number_, and _IP Address_ properties. Add properties by selecting the _+ Property_ button. Once complete, select the _Add tile_ button.
+
+    ![The blade for adding a tile is displayed.](media/device-list-configure1.png "Add a tile from devices")
 
     ![The dashboard shows company logo and the device IDs and IP addresses.](media/dashboard-inprogress-1.png "Dashboard in progress")
 
@@ -446,13 +448,26 @@ In the previous exercise, we created a device group that contains the devices lo
 
 It is beneficial to see the location of certain critical Texas rod pumps. We will add a map that will display the location of each of the Texas Rod Pump devices.
 
-1. Return to the _Edit_ view of the Dashboard. As in the previous task, select the _Texas Rod Pumps_ and all the devices in the _Devices_ list. In the _Property_ drop down, select _Pump Location_.Select _Add tile_, then select _Save_ from the Dashboard toolbar menu.
+1. Return to the _Edit_ view of the Dashboard. Select _Start with a visual_ from the _Add a tile_ section of the menu.  Select _Map (property)_. Select _Add tile_.
+
+    ![The Rod Pump location is displayed in a map. A list of devices and their IP addresses are listed on the right-hand side.](media/add-property-map-pump-locations.png "Add Map (property) tile")
+
+2.  Once the tile is added to the design surface, expand the ellipsis menu on the tile, and select _Configure_.  Configure the map with the following settings, then click _Update_ to save the configuration changes.
+
+   | Field          | Value                                 |
+   | -------------- | ------------------------------------- |
+   | Title          | Pump Location                         |
+   | Device Group   | Texas Rod Pumps                       |
+   | Devices        | _select each device_                  |
+   | Property       | Pump Location                         |
+   
+   ![The Rod Pump location is displayed in a map. A list of devices and their IP addresses are listed on the right-hand side.](media/configure-property-map-pump-locations.png "Configure Map (property) tile")
+
+3. Observe how the device group now has a map displaying markers for each device in the set. Feel free to adjust to zoom to better infer their location.
 
     ![The Rod Pump location is displayed in a map. A list of devices and their IP addresses are listed on the right-hand side.](media/completed-dashboard.png "Completed Dashboard")
 
-2. Observe how the device group now has a map displaying markers for each device in the set. Feel free to adjust to zoom to better infer their location.
-
-3. Return to the edit view of the Dashboard and experiment adding additional visualizations relative to the Texas Rod Pump device group. For instance, add a tile that shows the Motor Power data for all of the devices in a single chart.
+4. Return to the edit view of the Dashboard and experiment adding additional visualizations relative to the Texas Rod Pump device group. For instance, add a Line chart tile that shows the Motor Power data for all of the devices in a single chart.
 
     ![A Motor Power (kW) tile has been added to the dashboard showing the current values for every device in the Texas Rod Pump device group.](media/dashboard-experiment.png "Completed Dashboard with Telemetry chart")
 
@@ -646,9 +661,9 @@ There are many ways to trigger flows in Microsoft Power Automate. One of them is
 
    ![The queues administration blade is displayed. The Add Queue button is circled.](media/create-storage-queue-menu.png "Create Queue in the Storage Account")
 
-2. Navigate to the storage account. Obtain the Shared Storage Key for the storage account by selecting the left-hand menu item **Access keys**. Copy the _Key_ value of _key1_ and retain this value. We will be using it later in the next task. Also, retain the name of your Storage Account. (in the image below, the name of the Storage Account is _storageaccountfabribce9_)
+2. Navigate to the storage account. Obtain the Shared Storage Key for the storage account by selecting the left-hand menu item **Access keys**. The keys are hidden to start. Select _Show keys_ to see the keys. Copy the _Key_ value of _key1_ and retain this value. We will be using it later in the next task. Also, retain the name of your Storage Account.
 
-   ![The pump function access key information is displayed. Key 1 is circled.](media/copy-function-storage-access-key.png "Copy access key for the Storage Account")
+   ![The storage account access key information is displayed. Show keys is circled.](media/copy-function-storage-access-key.png "Copy access key for the Storage Account")
 
 ### Task 4: Create notification service in Microsoft Power Automate
 
