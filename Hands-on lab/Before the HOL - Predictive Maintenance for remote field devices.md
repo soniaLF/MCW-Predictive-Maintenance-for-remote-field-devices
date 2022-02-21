@@ -81,17 +81,15 @@ In this task, you will create an Azure resource group for the resources used thr
 
     ![The portal menu icon is displayed.](media/portal-menu-icon.png "Menu icon")
 
-3. In the left-hand menu, select **Resource Groups**.
-
-4. At the top of the screen select the **Add** button.
+3. In the left-hand menu, select **Resource groups**.  On its context menu, select **Create**.
 
    ![Add Resource Group Menu](media/add-resource-group-menu.png 'Resource Group Menu')
 
-5. Create a new resource group with the name **Fabrikam_Oil**, ensure the proper subscription and region nearest you are selected. Then select **Review + Create**.
+4. Create a new resource group with the name **Fabrikam_Oil**, ensure the proper subscription and region nearest you are selected. Then select **Review + Create**.
 
    ![Create Resource Group](media/create-resource-group.png 'Resource Group')
 
-6. On the Summary blade, select **Create** to provision your resource group.
+5. On the Summary blade, select **Create** to provision your resource group.
 
 ### Task 3: Create an Azure Databricks service
 
