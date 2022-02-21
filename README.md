@@ -35,7 +35,7 @@ At the end of this hands-on-lab, you will be better able to implement an IoT-bas
 
 ## Azure services and related products
 
-- IoT Central
+- Azure IoT Central
 - Azure Databricks
 - Azure Machine Learning
 - Azure Event Hubs
