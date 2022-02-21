@@ -72,8 +72,8 @@ namespace Fabrikam.Oil.Pumps
 
                     var modelRequest = new RestRequest();
                     modelRequest.AddJsonBody(payload);
-                    var modelResult = restClient.ExecuteAsPost<int>(modelRequest, "POST");
-                    if (modelResult.Content == "1")
+                    var modelResult = await restClient.PostAsync<int>(modelRequest);
+                    if (modelResult == 1)
                     {
                         // impending failure detected from model - send notification.
 
