@@ -298,7 +298,7 @@ Included with this lab is source code that will simulate the connection and tele
 
 ### Task 1: Record device connection information
 
-1. In IoT Central, select _Devices_ from the left-hand menu. Then, from the devices list, select the link for _Rod Pump - DEVICE001_, and select the _Connect_ button located in the upper right corner of the device's page.
+1. In IoT Central, select _Devices_ from the left-hand menu. Then, from the devices list, select the link for **Rod Pump - DEVICE001**, and select **Connect** located in the toolbar.
 
     ![The device screen for DEVICE001 is displayed with the Connect button highlighted.](media/device-connect-menu.png "DEVICE001 Screen")
 
