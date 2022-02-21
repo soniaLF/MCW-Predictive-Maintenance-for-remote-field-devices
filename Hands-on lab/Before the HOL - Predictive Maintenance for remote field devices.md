@@ -172,7 +172,7 @@ In this task, you will import a Databricks notebook into your workspace.
 
    ![Create a resource is highlighted and Machine Learning is selected.](media/azure-create-aml-search.png 'SQL Database')
 
-3. Select **Create** in the Azure Databricks details page.
+3. Select **Create** in the Machine Learning details page.
 
 4. Within the **Machine Learning** form, complete the following:
 
