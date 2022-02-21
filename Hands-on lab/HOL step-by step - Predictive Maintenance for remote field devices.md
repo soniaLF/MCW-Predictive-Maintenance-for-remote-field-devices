@@ -219,7 +219,7 @@ The telemetry being reported by the Fabrikam rod pumps are as follows, we will b
 
     ![The screen displays the state configuration options.](media/power-state-definition.png "Power State")
 
-11. In the device template, Properties are metadata associated with the equipment. For our template, we will expect a property for Serial Number, IP Address, and the geographic location of the pump. Remaining on the same screen, select _+ Add capability_. Define the device properties as follows, then select _Save_ from the toolbar menu:
+11. In the device template, **Properties** are metadata associated with the equipment. These are added on the same form as the capabilities, only using **Property** for the Capability type field. For our template, we will expect a property for Serial Number, IP Address, and the geographic location of the pump. Remaining on the same screen, select _+ Add capability_. Define the device properties as follows, then select _Save_ from the toolbar menu:
 
     | Display Name  | Name         | Capability Type | Semantic Type | Schema | Writable | Description                       |
     | ------------- | ------------ | --------------- | ------------- | ------ |--------- | --------------------------------- |
@@ -262,7 +262,7 @@ The telemetry being reported by the Fabrikam rod pumps are as follows, we will b
 
 18. On the `Rod Pump` device template screen, select the `Views` item from the central navigation pane, and choose `Visualizing the device` once again to create a new view. Name this view, `Command` and add a tile for the `Toggle Motor Power` command. Once complete, press the `Save` button in the toolbar. This View will allow pump operators to initiate the toggle power command from the IoT Central application.
 
-19. Finally, we can add a thumbnail image to represent the equipment. Select on the circle icon to left of the template name. This will allow you to select an image file. The image used in this lab can be found on [PixaBay](https://pixabay.com/photos/refinery-pump-oil-pump-industry-514010/). After setting the thumbnail, select the `Publish` button in the device template toolbar.
+19. Finally, we can add a thumbnail image to represent the equipment. Select **Device templates**, then select **Rod Pump**. Select the circle icon to left of the template name. This will allow you to select an image file. The image used in this lab can be found on [PixaBay](https://pixabay.com/photos/refinery-pump-oil-pump-industry-514010/). After setting the thumbnail, select the `Publish` button in the device template toolbar. Finally, select **Publish** to publish the device template.
 
     ![The header portion of the Rod Pump device template is shown with the thumbnail and Publish menu item highlighted.](media/device-template-thumbnail.png "Device Template Thumbnail and Publishing")
 
