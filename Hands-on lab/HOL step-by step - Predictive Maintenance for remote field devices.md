@@ -143,27 +143,33 @@ The telemetry being reported by the Fabrikam rod pumps are as follows, we will b
 
 ### Task 2: Create an IoT Central application
 
-1. In the Azure Portal, open the resource group you created in the **Before the HOL** exercise. From the toolbar, select the _+ Add_ button.
+1. Navigate to the [Azure portal](https://portal.azure.com).
 
-2. In the **Search the Marketplace**, search for and select **IoT Central application**. On the IoT Central application resource overview screen, select _Create_.
+2. Expand the left menu, and select **+ Create a resource**, type in "IoT Central" in the search field, then select **IoT Central application** from the results.
+
+    ![The browser screen shows the Create a resource screen. IoT Central is entered in the search box. IoT Central application is highlighted in the suggested search results.](media/create-iot-central-application.png "Create an IoT Central application resource from the Create a resource screen.")
+
+3. On the IoT Central application resource overview screen, select **Create**.
 
     ![The browser screen shows the IoT Central application resource screen. The Create button is highlighted.](media/azure-iot-central-website.png "IoT Central application resource overview screen")
 
-3. In the IoT Central Application, fill it out as follows, then select the _Create_ button.
+4. In the IoT Central Application, fill out the form with the following settings:
 
     | Field          | Value     |
     | -------------- | -------- |
-    | Resource name   | _enter a globally unique name_   |
-    | Application URL | _keep the default_ |
-    | Subscription | _select the appropriate subscription_ |
-    | Resource group | _select `Fabrikam_Oil`_ |
-    | Pricing plan | _select `Standard 2`_ |
-    | Template | _select `Custom application`_ |
-    | Location | _select the location nearest to you_ |
+    | Resource name   | Enter a globally unique name.   |
+    | Application URL | Keep the default. |
+    | Subscription | Select the appropriate subscription. |
+    | Resource group | Select `Fabrikam_Oil`. |
+    | Pricing plan | Select `Standard 2`. |
+    | Template | Select `Custom application`. |
+    | Location | Select the region nearest to you. |
 
     ![The IoT Central Application form is shown populated with the preceding values.](media/azure-iot-central-new-application.png "IoT Central Application form")
 
-4. Wait for the application to be provisioned.
+5. Select **Create**.
+
+6. Wait for the application to be provisioned.
 
 ### Task 3: Create the Device Template
 
