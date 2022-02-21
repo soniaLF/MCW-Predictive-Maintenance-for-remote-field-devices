@@ -127,9 +127,9 @@ Azure Databricks is used to train and deploy a machine learning model that predi
 
    ![Launch Workspace](media/databricks-launch-workspace.png 'Launch Workspace')
 
-3. Once in the workspace, select **Clusters** in the left-hand menu, then select **+ Create Cluster**.
+3. Once in the workspace, select **Compute** in the left-hand menu, then select **Create Cluster**.
 
-   ![Create Cluster is highlighted.](media/databricks-clusters.png 'Clusters')
+   ![Compute, then Create Cluster are highlighted.](media/databricks-clusters.png 'Clusters')
 
 4. In the **New Cluster** form, specify the following configuration options:
 
@@ -138,7 +138,7 @@ Azure Databricks is used to train and deploy a machine learning model that predi
    | Cluster name               | _enter `lab`_                                                                                |
    | Cluster Mode               | _select `Standard`_                                                                          |
    | Pool                       | _select `None`_                                                                              |
-   | Databricks Runtime Version | _select `Runtime: 7.4 (Scala 2.12, Spark 3.0.1)`_                                         |
+   | Databricks Runtime Version | _select `Runtime: 10.3 (Scala 2.12, Spark 3.2.1)`_                                         |
    | Autopilot Options          | _uncheck `Enable autoscaling` and check `Terminate after...`, with a value of `120` minutes_ |
    | Worker Type                | _select `Standard_DS3_v2`_                                                                   |
    | Driver Type                | _select `Same as worker`_                                                                    |
@@ -160,7 +160,7 @@ In this task, you will import a Databricks notebook into your workspace.
 
    ![The file import form is displayed with the Anomaly Detection.ipynb file selected.](media/databricks-import.png 'Import Notebooks')
 
-3. After importing, select your username. You will see a new notebook named `Anomaly Detection`.
+3. After importing the notebook, select **Workspace**, then select **Users**. Select your username. You will see a new notebook named `Anomaly Detection`.
 
    ![The imported notebooks are displayed.](media/databricks-notebooks.png 'Imported notebooks')
 
