@@ -388,14 +388,23 @@ Device groups allow you to create logical groupings of IoT Devices in the field 
 
 ### Task 1: Create a device group using a filter
 
+In the field, all Texas pumps are located in the *192.168.1.* subnet, so we will create a filter to include only those pumps in this device group. 
+
 1. In the left-hand menu, select the _Device groups_ menu item. You will see a single default device group in the list (_Rod Pump - All devices_). Select the _+ New_ button in toolbar.
 
     ![A screen displays the current device groups. The + New button is highlighted.](media/device-set-list.png "Device group listing")
 
-2. In the field, all Texas pumps are located in the *192.168.1.* subnet, so we will create a filter to include only those pumps in this device group. Create the Device group with the filter as described in the following table. Feel free to _Run query_ to see the devices included, then select _Save_ from the toolbar:
+2. Set the name for this device group to `Texas Rod Pumps`. For the description, enter `Rod pumps located in Texas`.
+3. In the section **Create a device query**, in the **Value** column, select **Rod Pump**.
+4. Select **+ Filter** to add another filter.
+5. Set up the filter with the following settings:
+    * Name: **IP Address**
+    * Operator: **Contains**
+    * Value: `192.168.1.`
 
-    ![The screen shows the device group creation options. There is a list of devices and their settings displayed in a results table.](media/new-device-set.png "New device group")
+    ![The screen shows the device group query. There is a list of devices and their settings displayed in a results table.](media/new-device-set.png "New device group")
 
+6. Select **Save** from the toolbar. Your results should be:
     | Field               | Value                      |
     | ------------------- | -------------------------- |
     | Device Group Name (in header) | Texas Rod Pumps            |
@@ -405,7 +414,7 @@ Device groups allow you to create logical groupings of IoT Devices in the field 
     | Filter: Operator | contains                   |
     | Filter: Value    | 192.168.1.                 |
 
-3. Once the Device group is saved, you are able to act upon this group of devices as a single unit within IoT Central.
+Once the device group is saved, you are able to act upon this group of devices as a single unit within IoT Central.
 
 ## Exercise 4: Creating a useful dashboard
 
