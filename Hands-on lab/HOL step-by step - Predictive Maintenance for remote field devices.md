@@ -468,14 +468,14 @@ It is beneficial to see the location of certain critical Texas rod pumps. We wil
 
     ![The Rod Pump location is displayed in a map. A list of devices and their IP addresses are listed on the right-hand side.](media/add-property-map-pump-locations.png "Add Map (property) tile")
 
-2. Once the tile is added to the design surface, expand the ellipsis menu on the tile, and select _Configure_.  Configure the map with the following settings, then click _Update_ to save the configuration changes.
+2. Once the tile is added to the design surface, select the **Edit** (pencil icon) from the tile's toolbar.  Configure the map with the following settings, then click _Update_ to save the configuration changes.
 
    | Field          | Value                                 |
    | -------------- | ------------------------------------- |
-   | Title          | Pump Location                         |
-   | Device Group   | Texas Rod Pumps                       |
+   | Title          | `Pump Location`                         |
+   | Device Group   | **Texas Rod Pumps**                       |
    | Devices        | _select each device_                  |
-   | Property       | Pump Location                         |
+   | Property       | **Pump Location**                         |
 
    ![The Rod Pump location is displayed in a map. A list of devices and their IP addresses are listed on the right-hand side.](media/configure-property-map-pump-locations.png "Configure Map (property) tile")
 
@@ -499,7 +499,7 @@ The Event Hub we will be creating will act as a collector for data coming into I
 
 1. Log into the [Azure Portal](https://portal.azure.com), and open your **Fabrikam_Oil** resource group.
 
-2. On the top of the screen, select the **Add** button. When the marketplace screen displays, search for and select **Event Hubs**. This will allow you to create a new Event Hub Namespace resource. Select the _Create_ button on the resource overview screen.
+2. On the top of the screen, select the **Create** button. When the marketplace screen displays, search for and select **Event Hubs**. This will allow you to create a new Event Hub Namespace resource. Select the **Create** button on the resource overview screen.
 
     ![The marketplace search box contains Event Hubs, and the Event Hubs suggestion is highlighted.](media/marketplace_eventhubs.png "New Event Hub")
 
@@ -548,18 +548,18 @@ The Event Hub we will be creating will act as a collector for data coming into I
 
    | Field                | Value                                            |
    | -------------------- | ------------------------------------------------ |
-   | Display Name  (Header)        | Event Hub Feed                                   |
-   | Enabled (Header)              | On                                               |
-   | Type of data to export | Telemetry |
+   | Display Name  (Header)        | `Event Hub` Feed                                   |
+   | Enabled (Header)              | **On**                                               |
+   | Type of data to export | **Telemetry** |
   
 3. In the _Destinations_ section, select the _create a new one_ link. Configure the new destination as follows, then select the _Create_ button:
 
     | Field                | Value                                            |
     | -------------------- | ------------------------------------------------ |
-    | Destination name     | iot-central-event-hub-feed                                   |
-    | Destination type              | Azure Event Hubs                                               |
+    | Destination name     | `iot-central-event-hub-feed`                                   |
+    | Destination type              | **Azure Event Hubs**                                               |
     | Connection string | see subsection below on how to get the connection string |
-    | Event Hub | iot-central-feed |
+    | Event Hub | `iot-central-feed` |
 
    Obtain the connection string as follows:
 
@@ -575,7 +575,7 @@ The Event Hub we will be creating will act as a collector for data coming into I
 
    ![The data export configuration fields are displayed.](media/create-data-export-form.png "Configure Data Export")
 
-4. Select the _Save_ button from the toolbar menu on the _Event Hub Feed_ continuous export screen.
+4. Select **Save** from the toolbar menu on the **Event Hub Feed** continuous export screen.
 
 5. The Event Hub Feed export will be created, and then started (it may take a few minutes for the export to start). Return to the Data export list to see the current status of the feed.
 
