@@ -468,7 +468,7 @@ It is beneficial to see the location of certain critical Texas rod pumps. We wil
 
     ![The Rod Pump location is displayed in a map. A list of devices and their IP addresses are listed on the right-hand side.](media/add-property-map-pump-locations.png "Add Map (property) tile")
 
-2.  Once the tile is added to the design surface, expand the ellipsis menu on the tile, and select _Configure_.  Configure the map with the following settings, then click _Update_ to save the configuration changes.
+2. Once the tile is added to the design surface, expand the ellipsis menu on the tile, and select _Configure_.  Configure the map with the following settings, then click _Update_ to save the configuration changes.
 
    | Field          | Value                                 |
    | -------------- | ------------------------------------- |
@@ -476,7 +476,7 @@ It is beneficial to see the location of certain critical Texas rod pumps. We wil
    | Device Group   | Texas Rod Pumps                       |
    | Devices        | _select each device_                  |
    | Property       | Pump Location                         |
-   
+
    ![The Rod Pump location is displayed in a map. A list of devices and their IP addresses are listed on the right-hand side.](media/configure-property-map-pump-locations.png "Configure Map (property) tile")
 
 3. Observe how the device group now has a map displaying markers for each device in the set. Feel free to adjust to zoom to better infer their location.
