@@ -889,11 +889,11 @@ Duration: 10 minutes
 
 ### Task 1: Delete Lab Resources
 
-1. In the [Azure Portal](https://portal.azure.com), select **Resource Groups**, open the resource group that you created in Exercise 6, and select the **Delete resource group** button.
+1. In the [Azure portal](https://portal.azure.com), select **Resource Groups**. Open the resource group that you created in Exercise 6, and select the **Delete resource group** button.
 
    ![The Azure Resource Group panel is displayed. The Delete resource group link is circled.](media/delete-resource-group.png "Delete the Resource Group")
 
-2. Delete Microsoft Power Automate flow that we created. Access [Microsoft Power Automate](https://flow.microsoft.com) and login. From the left-hand menu, select **My flows**. Select the ellipsis button next to the flow we created in this lab and select **Delete**.
+2. Delete Microsoft Power Automate flow that we created. Access [Microsoft Power Automate](https://powerautomate.microsoft.com) and login. From the left-hand menu, select **My flows**. Select the ellipsis button next to the flow we created in this lab and select **Delete**.
 
    ![The Power Automate Flows panel is displayed. The ellipsis and delete links are circled.](media/delete-flow.png "Delete Microsoft Power Automate Flow")
 
