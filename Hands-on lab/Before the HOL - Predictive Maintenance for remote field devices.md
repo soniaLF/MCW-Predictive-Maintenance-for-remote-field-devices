@@ -48,7 +48,7 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
 4. [C# Visual Studio Code Extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode.csharp)
 5. [Azure Functions Core Tools version 2.x (using NPM or Chocolatey - see readme on GitHub repository)](https://github.com/Azure/azure-functions-core-tools)
 6. [Azure Functions Visual Studio Code Extension](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurefunctions)
-7. An Azure Databricks cluster running Databricks Runtime 5.1 or above.
+7. An Azure Databricks cluster running Databricks Runtime 10.3 or above.
 8. [Node.js 8.0 or above.](https://nodejs.org)
 
 ## Before the hands-on lab
