@@ -92,7 +92,7 @@ The Predictive Maintenance for Remote Field Devices hands-on lab is an exercise 
 
 [Azure IoT Central](https://docs.microsoft.com/azure/iot-central/overview-iot-central) is at the core of the preferred solution. It is used for data ingest, device management, data storage, and reporting. IoT field devices securely connect to IoT Central through its cloud gateway. The continuous export component sends device telemetry data to [Azure Blob storage](https://docs.microsoft.com/azure/storage/blobs/storage-blobs-overview) for cold storage, and the same data to [Azure Event Hubs](https://docs.microsoft.com/azure/event-hubs/event-hubs-about) for real-time processing. Azure Databricks uses the data stored in cold storage to periodically re-train a Machine Learning (ML) model to detect oil pump failures. It is also used to deploy the trained model to a web service hosted by [Azure Kubernetes Service](https://docs.microsoft.com/azure/aks/) (AKS) or [Azure Container Instances](https://docs.microsoft.com/azure/container-instances/) (ACI), using [Azure Machine Learning](https://docs.microsoft.com/en-us/azure/machine-learning/overview-what-is-azure-machine-learning). An [Azure function](https://docs.microsoft.com/azure/azure-functions/functions-overview) is triggered by events flowing through Event Hubs. It sends the event data for each pump to the web service hosting the deployed model, then sends an alert through [Microsoft Power Automate](https://powerautomate.microsoft.com/) if an alert has not been sent within a configurable period of time. The alert is sent in the form of an email, identifying the failing oil pump with a suggestion to service the device.
 
-_Azure IoT Central architecture_
+Azure IoT Central architecture
 
 ![The architecture diagram illustrates the components of Azure IoT Central.](media/arch-diagram.png "IoT Central architecture")
 
@@ -388,7 +388,7 @@ Device groups allow you to create logical groupings of IoT Devices in the field 
 
 ### Task 1: Create a device group using a filter
 
-In the field, all Texas pumps are located in the *192.168.1.* subnet, so we will create a filter to include only those pumps in this device group. 
+In the field, all Texas pumps are located in the `192.168.1.*` subnet, so we will create a filter to include only those pumps in this device group.
 
 1. In the left-hand menu, select the _Device groups_ menu item. You will see a single default device group in the list (_Rod Pump - All devices_). Select the _+ New_ button in toolbar.
 
@@ -398,9 +398,9 @@ In the field, all Texas pumps are located in the *192.168.1.* subnet, so we will
 3. In the section **Create a device query**, in the **Value** column, select **Rod Pump**.
 4. Select **+ Filter** to add another filter.
 5. Set up the filter with the following settings:
-    * Name: **IP Address**
-    * Operator: **Contains**
-    * Value: `192.168.1.`
+    - Name: **IP Address**
+    - Operator: **Contains**
+    - Value: `192.168.1.`
 
     ![The screen shows the device group query. There is a list of devices and their settings displayed in a results table.](media/new-device-set.png "New device group")
 
@@ -501,7 +501,7 @@ The Event Hub we will be creating will act as a collector for data coming into I
 
 2. On the top of the screen, select the **Create** button. When the marketplace screen displays, search for and select **Event Hubs**. This will allow you to create a new Event Hub Namespace resource. Select the **Create** button on the resource overview screen.
 
-    ![The marketplace search box contains Event Hubs, and the Event Hubs suggestion is highlighted.](media/marketplace_eventhubs.png "New Event Hub")
+    ![The marketplace search box contains Event Hubs, and the Event Hubs suggestion is highlighted.](media/marketplace-eventhubs.png "New Event Hub")
 
 3. Configure the event hub as follows, select the *Review + create** button, and then **Create**:
 
@@ -579,7 +579,7 @@ The Event Hub we will be creating will act as a collector for data coming into I
 
 5. The Event Hub Feed export will be created, and then started (it may take a few minutes for the export to start). Return to the Data export list to see the current status of the feed.
 
-   ![The Data Export screen displays the status of Event Hub creation. The status of healthy is displayed.](media/ce-eventhubfeed-running.png "Event Hub Feed is Healthy")
+   ![The Data Export screen displays the status of Event Hub creation. The status of healthy is displayed.](media/continuous-export-eventhub-feed-running.png "Event Hub Feed is Healthy")
 
 ## Exercise 6: Use Azure Databricks and Azure Machine Learning service to train and deploy predictive model
 
@@ -784,7 +784,7 @@ It is recommended that you never check in secrets, such as connection strings, i
 
 2. Upon opening the folder in Visual Studio Code, you may be prompted to restore unresolved dependencies. If this is the case, select the **Restore** button.
 
-   ![A sample Restore Unresolved Dependencies dialog is displayed. The Restore button is available.](media/unresolveddependencies.png "Restore Unresolved Dependencies Dialog")
+   ![A sample Restore Unresolved Dependencies dialog is displayed. The Restore button is available.](media/unresolved-dependencies.png "Restore Unresolved Dependencies Dialog")
 
 3. In this folder, create a new file named _local.settings.json_ and populate it with the values obtained in the previous task as follows, then save the file (note: prediction model endpoint was obtained in Exercise 6, Task 1 - step 8):
 
@@ -847,7 +847,7 @@ We will run the function app and the generator to add values to the queues, so t
 
    ![The Azure Function Application Overview window is displayed with the Configuration item highlighted.](media/function-configuration-settings-menu.png "Azure Function Application Overview window")
 
-3. In the **Application Settings** section, we will add the following application settings to mimic those that are in our *local.settings.json* file. Add a new setting by selecting the **New application setting** button.
+3. In the **Application Settings** section, we will add the following application settings to mimic those that are in our **local.settings.json** file. Add a new setting by selecting the **New application setting** button.
 
     | Setting     | Value                                                                               |
     | ----------- | ----------------------------------------------------------------------------------- |
@@ -868,11 +868,11 @@ We will run the function app and the generator to add values to the queues, so t
 
 2. In the textbox of the command palette, type in *Azure:Sign In*, and select enter (or select the command from the list). This will open a Microsoft Authentication webpage in your default browser. Logging into this window will authenticate Visual Studio Code with your ID.
 
-   ![The Visual Studio Code command palette is displaying Azure:Sign In as a command option. The Azure:Sign In command is highlighted.](media/commandpalettesignin.png "Azure Sign In Command")
+   ![The Visual Studio Code command palette is displaying Azure:Sign In as a command option. The Azure:Sign In command is highlighted.](media/command-palette-sign-in.png "Azure Sign In Command")
 
-3. Once authenticated, we are ready to deploy - once again select <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>p</kbd> to open the command palette. Type *Azure Functions: Deploy* and select the *Azure Functions: Deploy to Function App* command from the list.
+3. Once authenticated, we are ready to deploy - once again select <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>p</kbd> to open the command palette. Type `Azure Functions: Deploy` and select the **Azure Functions: Deploy to Function App** command from the list.
 
-   ![The Visual Studio Code command palette is displaying Azure Functions. The Deploy to Function App command is circled.](media/commandpalettedeploytofunctionapp.png "Deploy to Function App Command")
+   ![The Visual Studio Code command palette is displaying Azure Functions. The Deploy to Function App command is circled.](media/command-palette-deploy-to-function-app.png "Deploy to Function App Command")
 
 4. The first step of this command is to identify where we are deploying the function to. In our case, we have already created a Function App to house our function called **pumpfunctions**. Select this value from the list of available choices.
 
