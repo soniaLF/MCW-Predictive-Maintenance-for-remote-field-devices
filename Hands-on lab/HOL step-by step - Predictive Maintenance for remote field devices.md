@@ -310,7 +310,7 @@ Included with this lab is source code that will simulate the connection and tele
 
 ### Task 2: Open the Visual Studio solution, and update connection string values
 
-1. Using Visual Studio Code, open the `C:\MCW-Predictive-Maintenance-for-remote-field-devices-master\Hands-on lab\Resources\FieldDeviceSimulator\Fabrikam.FieldDevice.Generator` folder.
+1. Using Visual Studio Code, open the `C:\MCW-Predictive-Maintenance-for-remote-field-devices-main\Hands-on lab\Resources\FieldDeviceSimulator\Fabrikam.FieldDevice.Generator` folder.
 
     > If you are prompted by Visual Studio code to install additional components to enable debugging, please select the option to install the components.
 
@@ -438,7 +438,7 @@ One of the main features of IoT Central is the ability to visualize the health o
 
     ![The Custom tiles items are displayed. The Image item is selected.](media/dashboard-library-image.png "Custom tiles")
 
-2. Once the tile is added to the design surface, expand the ellipsis menu on the tile, and select _Configure_. Configure the logo with the following file _C:\MCW-Predictive-Maintenance-for-remote-field-devices-master\Hands-on lab\media\fabrikam-logo.png_. Select the _Update_ button once complete.
+2. Once the tile is added to the design surface, expand the ellipsis menu on the tile, and select _Configure_. Configure the logo with the following file _C:\MCW-Predictive-Maintenance-for-remote-field-devices-main\Hands-on lab\media\fabrikam-logo.png_. Select the _Update_ button once complete.
 
     ![The company logo configuration options are displayed.](media/configure-dashboard-logo.png "Configure Logo Image")
 
@@ -780,7 +780,7 @@ We will be using [Microsoft Power Automate](https://powerautomate.microsoft.com/
 
 It is recommended that you never check in secrets, such as connection strings, into source control. One way to do this is to use settings files. The values stored in these files mimic environment values used in production. The local settings file is never checked into source control.
 
-1. Using Visual Studio Code, open the `C:\MCW-Predictive-Maintenance-for-remote-field-devices-master\Hands-on lab\Resources\FailurePredictionFunction` folder.
+1. Using Visual Studio Code, open the `C:\MCW-Predictive-Maintenance-for-remote-field-devices-main\Hands-on lab\Resources\FailurePredictionFunction` folder.
 
 2. Upon opening the folder in Visual Studio Code, you may be prompted to restore unresolved dependencies. If this is the case, select the **Restore** button.
 

@@ -69,7 +69,7 @@ Download the lab artifacts from GitHub.
 
    ![Download .zip containing the repository](media/github-download-repo.png 'Download ZIP')
 
-3. Unzip the contents to your root hard drive (i.e., `C:\`). This will create a folder on your root drive named `MCW-Predictive-Maintenance-for-remote-field-devices-master`.
+3. Unzip the contents to your root hard drive (i.e., `C:\`). This will create a folder on your root drive named `MCW-Predictive-Maintenance-for-remote-field-devices-main`.
 
 ### Task 2: Provision a resource group
 
@@ -154,7 +154,7 @@ In this task, you will import a Databricks notebook into your workspace.
 
    ![The Import link is highlighted in the Workspace.](media/databricks-import-link.png 'Workspace')
 
-2. Keep **File** selected next to **Import from**, select or drag and drop the file `C:\MCW-Predictive-Maintenance-for-remote-field-devices-master\Hands-on lab\Resources\Notebooks\Anomaly Detection.ipynb`, then select **Import**.
+2. Keep **File** selected next to **Import from**, select or drag and drop the file `C:\MCW-Predictive-Maintenance-for-remote-field-devices-main\Hands-on lab\Resources\Notebooks\Anomaly Detection.ipynb`, then select **Import**.
 
    ![The file import form is displayed with the Anomaly Detection.ipynb file selected.](media/databricks-import.png 'Import Notebooks')
 
