@@ -90,7 +90,7 @@ The Predictive Maintenance for Remote Field Devices hands-on lab is an exercise 
 
 ![The architecture diagram shows the components of the preferred solution.](media/preferred-solution.png "High-level architecture")
 
-[Azure IoT Central](https://docs.microsoft.com/azure/iot-central/overview-iot-central) is at the core of the preferred solution. It is used for data ingest, device management, data storage, and reporting. IoT field devices securely connect to IoT Central through its cloud gateway. The continuous export component sends device telemetry data to [Azure Blob storage](https://docs.microsoft.com/azure/storage/blobs/storage-blobs-overview) for cold storage, and the same data to [Azure Event Hubs](https://docs.microsoft.com/azure/event-hubs/event-hubs-about) for real-time processing. Azure Databricks uses the data stored in cold storage to periodically re-train a Machine Learning (ML) model to detect oil pump failures. It is also used to deploy the trained model to a web service hosted by [Azure Kubernetes Service](https://docs.microsoft.com/azure/aks/) (AKS) or [Azure Container Instances](https://docs.microsoft.com/azure/container-instances/) (ACI), using [Azure Machine Learning](https://docs.microsoft.com/en-us/azure/machine-learning/overview-what-is-azure-machine-learning). An [Azure function](https://docs.microsoft.com/azure/azure-functions/functions-overview) is triggered by events flowing through Event Hubs. It sends the event data for each pump to the web service hosting the deployed model, then sends an alert through [Microsoft Power Automate](https://powerautomate.microsoft.com/en-us/) if an alert has not been sent within a configurable period of time. The alert is sent in the form of an email, identifying the failing oil pump with a suggestion to service the device.
+[Azure IoT Central](https://docs.microsoft.com/azure/iot-central/overview-iot-central) is at the core of the preferred solution. It is used for data ingest, device management, data storage, and reporting. IoT field devices securely connect to IoT Central through its cloud gateway. The continuous export component sends device telemetry data to [Azure Blob storage](https://docs.microsoft.com/azure/storage/blobs/storage-blobs-overview) for cold storage, and the same data to [Azure Event Hubs](https://docs.microsoft.com/azure/event-hubs/event-hubs-about) for real-time processing. Azure Databricks uses the data stored in cold storage to periodically re-train a Machine Learning (ML) model to detect oil pump failures. It is also used to deploy the trained model to a web service hosted by [Azure Kubernetes Service](https://docs.microsoft.com/azure/aks/) (AKS) or [Azure Container Instances](https://docs.microsoft.com/azure/container-instances/) (ACI), using [Azure Machine Learning](https://docs.microsoft.com/en-us/azure/machine-learning/overview-what-is-azure-machine-learning). An [Azure function](https://docs.microsoft.com/azure/azure-functions/functions-overview) is triggered by events flowing through Event Hubs. It sends the event data for each pump to the web service hosting the deployed model, then sends an alert through [Microsoft Power Automate](https://powerautomate.microsoft.com/) if an alert has not been sent within a configurable period of time. The alert is sent in the form of an email, identifying the failing oil pump with a suggestion to service the device.
 
 _Azure IoT Central architecture_
 
@@ -633,9 +633,11 @@ We will be using an Azure Function to read incoming telemetry from IoT Hub and s
 
 2. Open your resource group for this lab.
 
-3. From the top menu, select the **+ Add** button, and search for Function App.
+3. From the top menu, select the **+ Create** button, and search for `Function App`. Select the Function App app. Then, select **Create**.
 
-4. Configure the Function App as follows, then select **Next: Hosting >**:
+    ![The Marketplace is displayed. The search input shows "Function App". The Function App image and title are highlighted.](media/search-for-function-app.png "Search the Marketplace")
+
+4. Configure the Function App with the following settings, then select **Next: Hosting >**:
 
     | Field         | Value                                           |
     | ------------- | ----------------------------------------------- |
@@ -691,9 +693,9 @@ There are many ways to trigger flows in Microsoft Power Automate. One of them is
 
 ### Task 4: Create notification service in Microsoft Power Automate
 
-We will be using [Microsoft Power Automate](https://flow.microsoft.com/) as a means to email notifications to the workforce in the field. This flow will respond to new messages placed on the queue that we created in Task 3.
+We will be using [Microsoft Power Automate](https://powerautomate.microsoft.com/) as a means to email notifications to the workforce in the field. This flow will respond to new messages placed on the queue that we created in Task 3.
 
-1. Access [Microsoft Power Automate](https://flow.microsoft.com) and sign in (create an account if you don't already have one).
+1. Access [Microsoft Power Automate](https://powerautomate.microsoft.com/) and sign in (create an account if you don't already have one).
 
 2. From the left-hand menu, select **+ Create**, then choose **Instant cloud flow**.
 
@@ -737,7 +739,7 @@ We will be using [Microsoft Power Automate](https://flow.microsoft.com/) as a me
 
    ![The Flow action for sending an email is displayed. The message text option and New step button are circled.](media/create-flow-email-form.png "Email form")
 
-10. In the search bar for the next step, search for _queue_ once more, then select the **Delete message (V2)(preview)** item from the filtered list of Actions.
+10. In the search bar for the next step, search for _queue_ once more, then select the **Delete message (V2)** item from the filtered list of Actions.
 
     ![The Flow Action pane is displayed. The queue text is listed in the search field.](media/create-flow-delete-message-step.png "Delete queue message step")
 
