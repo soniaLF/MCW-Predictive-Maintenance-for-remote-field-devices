@@ -9,7 +9,7 @@ Before the hands-on lab setup guide
 </div>
 
 <div class="MCWHeader3">
-May 2021
+February 2022
 </div>
 
 Information in this document, including URL and other Internet Web site references, is subject to change without notice. Unless otherwise noted, the example companies, organizations, products, domain names, e-mail addresses, logos, people, places, and events depicted herein are fictitious, and no association with any real company, organization, product, domain name, e-mail address, logo, person, place or event is intended or should be inferred. Complying with all applicable copyright laws is the responsibility of the user. Without limiting the rights under copyright, no part of this document may be reproduced, stored in or introduced into a retrieval system, or transmitted in any form or by any means (electronic, mechanical, photocopying, recording, or otherwise), or for any purpose, without the express written permission of Microsoft Corporation.
@@ -18,7 +18,7 @@ Microsoft may have patents, patent applications, trademarks, copyrights, or othe
 
 The names of manufacturers, products, or URLs are provided for informational purposes only and Microsoft makes no representations and warranties, either expressed, implied, or statutory, regarding these manufacturers or the use of the products with any Microsoft technologies. The inclusion of a manufacturer or product does not imply endorsement of Microsoft of the manufacturer or product. Links may be provided to third party sites. Such sites are not under the control of Microsoft and Microsoft is not responsible for the contents of any linked site or any link contained in a linked site, or any changes or updates to such sites. Microsoft is not responsible for webcasting or any other form of transmission received from any linked site. Microsoft is providing these links to you only as a convenience, and the inclusion of any link does not imply endorsement of Microsoft of the site or the products contained therein.
 
-© 2021 Microsoft Corporation. All rights reserved.
+© 2022 Microsoft Corporation. All rights reserved.
 
 Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/intellectualproperty/Trademarks/Usage/General.aspx> are trademarks of the Microsoft group of companies. All other trademarks are property of their respective owners.
 
@@ -48,7 +48,7 @@ Microsoft and the trademarks listed at <https://www.microsoft.com/en-us/legal/in
 4. [C# Visual Studio Code Extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode.csharp)
 5. [Azure Functions Core Tools version 2.x (using NPM or Chocolatey - see readme on GitHub repository)](https://github.com/Azure/azure-functions-core-tools)
 6. [Azure Functions Visual Studio Code Extension](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azurefunctions)
-7. An Azure Databricks cluster running Databricks Runtime 5.1 or above.
+7. An Azure Databricks cluster running Databricks Runtime 10.3 or above.
 8. [Node.js 8.0 or above.](https://nodejs.org)
 
 ## Before the hands-on lab
@@ -69,7 +69,7 @@ Download the lab artifacts from GitHub.
 
    ![Download .zip containing the repository](media/github-download-repo.png 'Download ZIP')
 
-3. Unzip the contents to your root hard drive (i.e., `C:\`). This will create a folder on your root drive named `MCW-Predictive-Maintenance-for-remote-field-devices-master`.
+3. Unzip the contents to your root hard drive (i.e., `C:\`). This will create a folder on your root drive named `MCW-Predictive-Maintenance-for-remote-field-devices-main`.
 
 ### Task 2: Provision a resource group
 
@@ -81,17 +81,15 @@ In this task, you will create an Azure resource group for the resources used thr
 
     ![The portal menu icon is displayed.](media/portal-menu-icon.png "Menu icon")
 
-3. In the left-hand menu, select **Resource Groups**.
-
-4. At the top of the screen select the **Add** button.
+3. In the left-hand menu, select **Resource groups**.  On its context menu, select **Create**.
 
    ![Add Resource Group Menu](media/add-resource-group-menu.png 'Resource Group Menu')
 
-5. Create a new resource group with the name **Fabrikam_Oil**, ensure the proper subscription and region nearest you are selected. Then select **Review + Create**.
+4. Create a new resource group with the name **Fabrikam_Oil**, ensure the proper subscription and region nearest you are selected. Then select **Review + Create**.
 
    ![Create Resource Group](media/create-resource-group.png 'Resource Group')
 
-6. On the Summary blade, select **Create** to provision your resource group.
+5. On the Summary blade, select **Create** to provision your resource group.
 
 ### Task 3: Create an Azure Databricks service
 
@@ -127,9 +125,9 @@ Azure Databricks is used to train and deploy a machine learning model that predi
 
    ![Launch Workspace](media/databricks-launch-workspace.png 'Launch Workspace')
 
-3. Once in the workspace, select **Clusters** in the left-hand menu, then select **+ Create Cluster**.
+3. Once in the workspace, select **Compute** in the left-hand menu, then select **Create Cluster**.
 
-   ![Create Cluster is highlighted.](media/databricks-clusters.png 'Clusters')
+   ![Compute, then Create Cluster are highlighted.](media/databricks-clusters.png 'Clusters')
 
 4. In the **New Cluster** form, specify the following configuration options:
 
@@ -138,7 +136,7 @@ Azure Databricks is used to train and deploy a machine learning model that predi
    | Cluster name               | _enter `lab`_                                                                                |
    | Cluster Mode               | _select `Standard`_                                                                          |
    | Pool                       | _select `None`_                                                                              |
-   | Databricks Runtime Version | _select `Runtime: 7.4 (Scala 2.12, Spark 3.0.1)`_                                         |
+   | Databricks Runtime Version | _select `Runtime: 10.3 (Scala 2.12, Spark 3.2.1)`_                                         |
    | Autopilot Options          | _uncheck `Enable autoscaling` and check `Terminate after...`, with a value of `120` minutes_ |
    | Worker Type                | _select `Standard_DS3_v2`_                                                                   |
    | Driver Type                | _select `Same as worker`_                                                                    |
@@ -156,11 +154,11 @@ In this task, you will import a Databricks notebook into your workspace.
 
    ![The Import link is highlighted in the Workspace.](media/databricks-import-link.png 'Workspace')
 
-2. Keep **File** selected next to **Import from**, select or drag and drop the file `C:\MCW-Predictive-Maintenance-for-remote-field-devices-master\Hands-on lab\Resources\Notebooks\Anomaly Detection.ipynb`, then select **Import**.
+2. Keep **File** selected next to **Import from**, select or drag and drop the file `C:\MCW-Predictive-Maintenance-for-remote-field-devices-main\Hands-on lab\Resources\Notebooks\Anomaly Detection.ipynb`, then select **Import**.
 
    ![The file import form is displayed with the Anomaly Detection.ipynb file selected.](media/databricks-import.png 'Import Notebooks')
 
-3. After importing, select your username. You will see a new notebook named `Anomaly Detection`.
+3. After importing the notebook, select **Workspace**, then select **Users**. Select your username. You will see a new notebook named `Anomaly Detection`.
 
    ![The imported notebooks are displayed.](media/databricks-notebooks.png 'Imported notebooks')
 
@@ -172,7 +170,7 @@ In this task, you will import a Databricks notebook into your workspace.
 
    ![Create a resource is highlighted and Machine Learning is selected.](media/azure-create-aml-search.png 'SQL Database')
 
-3. Select **Create** in the Azure Databricks details page.
+3. Select **Create** in the Machine Learning details page.
 
 4. Within the **Machine Learning** form, complete the following:
 

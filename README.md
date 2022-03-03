@@ -1,10 +1,10 @@
 # Predictive Maintenance for remote field devices
 
-Fabrikam, Inc. creates innovated IoT solutions for the oil and gas manufacturing industry. It is beginning work on a new, predictive maintenance solution that targets rod pumps (the iconic pivoting pumps that dot oil fields around the world). With their solution in place, companies will be able to monitor and configure pump settings and operations remotely, and only send personnel onsite when necessary for repair or maintenance when the solution indicates that something has gone wrong. However, Fabrikam wants to go beyond reactive alerting- they want to want to enable the solution with the ability to _predict_ problems so they can be averted before a fault occurs and damage is done.
+Fabrikam, Inc. creates innovative IoT solutions for the oil and gas manufacturing industry. It is beginning work on a new, predictive maintenance solution that targets rod pumps (the iconic pivoting pumps that dot oil fields around the world). With their solution in place, companies will be able to monitor and configure pump settings and operations remotely, and only send personnel onsite when necessary for repair or maintenance when the solution indicates that something has gone wrong. However, Fabrikam wants to go beyond reactive alerting- they want to want to enable the solution with the ability to _predict_ problems so they can be averted before a fault occurs and damage is done.
 
-They would like to understand their options for expediting the implementation of the PoC. Specifically, they are looking to learn what offerings Azure provides that could enable a quick end-to-end start on the infrastructure for monitoring and managing devices and the system metadata. On top this, they are curious about what other platform services Azure provides that they should consider in this scenario.
+They would like to understand their options for expediting the implementation of the PoC. Specifically, they are looking to learn what offerings Azure provides that could enable a quick end-to-end start on the infrastructure for monitoring and managing devices and the system metadata. On top of this, they are curious about what other platform services Azure provides that they should consider in this scenario.
 
-May 2021
+February 2022
 
 ## Target audience
 
@@ -35,7 +35,7 @@ At the end of this hands-on-lab, you will be better able to implement an IoT-bas
 
 ## Azure services and related products
 
-- IoT Central
+- Azure IoT Central
 - Azure Databricks
 - Azure Machine Learning
 - Azure Event Hubs

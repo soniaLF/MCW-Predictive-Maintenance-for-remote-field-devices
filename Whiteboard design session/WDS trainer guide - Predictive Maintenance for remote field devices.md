@@ -9,7 +9,7 @@ Whiteboard design session trainer guide
 </div>
 
 <div class="MCWHeader3">
-May 2021
+February 2022
 </div>
 
 Information in this document, including URL and other Internet Web site references, is subject to change without notice. Unless otherwise noted, the example companies, organizations, products, domain names, e-mail addresses, logos, people, places, and events depicted herein are fictitious, and no association with any real company, organization, product, domain name, e-mail address, logo, person, place or event is intended or should be inferred. Complying with all applicable copyright laws is the responsibility of the user. Without limiting the rights under copyright, no part of this document may be reproduced, stored in or introduced into a retrieval system, or transmitted in any form or by any means (electronic, mechanical, photocopying, recording, or otherwise), or for any purpose, without the express written permission of Microsoft Corporation.
@@ -18,7 +18,7 @@ Microsoft may have patents, patent applications, trademarks, copyrights, or othe
 
 The names of manufacturers, products, or URLs are provided for informational purposes only and Microsoft makes no representations and warranties, either expressed, implied, or statutory, regarding these manufacturers or the use of the products with any Microsoft technologies. The inclusion of a manufacturer or product does not imply endorsement of Microsoft of the manufacturer or product. Links may be provided to third party sites. Such sites are not under the control of Microsoft and Microsoft is not responsible for the contents of any linked site or any link contained in a linked site, or any changes or updates to such sites. Microsoft is not responsible for webcasting or any other form of transmission received from any linked site. Microsoft is providing these links to you only as a convenience, and the inclusion of any link does not imply endorsement of Microsoft of the site or the products contained therein.
 
-© 2021 Microsoft Corporation. All rights reserved.
+© 2022 Microsoft Corporation. All rights reserved.
 
 Microsoft and the trademarks listed at https://www.microsoft.com/legal/intellectualproperty/Trademarks/Usage/General.aspx are trademarks of the Microsoft group of companies. All other trademarks are property of their respective owners.
 
@@ -377,21 +377,20 @@ Directions: Reconvene with the larger group to hear the facilitator/SME share th
 
 | Description                                                           | Links                                                                                                |
 | --------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
-| About IoT Central                                                     | <https://docs.microsoft.com/azure/iot-central/overview-iot-central>                                  |
-| About IoT Hub                                                         | <https://docs.microsoft.com/azure/iot-hub/iot-hub-what-is-iot-hub>                                   |
-| What are IoT solution accelerators?                                   | <https://docs.microsoft.com/azure/iot-accelerators/iot-accelerators-what-are-solution-accelerators>  |
-| Azure IoT Hub Device Provisioning Service (DPS)                       | <https://docs.microsoft.com/azure/iot-dps/about-iot-dps>                                             |
+| What is Azure IoT Central?                                            | <https://docs.microsoft.com/azure/iot-central/overview-iot-central>                                  |
+| IoT Concepts and Azure IoT Hub                                        | <https://docs.microsoft.com/en-us/azure/iot-hub/iot-concepts-and-iot-hub>                            |
+| What are Azure IoT solution accelerators?                             | <https://docs.microsoft.com/en-us/previous-versions/azure/iot-accelerators/about-iot-accelerators>   |
+| What is Azure IoT Hub Device Provisioning Service?                    | <https://docs.microsoft.com/azure/iot-dps/about-iot-dps>                                             |
 | Conceptual understanding of X.509 CA certificates in the IoT industry | <https://docs.microsoft.com/azure/iot-hub/iot-hub-x509ca-concept>                                    |
-| Creating a certificate chain when signing devices                     | <https://github.com/Azure/azure-iot-sdk-c/blob/master/tools/CACertificates/CACertificateOverview.md> |
-| IoT Central continuous data export to Event Hubs and Service Bus      | <https://docs.microsoft.com/azure/iot-central/howto-export-data-event-hubs-service-bus>              |
-| IoT Central continuous data export to Blob Storage                    | <https://docs.microsoft.com/azure/iot-central/howto-export-data-blob-storage>                        |
-| About Azure Blob storage                                              | <https://docs.microsoft.com/azure/storage/blobs/storage-blobs-overview>                              |
-| About Azure Event Hubs                                                | <https://docs.microsoft.com/azure/event-hubs/event-hubs-about>                                       |
-| What is Azure Databricks?                                             | <https://docs.microsoft.com/azure/azure-databricks/what-is-azure-databricks>                         |
-| What is Azure Machine Learning service?                               | <https://docs.microsoft.com/azure/machine-learning/service/overview-what-is-azure-ml>                |
+| Managing test CA certificates for samples and tutorials               | <https://github.com/Azure/azure-iot-sdk-c/blob/main/tools/CACertificates/CACertificateOverview.md>   |
+| Export data from Azure IoT Central                                    | <https://docs.microsoft.com/en-us/azure/iot-central/core/howto-export-data>                          |
+| What is Azure Blob storage?                                           | <https://docs.microsoft.com/azure/storage/blobs/storage-blobs-overview>                              |
+| What is Azure Event Hubs?                                             | <https://docs.microsoft.com/azure/event-hubs/event-hubs-about>                                       |
+| What is Azure Databricks?                                             | <https://docs.microsoft.com/en-us/azure/databricks/scenarios/what-is-azure-databricks>               |
+| What is Azure Machine Learning?                                       | <https://docs.microsoft.com/en-us/azure/machine-learning/overview-what-is-azure-machine-learning>                |
 | Azure Kubernetes Service (AKS)                                        | <https://docs.microsoft.com/azure/aks/>                                                              |
-| Azure functions                                                       | <https://docs.microsoft.com/azure/azure-functions/functions-overview>                                |
-| Microsoft Power Automate                                                        | <https://flow.microsoft.com/>                                                                        |
+| Introduction to Azure Functions                                       | <https://docs.microsoft.com/azure/azure-functions/functions-overview>                                |
+| Microsoft Power Automate                                              | <https://powerautomate.microsoft.com/en-us/>                                                         |
 | What is Azure Logic Apps?                                             | <https://docs.microsoft.com/azure/logic-apps/logic-apps-overview>                                    |
 
 # Predictive Maintenance for remote field devices whiteboard design session trainer guide
@@ -493,7 +492,7 @@ _Device and metadata management_
 
     Connect single devices for rapid testing and building small proofs of concept. Since Azure IoT Central uses Azure IoT Hub under the covers, you use the [Azure IoT Hub Device Provisioning Service (DPS)](https://docs.microsoft.com/azure/iot-dps/about-iot-dps) to manage device registration and connections.
 
-    The first step is to create a device template in IoT Central. This template defines the device metadata, such as properties and telemetry fields, that are common to one or more IoT devices you connect to IoT Central. The next step is to select the template and add a new real device. The options here are to add a simulated device that IoT Central manages and uses to generate simulated telemetry or a real device. Real devices represent IoT devices that you connect to IoT Central through application code, or credentials flashed to the device. Finally, select the real device in IoT Central and click Connect to display the connection details, Scope ID, Device ID, and Device Primary key. This information is used to register the device with the DPS which then forwards the necessary connection information to the device.
+    The first step is to create a device template in IoT Central. This template defines the device metadata, such as properties and telemetry fields, that are common to one or more IoT devices you connect to IoT Central. The next step is to select the template and add a new real device. The options here are to add a simulated device that IoT Central manages and uses to generate simulated telemetry or a real device. Real devices represent IoT devices that you connect to IoT Central through application code, or credentials flashed to the device. Finally, select the real device in IoT Central and select Connect to display the connection details, Scope ID, Device ID, and Device Primary key. This information is used to register the device with the DPS which then forwards the necessary connection information to the device.
 
 2. How do you connect multiple devices at scale? What options are there to secure device connections?
 
