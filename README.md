@@ -1,3 +1,6 @@
+#Provo a modificare 
+
+
 # Predictive Maintenance for remote field devices
 
 ## This workshop is archived and no longer being maintained.  Content is read-only.
